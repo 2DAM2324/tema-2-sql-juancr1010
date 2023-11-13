@@ -1251,12 +1251,16 @@ public class Ventana1 extends javax.swing.JFrame {
         idEquipo = jTextField_idEquipo_equipoCarreras.getText();
         nombre = jTextField_nombre_equipoCarreras.getText();
         EquipoCarreras unEquipo = new EquipoCarreras(idEquipo, nombre);
-        if(this.miControlador.comprobarSiEquipoExiste(unEquipo) == false){
-            this.miControlador.anadirEquipoCarreras(unEquipo);
-        }else{
-            JOptionPane.showMessageDialog(null, "El equipo ya existe en el sistema, introduzca otro ID");
-        }
         
+        if(idEquipo.equals("") || nombre.equals("")){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
+        }else{
+            if(this.miControlador.comprobarSiEquipoExiste(unEquipo) == false){
+                this.miControlador.anadirEquipoCarreras(unEquipo);
+            }else{
+                JOptionPane.showMessageDialog(null, "El equipo ya existe en el sistema, introduzca otro ID");
+            }
+        }
         this.miControlador.mostrarEquiposCarreras();
         
         this.actualizarTablaEquipos();
@@ -1272,15 +1276,17 @@ public class Ventana1 extends javax.swing.JFrame {
      this.traerPilotosControladorVista();
      int fila = jTable_equipoCarreras.getSelectedRow();
      
-    
-     jButton_guardarModificacion_equipoCarreras.setVisible(true);
-     jComboBox_anadirPiloto_EquiposCarreras.setVisible(true);
-     jButton_anadirPiloto_EquipoCarreras.setVisible(true);
-     jButton_cancelar_equipoCarreras.setVisible(true);
-    //System.out.println("FILA: " + fila);
-     jTextField_idEquipo_equipoCarreras.setText(miControlador.getUnEquipo(fila).getIdEquipo());
-     jTextField_nombre_equipoCarreras.setText(miControlador.getUnEquipo(fila).getNombre());
-     
+    if(fila !=-1){
+        jButton_guardarModificacion_equipoCarreras.setVisible(true);
+        jComboBox_anadirPiloto_EquiposCarreras.setVisible(true);
+        jButton_anadirPiloto_EquipoCarreras.setVisible(true);
+        jButton_cancelar_equipoCarreras.setVisible(true);
+       //System.out.println("FILA: " + fila);
+        jTextField_idEquipo_equipoCarreras.setText(miControlador.getUnEquipo(fila).getIdEquipo());
+        jTextField_nombre_equipoCarreras.setText(miControlador.getUnEquipo(fila).getNombre());
+    }else{
+        JOptionPane.showMessageDialog(null, "Por favor seleccione un equipo de carreras");
+    }
     
     }//GEN-LAST:event_jButton_modificar_equipoCarrerasMouseClicked
 
@@ -1293,20 +1299,24 @@ public class Ventana1 extends javax.swing.JFrame {
         idEquipo = jTextField_idEquipo_equipoCarreras.getText();
         nombre = jTextField_nombre_equipoCarreras.getText();
         EquipoCarreras unEquipo = new EquipoCarreras(idEquipo, nombre);
-        if((idEquipo.equals(this.misEquipos.get(fila).getIdEquipo()))){
-            this.misEquipos.get(fila).setIdEquipo(idEquipo);
-            this.misEquipos.get(fila).setIdEquipo(nombre);
-        
-            this.miControlador.modificarEquipoCarreras(idEquipo, nombre, fila);
-        }else if(this.miControlador.comprobarSiEquipoExiste(unEquipo)){
-            JOptionPane.showMessageDialog(null, "El equipo ya existe en el sistema, introduzca otro ID");
+
+        if(idEquipo.equals("") || nombre.equals("")){
+           JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco");
         }else{
-            this.misEquipos.get(fila).setIdEquipo(idEquipo);
-            this.misEquipos.get(fila).setIdEquipo(nombre);
-        
-            this.miControlador.modificarEquipoCarreras(idEquipo, nombre, fila);
+            if((idEquipo.equals(this.misEquipos.get(fila).getIdEquipo()))){
+                this.misEquipos.get(fila).setIdEquipo(idEquipo);
+                this.misEquipos.get(fila).setIdEquipo(nombre);
+
+                this.miControlador.modificarEquipoCarreras(idEquipo, nombre, fila);
+            }else if(this.miControlador.comprobarSiEquipoExiste(unEquipo)){
+                JOptionPane.showMessageDialog(null, "El equipo ya existe en el sistema, introduzca otro ID");
+            }else{
+                this.misEquipos.get(fila).setIdEquipo(idEquipo);
+                this.misEquipos.get(fila).setIdEquipo(nombre);
+
+                this.miControlador.modificarEquipoCarreras(idEquipo, nombre, fila);
+            }
         }
-        
         
         
         this.actualizarTablaEquipos();
@@ -1387,23 +1397,28 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_equipoCarreras.getSelectedRow();
         boolean pilotoConEquipo = false;
-        for(Piloto p : this.misPilotos){
-            
-            Object selectedValue = this.jComboBox_anadirPiloto_EquiposCarreras.getSelectedItem();
-            
-            if(selectedValue != null){
-                if(p.getIdPiloto().equals(selectedValue)){
-                    if(p.getEquipo_piloto() == null){
-                        p.setEquipo_piloto(this.miControlador.getEquipos().get(fila));
-                        this.miControlador.getEquipos().get(fila).getPilotos().add(p);
-                    }else{
-                        pilotoConEquipo = true;
+        
+        if(fila != -1){
+            for(Piloto p : this.misPilotos){
+
+                Object selectedValue = this.jComboBox_anadirPiloto_EquiposCarreras.getSelectedItem();
+
+                if(selectedValue != null){
+                    if(p.getIdPiloto().equals(selectedValue)){
+                        if(p.getEquipo_piloto() == null){
+                            p.setEquipo_piloto(this.miControlador.getEquipos().get(fila));
+                            this.miControlador.getEquipos().get(fila).getPilotos().add(p);
+                        }else{
+                            pilotoConEquipo = true;
+                        }
                     }
                 }
             }
-        }
-        if(pilotoConEquipo){
-            JOptionPane.showMessageDialog(null, "ERROR:\nEl piloto ya se encuentra en un equipo");
+            if(pilotoConEquipo){
+                JOptionPane.showMessageDialog(null, "ERROR:\nEl piloto ya se encuentra en un equipo");
+            }
+        }else{
+                JOptionPane.showMessageDialog(null, "Seleccione un equipo al que añadir el piloto");
         }
     }//GEN-LAST:event_jButton_anadirPiloto_EquipoCarrerasMouseClicked
 
@@ -1433,13 +1448,18 @@ public class Ventana1 extends javax.swing.JFrame {
             abortarOperacion = true;
             JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
         }
-        if(!abortarOperacion){
-            Piloto unPiloto = new Piloto(idPiloto, nombre, edad);
+        
+        if(idPiloto.equals("") || nombre.equals("")){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
+        }else{
+            if(!abortarOperacion){
+                Piloto unPiloto = new Piloto(idPiloto, nombre, edad);
 
-            if(this.miControlador.comprobarSiPilotoExiste(unPiloto) == false){
-                this.miControlador.getPilotos().add(unPiloto);
-            }else{
-                JOptionPane.showMessageDialog(null, "El piloto ya existe en el sistema, introduzca otro ID");
+                if(this.miControlador.comprobarSiPilotoExiste(unPiloto) == false){
+                    this.miControlador.getPilotos().add(unPiloto);
+                }else{
+                    JOptionPane.showMessageDialog(null, "El piloto ya existe en el sistema, introduzca otro ID");
+                }
             }
         }
         this.miControlador.mostrarEquiposCarreras();
@@ -1470,21 +1490,26 @@ public class Ventana1 extends javax.swing.JFrame {
         //edad = Integer.parseInt(jTextField_edad_piloto.getText());
         Piloto unPiloto = new Piloto(idPiloto, nombre, edad);
         
-        if(!abortarOperacion){
-            if((idPiloto.equals(this.misPilotos.get(fila).getIdPiloto()))){
-                this.misPilotos.get(fila).setIdPiloto(idPiloto);
-                this.misPilotos.get(fila).setNombre(nombre);
-                this.misPilotos.get(fila).setEdad(edad);
+        if(idPiloto.equals("") ||nombre.equals("")){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe introducir datos en blanco, abortando...");
+        }else{
+        
+            if(!abortarOperacion){
+                if((idPiloto.equals(this.misPilotos.get(fila).getIdPiloto()))){
+                    this.misPilotos.get(fila).setIdPiloto(idPiloto);
+                    this.misPilotos.get(fila).setNombre(nombre);
+                    this.misPilotos.get(fila).setEdad(edad);
 
-                this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
-            }else if(this.miControlador.comprobarSiPilotoExiste(unPiloto)){
-                JOptionPane.showMessageDialog(null, "El piloto ya existe en el sistema, introduzca otro ID");
-            }else{
-                this.misPilotos.get(fila).setIdPiloto(idPiloto);
-                this.misPilotos.get(fila).setNombre(nombre);
-                this.misPilotos.get(fila).setEdad(edad);
+                    this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
+                }else if(this.miControlador.comprobarSiPilotoExiste(unPiloto)){
+                    JOptionPane.showMessageDialog(null, "El piloto ya existe en el sistema, introduzca otro ID");
+                }else{
+                    this.misPilotos.get(fila).setIdPiloto(idPiloto);
+                    this.misPilotos.get(fila).setNombre(nombre);
+                    this.misPilotos.get(fila).setEdad(edad);
 
-                this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
+                    this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
+                }
             }
         }
         this.actualizarTablaPilotos();
@@ -1518,40 +1543,49 @@ public class Ventana1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField_IdInforme_pilotoActionPerformed
 
     private void jButton_modificar_pilotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_modificar_pilotoMouseClicked
-        // TODO add your handling code here:
-        int fila = jTable_piloto.getSelectedRow();
+     // TODO add your handling code here:
+     int fila = jTable_piloto.getSelectedRow();
     
-     jButton_guardarModificacion_pilotos.setVisible(true);
-     jComboBox_coche_piloto.setVisible(true);
-     jButton_anadirCoche_piloto.setVisible(true);
-     jButton_cancelar_pilotos.setVisible(true);
-    //System.out.println("FILA: " + fila);
-     jTextField_idPiloto_piloto.setText(miControlador.getPilotos().get(fila).getIdPiloto());
-     jTextField_nombre_piloto.setText(miControlador.getPilotos().get(fila).getNombre());
-     jTextField_edad_piloto.setText(Integer.toString(miControlador.getPilotos().get(fila).getEdad()));
+     if(fila != -1){
+        jButton_guardarModificacion_pilotos.setVisible(true);
+        jComboBox_coche_piloto.setVisible(true);
+        jButton_anadirCoche_piloto.setVisible(true);
+        jButton_cancelar_pilotos.setVisible(true);
+       //System.out.println("FILA: " + fila);
+        jTextField_idPiloto_piloto.setText(miControlador.getPilotos().get(fila).getIdPiloto());
+        jTextField_nombre_piloto.setText(miControlador.getPilotos().get(fila).getNombre());
+        jTextField_edad_piloto.setText(Integer.toString(miControlador.getPilotos().get(fila).getEdad()));
+     }else{
+         JOptionPane.showMessageDialog(null, "Por favor seleccione un piloto");
+     }
     }//GEN-LAST:event_jButton_modificar_pilotoMouseClicked
 
     private void jButton_anadirCoche_pilotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_anadirCoche_pilotoMouseClicked
         // TODO add your handling code here:
         int fila = jTable_piloto.getSelectedRow();
         boolean CocheConPiloto = false;
-        for(Coche c : this.misCoches){
-            
-            Object selectedValue = this.jComboBox_coche_piloto.getSelectedItem();
-            
-            if(selectedValue != null){
-                if(c.getIdCoche().equals(selectedValue)){
-                    if(c.getPiloto() == null){
-                        c.setPiloto(this.miControlador.getPilotos().get(fila));
-                        this.miControlador.getPilotos().get(fila).setCoche_piloto(c);
-                    }else{
-                        CocheConPiloto = true;
+        
+        if(fila != -1){
+            for(Coche c : this.misCoches){
+
+                Object selectedValue = this.jComboBox_coche_piloto.getSelectedItem();
+
+                if(selectedValue != null){
+                    if(c.getIdCoche().equals(selectedValue)){
+                        if(c.getPiloto() == null){
+                            c.setPiloto(this.miControlador.getPilotos().get(fila));
+                            this.miControlador.getPilotos().get(fila).setCoche_piloto(c);
+                        }else{
+                            CocheConPiloto = true;
+                        }
                     }
                 }
             }
-        }
-        if(CocheConPiloto){
-            JOptionPane.showMessageDialog(null, "ERROR:\nEl coche está siendo usado por otro piloto");
+            if(CocheConPiloto){
+                JOptionPane.showMessageDialog(null, "ERROR:\nEl coche está siendo usado por otro piloto");
+            }
+        }else{
+                JOptionPane.showMessageDialog(null, "Seleccione el piloto al que añadirle el coche");
         }
     }//GEN-LAST:event_jButton_anadirCoche_pilotoMouseClicked
 
@@ -1585,42 +1619,48 @@ public class Ventana1 extends javax.swing.JFrame {
         String idInforme = jTextField_IdInforme_piloto.getText();
         String descripcion = jTextField_descripcionInforme_piloto.getText();
         
-        if(fila != -1){
-            if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto() == null){
+        if(idInforme == null || descripcion == null){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
+        }else{
+            if(fila != -1){
+                if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto() == null){
 
-                this.miControlador.getPilotos().get(fila).generarInformePiloto(idInforme, descripcion);
-                this.miControlador.getInformes().add(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera());
-            }else{
-                if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera() == null){
-                    Informe aux = new Informe(idInforme, descripcion);
-                    aux.setGenera_en_informe(this.miControlador.getPilotos().get(fila).getGenera_en_piloto());
-                    this.miControlador.getPilotos().get(fila).getGenera_en_piloto().setInforme_genera(aux);
+                    this.miControlador.getPilotos().get(fila).generarInformePiloto(idInforme, descripcion);
                     this.miControlador.getInformes().add(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera());
                 }else{
-                    JOptionPane.showMessageDialog(null, "ERROR: no es posible generar más de un informe en un piloto");
+                    if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera() == null){
+                        Informe aux = new Informe(idInforme, descripcion);
+                        aux.setGenera_en_informe(this.miControlador.getPilotos().get(fila).getGenera_en_piloto());
+                        this.miControlador.getPilotos().get(fila).getGenera_en_piloto().setInforme_genera(aux);
+                        this.miControlador.getInformes().add(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera());
+                    }else{
+                        JOptionPane.showMessageDialog(null, "ERROR: no es posible generar más de un informe en un piloto");
+                    }
                 }
+
+                this.actualizarTablasVista();
+            }else{
+                JOptionPane.showMessageDialog(null, "ERROR: debe seleccionar un piloto al que generar un informe");
             }
-            
-            this.actualizarTablasVista();
-        }else{
-            JOptionPane.showMessageDialog(null, "ERROR: debe seleccionar un piloto al que generar un informe");
         }
-        
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_generarInforme_PilotoMouseClicked
 
     private void jButton_modificar_informeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_modificar_informeMouseClicked
         // TODO add your handling code here:
         int fila = jTable_informe.getSelectedRow();
-        jLabel_idInforme_informe.setVisible(true);
-        jTextField_idInforme_informe.setVisible(true);
-        jLabel_descripcion_informe.setVisible(true);
-        jTextField_descripcion_informe.setVisible(true);
-        jButton_cancelar_informe.setVisible(true);
-        jButton_guardar_informe.setVisible(true);
-        jTextField_idInforme_informe.setText(this.miControlador.getInformes().get(fila).getIdInforme());
-        jTextField_descripcion_informe.setText(this.miControlador.getInformes().get(fila).getDescripcion());
-        
+        if(fila != -1){
+            jLabel_idInforme_informe.setVisible(true);
+            jTextField_idInforme_informe.setVisible(true);
+            jLabel_descripcion_informe.setVisible(true);
+            jTextField_descripcion_informe.setVisible(true);
+            jButton_cancelar_informe.setVisible(true);
+            jButton_guardar_informe.setVisible(true);
+            jTextField_idInforme_informe.setText(this.miControlador.getInformes().get(fila).getIdInforme());
+            jTextField_descripcion_informe.setText(this.miControlador.getInformes().get(fila).getDescripcion());
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un informe");
+        }
     }//GEN-LAST:event_jButton_modificar_informeMouseClicked
 
     private void jButton_detalles_PilotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_detalles_PilotoMouseClicked
@@ -1657,18 +1697,22 @@ public class Ventana1 extends javax.swing.JFrame {
         
         
         Informe unInforme = new Informe(idInforme, descripcion);
-        if((idInforme.equals(this.misInformes.get(fila).getIdInforme()))){
-            this.miControlador.getInformes().get(fila).setIdInforme(idInforme);
-            this.miControlador.getInformes().get(fila).setDescripcion(descripcion);
-            
-        }else if(this.miControlador.comprobarSiInformeExiste(unInforme)){
-            JOptionPane.showMessageDialog(null, "El informe ya existe en el sistema, introduzca otro ID");
+        
+        if(idInforme.equals("") || descripcion.equals("")){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
-            this.miControlador.getInformes().get(fila).setIdInforme(idInforme);
-            this.miControlador.getInformes().get(fila).setDescripcion(descripcion);
-        
+            if((idInforme.equals(this.misInformes.get(fila).getIdInforme()))){
+                this.miControlador.getInformes().get(fila).setIdInforme(idInforme);
+                this.miControlador.getInformes().get(fila).setDescripcion(descripcion);
+
+            }else if(this.miControlador.comprobarSiInformeExiste(unInforme)){
+                JOptionPane.showMessageDialog(null, "El informe ya existe en el sistema, introduzca otro ID");
+            }else{
+                this.miControlador.getInformes().get(fila).setIdInforme(idInforme);
+                this.miControlador.getInformes().get(fila).setDescripcion(descripcion);
+
+            }
         }
-        
         
         jLabel_idInforme_informe.setVisible(false);
         jTextField_idInforme_informe.setVisible(false);
@@ -1711,13 +1755,15 @@ public class Ventana1 extends javax.swing.JFrame {
         modelo = jTextField_modelo_coche.getText();
         marca = jTextField_marca_coche.getText();
         Coche unCoche = new Coche(idCoche, modelo, marca);
-        
-        if(this.miControlador.comprobarSiCocheExiste(unCoche) == false){
-            this.miControlador.getCoches().add(unCoche);
+        if(idCoche.equals("") || modelo.equals("") || marca.equals("")){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar campos en blanco, abortando...");
         }else{
-            JOptionPane.showMessageDialog(null, "El coche ya existe en el sistema, introduzca otro ID");
+            if(this.miControlador.comprobarSiCocheExiste(unCoche) == false){
+                this.miControlador.getCoches().add(unCoche);
+            }else{
+                JOptionPane.showMessageDialog(null, "El coche ya existe en el sistema, introduzca otro ID");
+            }
         }
-        
         
         //this.miControlador.mostrarEquiposCarreras();
         
@@ -1735,13 +1781,17 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_coche.getSelectedRow();
         
-        jButton_cancelar_coche.setVisible(true);
-        jButton_guardar_coche.setVisible(true);
-        jComboBox_anadirIngeniero_Coche.setVisible(true);
-        jButton_anadirIngeniero_Coche.setVisible(true);
-        jTextField_idCoche_coche.setText(this.miControlador.getCoches().get(fila).getIdCoche());
-        jTextField_marca_coche.setText(this.miControlador.getCoches().get(fila).getMarca());
-        jTextField_modelo_coche.setText(this.miControlador.getCoches().get(fila).getModelo());
+        if(fila != -1){
+            jButton_cancelar_coche.setVisible(true);
+            jButton_guardar_coche.setVisible(true);
+            jComboBox_anadirIngeniero_Coche.setVisible(true);
+            jButton_anadirIngeniero_Coche.setVisible(true);
+            jTextField_idCoche_coche.setText(this.miControlador.getCoches().get(fila).getIdCoche());
+            jTextField_marca_coche.setText(this.miControlador.getCoches().get(fila).getMarca());
+            jTextField_modelo_coche.setText(this.miControlador.getCoches().get(fila).getModelo());
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un coche");
+        }
     }//GEN-LAST:event_jButton_modificar_cocheMouseClicked
 
     private void jButton_guardar_cocheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_guardar_cocheMouseClicked
@@ -1751,11 +1801,14 @@ public class Ventana1 extends javax.swing.JFrame {
         String idCoche = jTextField_idCoche_coche.getText();
         String marca = jTextField_marca_coche.getText();
         String modelo = jTextField_modelo_coche.getText();
-        
-        this.miControlador.getCoches().get(fila).setIdCoche(idCoche);
-        this.miControlador.getCoches().get(fila).setMarca(marca);
-        this.miControlador.getCoches().get(fila).setModelo(modelo);
-        
+
+        if(idCoche.equals("") || marca.equals("") || modelo.equals("")){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar campos en blanco, abortando...");
+        }else{
+            this.miControlador.getCoches().get(fila).setIdCoche(idCoche);
+            this.miControlador.getCoches().get(fila).setMarca(marca);
+            this.miControlador.getCoches().get(fila).setModelo(modelo);
+        }
         jButton_cancelar_coche.setVisible(false);
         jButton_guardar_coche.setVisible(false);
         jComboBox_anadirIngeniero_Coche.setVisible(false);
@@ -1808,19 +1861,22 @@ public class Ventana1 extends javax.swing.JFrame {
     private void jButton_anadirIngeniero_CocheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_anadirIngeniero_CocheMouseClicked
         // TODO add your handling code here:
         int fila = jTable_coche.getSelectedRow();
-        
-        for(Ingeniero i : this.misIngenieros){
-            
-            Object selectedValue = this.jComboBox_anadirIngeniero_Coche.getSelectedItem();
-            
-            if(selectedValue != null){
-                if(i.getIdIngeniero().equals(selectedValue)){
-                    i.getCoche_ingeniero().add(this.miControlador.getCoches().get(fila));
-                    this.miControlador.getCoches().get(fila).getIngenieros_coche().add(i);
+        if(fila != -1){
+            for(Ingeniero i : this.misIngenieros){
+
+                Object selectedValue = this.jComboBox_anadirIngeniero_Coche.getSelectedItem();
+
+                if(selectedValue != null){
+                    if(i.getIdIngeniero().equals(selectedValue)){
+                        i.getCoche_ingeniero().add(this.miControlador.getCoches().get(fila));
+                        this.miControlador.getCoches().get(fila).getIngenieros_coche().add(i);
+                    }
+
+
                 }
-                
-                
             }
+        }else{
+                JOptionPane.showMessageDialog(null, "Seleccione el coche al que añadirle el ingeniero");
         }
         
     }//GEN-LAST:event_jButton_anadirIngeniero_CocheMouseClicked
@@ -1868,11 +1924,14 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR: debes introducir un sueldo que sea un número real");
             abortarOperacion = true;
         }
-        
-        if(!abortarOperacion){
-            Ingeniero unIngeniero = new Ingeniero(idIngeniero, fechaNac, sueldo);
-            this.miControlador.getIngenieros().add(unIngeniero);
-            //this.miControlador.mostrarEquiposCarreras();
+        if(idIngeniero.equals("")){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar en blanco los campos, abortando...");
+        }else{
+            if(!abortarOperacion){
+                Ingeniero unIngeniero = new Ingeniero(idIngeniero, fechaNac, sueldo);
+                this.miControlador.getIngenieros().add(unIngeniero);
+                //this.miControlador.mostrarEquiposCarreras();
+            }
         }
         this.actualizarTablasVista();
         jTextField_idIngeniero_ingeniero.setText("");
@@ -1885,13 +1944,17 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_ingeniero.getSelectedRow();
         
-        jButton_cancelar_ingeniero.setVisible(true);
-        jButton_guardar_ingeniero.setVisible(true);
-        jComboBox_anadirCoche_Ingeniero.setVisible(true);
-        jButton_anadirCoche_Ingeniero.setVisible(true);
-        jTextField_idIngeniero_ingeniero.setText(this.miControlador.getIngenieros().get(fila).getIdIngeniero());
-        jTextField_fechnac_ingeniero.setText(this.miControlador.getIngenieros().get(fila).getFechaNacimiento());
-        jTextField_sueldo_ingeniero.setText(Double.toString(this.miControlador.getIngenieros().get(fila).getSueldo()));
+        if(fila != -1){
+            jButton_cancelar_ingeniero.setVisible(true);
+            jButton_guardar_ingeniero.setVisible(true);
+            jComboBox_anadirCoche_Ingeniero.setVisible(true);
+            jButton_anadirCoche_Ingeniero.setVisible(true);
+            jTextField_idIngeniero_ingeniero.setText(this.miControlador.getIngenieros().get(fila).getIdIngeniero());
+            jTextField_fechnac_ingeniero.setText(this.miControlador.getIngenieros().get(fila).getFechaNacimiento());
+            jTextField_sueldo_ingeniero.setText(Double.toString(this.miControlador.getIngenieros().get(fila).getSueldo()));
+        }else{
+            JOptionPane.showMessageDialog(null, "Por favor seleccione un ingeniero");
+        }
     }//GEN-LAST:event_jButton_modificar_ingenieroMouseClicked
 
     private void jComboBox_anadirCoche_IngenieroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_anadirCoche_IngenieroActionPerformed
@@ -1902,19 +1965,23 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_ingeniero.getSelectedRow();
         
-        for(Coche c : this.misCoches){
-            
-            Object selectedValue = this.jComboBox_anadirCoche_Ingeniero.getSelectedItem();
-            
-            if(selectedValue != null){
-                
-                if(c.getIdCoche().equals(selectedValue)){
-                    c.getIngenieros_coche().add(this.miControlador.getIngenieros().get(fila));
-                    this.miControlador.getIngenieros().get(fila).getCoche_ingeniero().add(c);
+        if(fila != -1){
+            for(Coche c : this.misCoches){
+
+                Object selectedValue = this.jComboBox_anadirCoche_Ingeniero.getSelectedItem();
+
+                if(selectedValue != null){
+
+                    if(c.getIdCoche().equals(selectedValue)){
+                        c.getIngenieros_coche().add(this.miControlador.getIngenieros().get(fila));
+                        this.miControlador.getIngenieros().get(fila).getCoche_ingeniero().add(c);
+                    }
+
+
                 }
-                
-                
             }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione un ingeniero al que añadirle el coche");
         }
     }//GEN-LAST:event_jButton_anadirCoche_IngenieroMouseClicked
 
@@ -1947,24 +2014,28 @@ public class Ventana1 extends javax.swing.JFrame {
             abortarOperacion = true;
         }
         
-        if(!abortarOperacion){
-            Ingeniero unIngeniero = new Ingeniero(idIngeniero, fecha, sueldo);
+        if(idIngeniero.equals("")){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar campos en blanco, abortando...");
+        }else{
+        
+            if(!abortarOperacion){
+                Ingeniero unIngeniero = new Ingeniero(idIngeniero, fecha, sueldo);
 
-            if((idIngeniero.equals(this.misIngenieros.get(fila).getIdIngeniero()))){
-                this.miControlador.getIngenieros().get(fila).setIdIngeniero(idIngeniero);
-                this.miControlador.getIngenieros().get(fila).setFechaNacimiento(fecha);
-                this.miControlador.getIngenieros().get(fila).setSueldo(sueldo);
+                if((idIngeniero.equals(this.misIngenieros.get(fila).getIdIngeniero()))){
+                    this.miControlador.getIngenieros().get(fila).setIdIngeniero(idIngeniero);
+                    this.miControlador.getIngenieros().get(fila).setFechaNacimiento(fecha);
+                    this.miControlador.getIngenieros().get(fila).setSueldo(sueldo);
 
-            }else if(this.miControlador.comprobarSiIngenieroExiste(unIngeniero)){
-                JOptionPane.showMessageDialog(null, "El ingeniero ya existe en el sistema, introduzca otro ID");
-            }else{
-                this.miControlador.getIngenieros().get(fila).setIdIngeniero(idIngeniero);
-                this.miControlador.getIngenieros().get(fila).setFechaNacimiento(fecha);
-                this.miControlador.getIngenieros().get(fila).setSueldo(sueldo);
+                }else if(this.miControlador.comprobarSiIngenieroExiste(unIngeniero)){
+                    JOptionPane.showMessageDialog(null, "El ingeniero ya existe en el sistema, introduzca otro ID");
+                }else{
+                    this.miControlador.getIngenieros().get(fila).setIdIngeniero(idIngeniero);
+                    this.miControlador.getIngenieros().get(fila).setFechaNacimiento(fecha);
+                    this.miControlador.getIngenieros().get(fila).setSueldo(sueldo);
 
+                }
             }
         }
-        
         jButton_cancelar_ingeniero.setVisible(false);
         jButton_guardar_ingeniero.setVisible(false);
         jComboBox_anadirCoche_Ingeniero.setVisible(false);
