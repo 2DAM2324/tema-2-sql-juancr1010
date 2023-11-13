@@ -1453,29 +1453,39 @@ public class Ventana1 extends javax.swing.JFrame {
     private void jButton_guardarModificacion_pilotosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_guardarModificacion_pilotosMouseClicked
         // TODO add your handling code here:
         int fila = jTable_piloto.getSelectedRow();
-        
+        Boolean abortarOperacion = false;
         String idPiloto = "";
         String nombre = "";
         int edad = 0;
+        try{
+            edad = Integer.parseInt(jTextField_edad_piloto.getText());
+        }
+        catch(NumberFormatException nfe){
+            nfe.printStackTrace();
+            abortarOperacion = true;
+            JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
+        }
         idPiloto = jTextField_idPiloto_piloto.getText();
         nombre = jTextField_nombre_piloto.getText();
-        edad = Integer.parseInt(jTextField_edad_piloto.getText());
+        //edad = Integer.parseInt(jTextField_edad_piloto.getText());
         Piloto unPiloto = new Piloto(idPiloto, nombre, edad);
         
-        if((idPiloto.equals(this.misPilotos.get(fila).getIdPiloto()))){
-            this.misPilotos.get(fila).setIdPiloto(idPiloto);
-            this.misPilotos.get(fila).setNombre(nombre);
-            this.misPilotos.get(fila).setEdad(edad);
-        
-            this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
-        }else if(this.miControlador.comprobarSiPilotoExiste(unPiloto)){
-            JOptionPane.showMessageDialog(null, "El piloto ya existe en el sistema, introduzca otro ID");
-        }else{
-            this.misPilotos.get(fila).setIdPiloto(idPiloto);
-            this.misPilotos.get(fila).setNombre(nombre);
-            this.misPilotos.get(fila).setEdad(edad);
-        
-            this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
+        if(!abortarOperacion){
+            if((idPiloto.equals(this.misPilotos.get(fila).getIdPiloto()))){
+                this.misPilotos.get(fila).setIdPiloto(idPiloto);
+                this.misPilotos.get(fila).setNombre(nombre);
+                this.misPilotos.get(fila).setEdad(edad);
+
+                this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
+            }else if(this.miControlador.comprobarSiPilotoExiste(unPiloto)){
+                JOptionPane.showMessageDialog(null, "El piloto ya existe en el sistema, introduzca otro ID");
+            }else{
+                this.misPilotos.get(fila).setIdPiloto(idPiloto);
+                this.misPilotos.get(fila).setNombre(nombre);
+                this.misPilotos.get(fila).setEdad(edad);
+
+                this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
+            }
         }
         this.actualizarTablaPilotos();
         
@@ -1575,13 +1585,27 @@ public class Ventana1 extends javax.swing.JFrame {
         String idInforme = jTextField_IdInforme_piloto.getText();
         String descripcion = jTextField_descripcionInforme_piloto.getText();
         
-        if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto() == null){
-        
-            this.miControlador.getPilotos().get(fila).generarInformePiloto(idInforme, descripcion);
-            this.miControlador.getInformes().add(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera());
+        if(fila != -1){
+            if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto() == null){
+
+                this.miControlador.getPilotos().get(fila).generarInformePiloto(idInforme, descripcion);
+                this.miControlador.getInformes().add(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera());
+            }else{
+                if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera() == null){
+                    Informe aux = new Informe(idInforme, descripcion);
+                    aux.setGenera_en_informe(this.miControlador.getPilotos().get(fila).getGenera_en_piloto());
+                    this.miControlador.getPilotos().get(fila).getGenera_en_piloto().setInforme_genera(aux);
+                    this.miControlador.getInformes().add(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera());
+                }else{
+                    JOptionPane.showMessageDialog(null, "ERROR: no es posible generar más de un informe en un piloto");
+                }
+            }
+            
+            this.actualizarTablasVista();
         }else{
-            JOptionPane.showMessageDialog(null, "ERROR: no es posible generar más de un informe en un piloto");
+            JOptionPane.showMessageDialog(null, "ERROR: debe seleccionar un piloto al que generar un informe");
         }
+        
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_generarInforme_PilotoMouseClicked
 
@@ -1611,8 +1635,12 @@ public class Ventana1 extends javax.swing.JFrame {
             cadena = "El piloto no tiene asignado ningún coche.\n";
         }
         if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto() != null){
-            cadena += "Informe generado por el piloto: \n";
-            cadena += this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera().getIdInforme() + "\n";
+            if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera() != null){
+                cadena += "Informe generado por el piloto: \n";
+                cadena += this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera().getIdInforme() + "\n";
+            }else{
+                cadena += "El piloto no ha generado ningún informe aun.";
+            }
         }else{
             cadena += "El piloto no ha generado ningún informe aun.";
         }
@@ -1668,7 +1696,10 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_informe.getSelectedRow();
         this.misInformes.get(fila).getGenera_en_informe().setInforme_genera(null);
+        
+        this.miControlador.mostrarInformes();
         this.miControlador.borrarInforme(fila);
+        this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_borrar_informeMouseClicked
 
     private void jButton_aniadir_cocheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_aniadir_cocheMouseClicked

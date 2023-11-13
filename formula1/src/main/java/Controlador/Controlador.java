@@ -152,6 +152,12 @@ public class Controlador {
         this.ingenieros.remove(pos);
     }
     
+    public void mostrarInformes(){
+        for(Informe i : this.informes){
+            System.out.println("ID: " + i.getIdInforme());
+        }
+    }
+    
     public void modificarEquipoCarreras(String id, String nombre, int pos){
         this.equipos.get(pos).setIdEquipo(id);
         this.equipos.get(pos).setNombre(nombre);
