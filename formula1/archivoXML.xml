@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xml>
+    <equiposCarreras>
+        <equipo>
+            <idEquipo>1</idEquipo>
+            <nombre>Equipo A</nombre>
+            <pilotos>
+                <piloto>
+                    <idPiloto>1</idPiloto>
+                    <nombre>Piloto 1A</nombre>
+                    <edad>30</edad>
+                    <genera>
+                        <fecha>14/02/2000</fecha>
+                        <informe>
+                            <idInforme>1</idInforme>
+                            <descripcion>descripcionInformePiloto1A</descripcion>
+                        </informe>
+                    </genera>
+                    <coche>
+                        <idCoche>101</idCoche>
+                        <modelo>Marca A</modelo>
+                        <marca>Modelo 1</marca>
+                        <ingenieros>
+                            <ingeniero>
+                                <idIngeniero>1</idIngeniero>
+                                <fecha_de_nacimiento>1990-01-15</fecha_de_nacimiento>
+                                <sueldo>60000.0</sueldo>
+                            </ingeniero>
+                            <ingeniero>
+                                <idIngeniero>2</idIngeniero>
+                                <fecha_de_nacimiento>1985-08-22</fecha_de_nacimiento>
+                                <sueldo>75000.0</sueldo>
+                            </ingeniero>
+                        </ingenieros>
+                    </coche>
+                </piloto>
+            </pilotos>
+        </equipo>
+        <equipo>
+            <idEquipo>2</idEquipo>
+            <nombre>Equipo B</nombre>
+            <pilotos>
+                <piloto>
+                    <idPiloto>3</idPiloto>
+                    <nombre>Piloto 1B</nombre>
+                    <edad>32</edad>
+                    <genera>
+                        <fecha>31/07/2012</fecha>
+                        <informe>
+                            <idInforme>3</idInforme>
+                            <descripcion>descripcionInformePiloto1B</descripcion>
+                        </informe>
+                    </genera>
+                    <coche>
+                        <idCoche>201</idCoche>
+                        <modelo>Marca B</modelo>
+                        <marca>Modelo 1</marca>
+                        <ingenieros>
+                            <ingeniero>
+                                <idIngeniero>4</idIngeniero>
+                                <fecha_de_nacimiento>1989-05-20</fecha_de_nacimiento>
+                                <sueldo>70000.0</sueldo>
+                            </ingeniero>
+                        </ingenieros>
+                    </coche>
+                </piloto>
+            </pilotos>
+        </equipo>
+        <equipo>
+            <idEquipo>3</idEquipo>
+            <nombre>Equipo C</nombre>
+            <pilotos>
+                <piloto>
+                    <idPiloto>4</idPiloto>
+                    <nombre>Piloto 1C</nombre>
+                    <edad>27</edad>
+                    <genera>
+                        <fecha>22/01/2007</fecha>
+                        <informe>
+                            <idInforme>4</idInforme>
+                            <descripcion>descripcionInformePiloto1C</descripcion>
+                        </informe>
+                    </genera>
+                    <coche>
+                        <idCoche>301</idCoche>
+                        <modelo>Marca C</modelo>
+                        <marca>Modelo 1</marca>
+                        <ingenieros>
+                            <ingeniero>
+                                <idIngeniero>5</idIngeniero>
+                                <fecha_de_nacimiento>1996-11-28</fecha_de_nacimiento>
+                                <sueldo>50000.0</sueldo>
+                            </ingeniero>
+                            <ingeniero>
+                                <idIngeniero>6</idIngeniero>
+                                <fecha_de_nacimiento>1993-07-02</fecha_de_nacimiento>
+                                <sueldo>58000.0</sueldo>
+                            </ingeniero>
+                        </ingenieros>
+                    </coche>
+                </piloto>
+            </pilotos>
+        </equipo>
+        <equipo>
+            <idEquipo>4</idEquipo>
+            <nombre>Equipo D</nombre>
+            <pilotos>
+                <piloto>
+                    <idPiloto>5</idPiloto>
+                    <nombre>Piloto 1D</nombre>
+                    <edad>29</edad>
+                    <genera>
+                        <fecha>14/02/2000</fecha>
+                        <informe>
+                            <idInforme>5</idInforme>
+                            <descripcion>descripcionInformePiloto1A</descripcion>
+                        </informe>
+                    </genera>
+                    <coche>
+                        <idCoche>401</idCoche>
+                        <modelo>Marca D</modelo>
+                        <marca>Modelo 1</marca>
+                        <ingenieros>
+                            <ingeniero>
+                                <idIngeniero>7</idIngeniero>
+                                <fecha_de_nacimiento>1991-12-05</fecha_de_nacimiento>
+                                <sueldo>62000.0</sueldo>
+                            </ingeniero>
+                            <ingeniero>
+                                <idIngeniero>8</idIngeniero>
+                                <fecha_de_nacimiento>1987-09-18</fecha_de_nacimiento>
+                                <sueldo>72000.0</sueldo>
+                            </ingeniero>
+                        </ingenieros>
+                    </coche>
+                </piloto>
+            </pilotos>
+        </equipo>
+    </equiposCarreras>
+</xml>
