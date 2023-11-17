@@ -253,6 +253,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jButton_detalles_EquipoCarreras = new javax.swing.JButton();
         jComboBox_anadirPiloto_EquiposCarreras = new javax.swing.JComboBox<>();
         jButton_anadirPiloto_EquipoCarreras = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel_piloto = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_piloto = new javax.swing.JTable();
@@ -449,6 +450,13 @@ public class Ventana1 extends javax.swing.JFrame {
     });
     jButton_anadirPiloto_EquipoCarreras.setVisible(false);
 
+    jButton1.setText("jButton1");
+    jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt) {
+            jButton1MouseClicked(evt);
+        }
+    });
+
     javax.swing.GroupLayout jPanel_equipoCarrerasLayout = new javax.swing.GroupLayout(jPanel_equipoCarreras);
     jPanel_equipoCarreras.setLayout(jPanel_equipoCarrerasLayout);
     jPanel_equipoCarrerasLayout.setHorizontalGroup(
@@ -477,7 +485,7 @@ public class Ventana1 extends javax.swing.JFrame {
                                 .addGap(35, 35, 35)
                                 .addComponent(jButton_anadirPiloto_EquipoCarreras)
                                 .addGap(32, 32, 32))
-                            .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_equipoCarrerasLayout.createSequentialGroup()
                                 .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel_nombre_equipoCarreras)
                                     .addComponent(jLabel_idEquipo_equipoCarreras))
@@ -486,9 +494,11 @@ public class Ventana1 extends javax.swing.JFrame {
                                     .addComponent(jTextField_idEquipo_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                                     .addComponent(jTextField_nombre_equipoCarreras))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton_cancelar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton_guardarModificacion_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton_cancelar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton_guardarModificacion_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGap(4, 4, 4)))))
                 .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
                     .addContainerGap()
@@ -528,7 +538,9 @@ public class Ventana1 extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
             .addComponent(jButton_leer_xml)
             .addGap(26, 26, 26)
-            .addComponent(jButton_reescribir_xml)
+            .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton_reescribir_xml)
+                .addComponent(jButton1))
             .addGap(20, 20, 20))
     );
 
@@ -2090,8 +2102,14 @@ public class Ventana1 extends javax.swing.JFrame {
         actualizarTablasVista();
     }//GEN-LAST:event_jButton_borrar_ingenieroMouseClicked
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        this.miControlador.mostrarTablaEquiposCarrerasTerminal();
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_anadirCoche_Ingeniero;
     private javax.swing.JButton jButton_anadirCoche_piloto;
     private javax.swing.JButton jButton_anadirIngeniero_Coche;

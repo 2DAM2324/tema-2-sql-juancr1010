@@ -9,6 +9,7 @@ import Modelo.Genera;
 import Modelo.Informe;
 import Modelo.Ingeniero;
 import Modelo.Piloto;
+import Modelo.DatabaseConnection;
 import Vista.Ventana1;
 import java.io.File;
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class Controlador {
    private ArrayList<Informe> informes;
    private ArrayList<Coche> coches;
    private ArrayList<Ingeniero> ingenieros;
+   private DatabaseConnection db;
 
     public Controlador() {
         this.equipos = new ArrayList<EquipoCarreras>();
@@ -53,6 +55,7 @@ public class Controlador {
         this.informes = new ArrayList<Informe>();
         this.coches = new ArrayList<Coche>();
         this.ingenieros = new ArrayList<Ingeniero>();
+        this.db = new DatabaseConnection();
     }
 
    
@@ -219,7 +222,11 @@ public class Controlador {
         return existe;
     }
     
-    
+    public void mostrarTablaEquiposCarrerasTerminal(){
+        this.db.connect();
+        this.db.consultarTablaEquiposCarreras();
+        this.db.cerrarConexion();
+    }
     
     
     public void leerXML(){

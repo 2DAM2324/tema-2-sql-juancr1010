@@ -25,17 +25,16 @@ public class DatabaseConnection {
         }
     }
 
-    public static Connection connect() throws SQLException {
+    public void connect() {
         // Cadena de conexión para Oracle
-        Connection conn = null;
         String url = "jdbc:sqlite:D:\\Program Files\\SqliteStudio\\basededatos\\formula1.db";
         try{
-             conn = DriverManager.getConnection(url);
+             this.conn = DriverManager.getConnection(url);
         }
         catch(SQLException e){
             System.out.println(e.getMessage());
         }
-        return conn;
+        
     }
 
     public DatabaseConnection() {
@@ -45,10 +44,10 @@ public class DatabaseConnection {
     public void insertarDatosEnTabla(String query){
         PreparedStatement sentencia = null;
         try{
-            conn = DatabaseConnection.connect();
-            sentencia = conn.prepareStatement(query);
+            sentencia = this.conn.prepareStatement(query);
             
             sentencia.executeUpdate();
+            
         }
         catch(SQLException e){
             e.printStackTrace();
@@ -66,7 +65,7 @@ public class DatabaseConnection {
     }
     
     public void consultarTablaEquiposCarreras(){
-        String cons = "SELECT * FROM equiposcarreras";
+        String cons = "SELECT * FROM equipoCarreras";
         PreparedStatement consulta = null;
         ResultSet resultado = null;
         

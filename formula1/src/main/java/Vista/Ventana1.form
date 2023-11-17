@@ -89,7 +89,7 @@
                                           <Component id="jButton_anadirPiloto_EquipoCarreras" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel_nombre_equipoCarreras" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel_idEquipo_equipoCarreras" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -100,9 +100,12 @@
                                               <Component id="jTextField_nombre_equipoCarreras" alignment="0" max="32767" attributes="0"/>
                                           </Group>
                                           <EmptySpace max="32767" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jButton_cancelar_equipoCarreras" max="32767" attributes="0"/>
-                                              <Component id="jButton_guardarModificacion_equipoCarreras" max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jButton1" min="-2" pref="73" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="jButton_cancelar_equipoCarreras" max="32767" attributes="0"/>
+                                                  <Component id="jButton_guardarModificacion_equipoCarreras" max="32767" attributes="0"/>
+                                              </Group>
                                           </Group>
                                           <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                                       </Group>
@@ -157,7 +160,10 @@
                       <EmptySpace pref="48" max="32767" attributes="0"/>
                       <Component id="jButton_leer_xml" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="jButton_reescribir_xml" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButton_reescribir_xml" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -320,6 +326,14 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="jButton_anadirPiloto_EquipoCarreras.setVisible(false);"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButton1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jButton1"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
