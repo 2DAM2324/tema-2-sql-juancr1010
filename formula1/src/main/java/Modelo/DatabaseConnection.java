@@ -27,6 +27,8 @@ public class DatabaseConnection {
     private ArrayList<Piloto> pilotosBD;
     private ArrayList<Informe> informesBD;
     private ArrayList<Genera> generasBD;
+    private ArrayList<Coche> cochesBD;
+    private ArrayList<Ingeniero> ingenierosBD;
     static {
         try {
             // Cargar el driver de Oracle
@@ -106,11 +108,10 @@ public class DatabaseConnection {
         }
     }
     
-    //TODO: Debes cohesionar los informes con los pilotos, recuerda que genera guarda el informe y el piloto, no los IDs.
-    public void traerGenera(){
-        this.generasBD = new ArrayList<Genera>();
-        
-        String cons = "SELECT * FROM Genera";
+    //TODO: Pasar los datos de la bd al controlador y posteriormente mostrar los datos en la vista
+    
+    public void relacionarEquiposConPilotos(){
+        String cons = "SELECT * FROM Piloto";
         PreparedStatement consulta = null;
         ResultSet resultado = null;
         
@@ -119,6 +120,17 @@ public class DatabaseConnection {
             resultado = consulta.executeQuery();
             
             while(resultado.next()){
+                for(Piloto p: this.pilotosBD){
+                    if(p.getIdPiloto().equals(resultado.getString(1))){
+                        for(EquipoCarreras e: this.equiposBD){
+                            if(resultado.getString(4).equals(e.getIdEquipo())){
+                                p.setEquipo_piloto(e);
+                                e.getPilotos().add(p);
+                                p.setEquipo_piloto(e);
+                            }
+                        }
+                    }
+                }
                 
             }
             
@@ -137,6 +149,227 @@ public class DatabaseConnection {
                 }
             }
         }
+    }
+    
+    public void relacionarCochesConPilotos(){
+    
+        String cons = "SELECT * FROM Piloto";
+        PreparedStatement consulta = null;
+        ResultSet resultado = null;
+        
+        try{
+            consulta = conn.prepareStatement(cons);
+            resultado = consulta.executeQuery();
+            
+            while(resultado.next()){
+                for(Piloto p: this.pilotosBD){
+                    if(p.getIdPiloto().equals(resultado.getString(1))){
+                        for(Coche c: this.cochesBD){
+                            if(resultado.getString(5).equals(c.getIdCoche())){
+                                p.setCoche_piloto(c);
+                                c.setPiloto(p);
+                                p.setCoche_piloto(c);
+                                c.setPiloto(p);
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(consulta != null){
+                try{
+                    consulta.close();
+                    resultado.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    
+    }
+    
+    public void relacionarCochesConIngenieros(){
+        String cons = "SELECT * FROM Taller";
+        String idCoche = "", idIngeniero = "";
+        
+        PreparedStatement consulta = null;
+        ResultSet resultado = null;
+        
+        try{
+            consulta = conn.prepareStatement(cons);
+            resultado = consulta.executeQuery();
+            
+            while(resultado.next()){
+                idCoche = resultado.getString(2);
+                idIngeniero = resultado.getString(3);
+                
+                for(Coche c: this.cochesBD){
+                    if(idCoche.equals(c.getIdCoche())){
+                        for(Ingeniero i: this.ingenierosBD){
+                            if(idIngeniero.equals(i.getIdIngeniero())){
+                                c.getIngenieros_coche().add(i);
+                                i.getCoche_ingeniero().add(c);
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(consulta != null){
+                try{
+                    consulta.close();
+                    resultado.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+    
+    }
+    
+    public void relacionarInformesConPilotos(){
+        for(Genera g: this.generasBD){
+            for(Piloto p: this.pilotosBD){
+                if(g.getPiloto_genera().getIdPiloto().equals(p.getIdPiloto())){
+                    for(Informe i: this.informesBD){
+                        if(g.getInforme_genera().getIdInforme().equals(i.getIdInforme())){
+                           p.setGenera_en_piloto(g);
+                           i.setGenera_en_informe(g);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    public void traerIngenieros(){
+        this.ingenierosBD = new ArrayList<Ingeniero>();
+        
+        String cons = "SELECT * FROM Ingeniero";
+        PreparedStatement consulta = null;
+        ResultSet resultado = null;
+        
+        try{
+            consulta = conn.prepareStatement(cons);
+            resultado = consulta.executeQuery();
+            
+            while(resultado.next()){
+                this.ingenierosBD.add(new Ingeniero(resultado.getString(1), resultado.getString(2), Double.parseDouble(resultado.getString(3))));
+            }
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(consulta != null){
+                try{
+                    consulta.close();
+                    resultado.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+    }
+    
+    public void traerCoches(){
+        this.cochesBD = new ArrayList<Coche>();
+        
+        String cons = "SELECT * FROM Coche";
+        PreparedStatement consulta = null;
+        ResultSet resultado = null;
+        
+        try{
+            consulta = conn.prepareStatement(cons);
+            resultado = consulta.executeQuery();
+            
+            while(resultado.next()){
+                this.cochesBD.add(new Coche(resultado.getString(1), resultado.getString(3), resultado.getString(2)));
+            }
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(consulta != null){
+                try{
+                    consulta.close();
+                    resultado.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+    }
+    
+    //TODO: Debes cohesionar los informes con los pilotos, recuerda que genera guarda el informe y el piloto, no los IDs.
+    public void traerGenera(){
+        this.generasBD = new ArrayList<Genera>();
+        
+        String cons = "SELECT * FROM Genera";
+        PreparedStatement consulta = null;
+        ResultSet resultado = null;
+        
+        try{
+            consulta = conn.prepareStatement(cons);
+            resultado = consulta.executeQuery();
+            
+            while(resultado.next()){
+                Genera aux = new Genera();
+                aux.setFecha(resultado.getString(1));
+               
+                for(Piloto p: this.pilotosBD){
+                   if(resultado.getString(2).equals(p.getIdPiloto())){
+                      aux.setPiloto_genera(p);
+                   }
+                }
+               
+                for(Informe i : this.informesBD){
+                    if(resultado.getString(3).equals(i.getIdInforme())){
+                        aux.setInforme_genera(i);
+                    }
+                }
+                
+                this.generasBD.add(aux);
+               
+            }
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(consulta != null){
+                try{
+                    consulta.close();
+                    resultado.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
     }
     
     public void traerInformes(){
