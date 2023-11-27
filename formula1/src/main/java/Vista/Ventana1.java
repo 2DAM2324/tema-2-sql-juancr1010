@@ -245,19 +245,14 @@ public class Ventana1 extends javax.swing.JFrame {
         jTable_equipoCarreras = new javax.swing.JTable();
         jButton_modificar_equipoCarreras = new javax.swing.JButton();
         jButton_borrar_equipoCarreras = new javax.swing.JButton();
-        jLabel_idEquipo_equipoCarreras = new javax.swing.JLabel();
         jLabel_nombre_equipoCarreras = new javax.swing.JLabel();
-        jTextField_idEquipo_equipoCarreras = new javax.swing.JTextField();
         jTextField_nombre_equipoCarreras = new javax.swing.JTextField();
         jButton_guardar_equipoCarreras = new javax.swing.JButton();
         jButton_cancelar_equipoCarreras = new javax.swing.JButton();
         jButton_guardarModificacion_equipoCarreras = new javax.swing.JButton();
-        jButton_leer_xml = new javax.swing.JButton();
-        jButton_reescribir_xml = new javax.swing.JButton();
         jButton_detalles_EquipoCarreras = new javax.swing.JButton();
         jComboBox_anadirPiloto_EquiposCarreras = new javax.swing.JComboBox<>();
         jButton_anadirPiloto_EquipoCarreras = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jPanel_piloto = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_piloto = new javax.swing.JTable();
@@ -374,8 +369,6 @@ public class Ventana1 extends javax.swing.JFrame {
             }
         });
 
-        jLabel_idEquipo_equipoCarreras.setText("idEquipo");
-
         jLabel_nombre_equipoCarreras.setText("Nombre");
 
         jButton_guardar_equipoCarreras.setText("Añadir");
@@ -402,25 +395,6 @@ public class Ventana1 extends javax.swing.JFrame {
         jButton_guardarModificacion_equipoCarreras.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton_guardarModificacion_equipoCarrerasMouseClicked(evt);
-            }
-        });
-
-        jButton_leer_xml.setText("LeerXMLFormula1");
-        jButton_leer_xml.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_leer_xmlActionPerformed(evt);
-            }
-        });
-
-        jButton_reescribir_xml.setText("ReescribirXML");
-        jButton_reescribir_xml.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton_reescribir_xmlMouseClicked(evt);
-            }
-        });
-        jButton_reescribir_xml.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_reescribir_xmlActionPerformed(evt);
             }
         });
 
@@ -454,60 +428,40 @@ public class Ventana1 extends javax.swing.JFrame {
     });
     jButton_anadirPiloto_EquipoCarreras.setVisible(false);
 
-    jButton1.setText("jButton1");
-    jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mouseClicked(java.awt.event.MouseEvent evt) {
-            jButton1MouseClicked(evt);
-        }
-    });
-
     javax.swing.GroupLayout jPanel_equipoCarrerasLayout = new javax.swing.GroupLayout(jPanel_equipoCarreras);
     jPanel_equipoCarreras.setLayout(jPanel_equipoCarrerasLayout);
     jPanel_equipoCarrerasLayout.setHorizontalGroup(
         jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
-            .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_detalles_EquipoCarreras))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton_modificar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton_borrar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton_guardar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton_reescribir_xml))
-                    .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
-                                .addComponent(jComboBox_anadirPiloto_EquiposCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(jButton_anadirPiloto_EquipoCarreras)
-                                .addGap(32, 32, 32))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_equipoCarrerasLayout.createSequentialGroup()
-                                .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel_nombre_equipoCarreras)
-                                    .addComponent(jLabel_idEquipo_equipoCarreras))
-                                .addGap(53, 53, 53)
-                                .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField_idEquipo_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                                    .addComponent(jTextField_nombre_equipoCarreras))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jButton_cancelar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButton_guardarModificacion_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGap(4, 4, 4)))))
+            .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                 .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jButton_leer_xml)))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_detalles_EquipoCarreras))
+                    .addGap(18, 18, 18)
+                    .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton_modificar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_borrar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_guardar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
+                    .addGap(27, 27, 27)
+                    .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel_equipoCarrerasLayout.createSequentialGroup()
+                            .addComponent(jComboBox_anadirPiloto_EquiposCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(35, 35, 35)
+                            .addComponent(jButton_anadirPiloto_EquipoCarreras)
+                            .addGap(32, 32, 32))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_equipoCarrerasLayout.createSequentialGroup()
+                            .addComponent(jLabel_nombre_equipoCarreras)
+                            .addGap(56, 56, 56)
+                            .addComponent(jTextField_nombre_equipoCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jButton_cancelar_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton_guardarModificacion_equipoCarreras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(4, 4, 4)))))
+            .addContainerGap(43, Short.MAX_VALUE))
     );
     jPanel_equipoCarrerasLayout.setVerticalGroup(
         jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,10 +480,7 @@ public class Ventana1 extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jButton_detalles_EquipoCarreras)
             .addGap(18, 18, 18)
-            .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel_idEquipo_equipoCarreras)
-                .addComponent(jTextField_idEquipo_equipoCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jButton_guardarModificacion_equipoCarreras))
+            .addComponent(jButton_guardarModificacion_equipoCarreras)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel_nombre_equipoCarreras)
@@ -539,13 +490,7 @@ public class Ventana1 extends javax.swing.JFrame {
             .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jComboBox_anadirPiloto_EquiposCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton_anadirPiloto_EquipoCarreras))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-            .addComponent(jButton_leer_xml)
-            .addGap(26, 26, 26)
-            .addGroup(jPanel_equipoCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton_reescribir_xml)
-                .addComponent(jButton1))
-            .addGap(20, 20, 20))
+            .addContainerGap(150, Short.MAX_VALUE))
     );
 
     jTabbedPane.addTab("EquipoCarreras", jPanel_equipoCarreras);
@@ -1262,25 +1207,22 @@ public class Ventana1 extends javax.swing.JFrame {
     private void jButton_guardar_equipoCarrerasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_guardar_equipoCarrerasMouseClicked
         // TODO add your handling code here:
         
-        String idEquipo = "";
+        String idEquipo = "a";
         String nombre = "";
-        idEquipo = jTextField_idEquipo_equipoCarreras.getText();
+        //idEquipo = jTextField_idEquipo_equipoCarreras.getText();
         nombre = jTextField_nombre_equipoCarreras.getText();
-        EquipoCarreras unEquipo = new EquipoCarreras(idEquipo, nombre);
+        //EquipoCarreras unEquipo = new EquipoCarreras(idEquipo, nombre);
         
-        if(idEquipo.equals("") || nombre.equals("")){
+        if(nombre.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
-            if(this.miControlador.comprobarSiEquipoExiste(unEquipo) == false){
-                this.miControlador.anadirEquipoCarreras(unEquipo);
-            }else{
-                JOptionPane.showMessageDialog(null, "El equipo ya existe en el sistema, introduzca otro ID");
-            }
+            this.miControlador.insertarEquipoCarreras(nombre);
         }
-        this.miControlador.mostrarEquiposCarreras();
-        
+        //this.miControlador.mostrarEquiposCarreras();
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
         this.actualizarTablaEquipos();
-        jTextField_idEquipo_equipoCarreras.setText("");
+        //jTextField_idEquipo_equipoCarreras.setText("");
         jTextField_nombre_equipoCarreras.setText("");
         
         
@@ -1298,7 +1240,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jButton_anadirPiloto_EquipoCarreras.setVisible(true);
         jButton_cancelar_equipoCarreras.setVisible(true);
        //System.out.println("FILA: " + fila);
-        jTextField_idEquipo_equipoCarreras.setText(miControlador.getUnEquipo(fila).getIdEquipo());
+        //jTextField_idEquipo_equipoCarreras.setText(miControlador.getUnEquipo(fila).getIdEquipo());
         jTextField_nombre_equipoCarreras.setText(miControlador.getUnEquipo(fila).getNombre());
     }else{
         JOptionPane.showMessageDialog(null, "Por favor seleccione un equipo de carreras");
@@ -1310,9 +1252,9 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_equipoCarreras.getSelectedRow();
         
-        String idEquipo = "";
+        String idEquipo = "a";
         String nombre = "";
-        idEquipo = jTextField_idEquipo_equipoCarreras.getText();
+        //idEquipo = jTextField_idEquipo_equipoCarreras.getText();
         nombre = jTextField_nombre_equipoCarreras.getText();
         EquipoCarreras unEquipo = new EquipoCarreras(idEquipo, nombre);
 
@@ -1340,7 +1282,7 @@ public class Ventana1 extends javax.swing.JFrame {
         this.jButton_guardarModificacion_equipoCarreras.setVisible(false);
         this.jComboBox_anadirPiloto_EquiposCarreras.setVisible(false);
         this.jButton_anadirPiloto_EquipoCarreras.setVisible(false);
-        jTextField_idEquipo_equipoCarreras.setText("");
+       // jTextField_idEquipo_equipoCarreras.setText("");
         jTextField_nombre_equipoCarreras.setText("");
      
     }//GEN-LAST:event_jButton_guardarModificacion_equipoCarrerasMouseClicked
@@ -1359,32 +1301,9 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_borrar_equipoCarrerasActionPerformed
 
-    private void jButton_leer_xmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_leer_xmlActionPerformed
-        // TODO add your handling code here:
-        this.miControlador.leerXML();
-        /*for(int i = 0; i < this.miControlador.getEquipos().size(); i++){
-            this.miControlador.getEquipos().get(i).mostrarEquipo();
-        }*/
-        for(int i = 0; i < this.miControlador.getPilotos().size(); i++){
-            //this.miControlador.getPilotos().get(i).mostrarPiloto();
-            this.miControlador.getIngenieros().get(i).mostrarIngeniero();
-        }
-        this.traerDatosControladorVista();
-        this.actualizarTablasVista();
-    }//GEN-LAST:event_jButton_leer_xmlActionPerformed
-
     private void jButton_modificar_equipoCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_modificar_equipoCarrerasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_modificar_equipoCarrerasActionPerformed
-
-    private void jButton_reescribir_xmlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_reescribir_xmlActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_reescribir_xmlActionPerformed
-
-    private void jButton_reescribir_xmlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_reescribir_xmlMouseClicked
-        // TODO add your handling code here:
-        this.miControlador.escribirXML(misEquipos);
-    }//GEN-LAST:event_jButton_reescribir_xmlMouseClicked
 
     private void jButton_guardar_equipoCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guardar_equipoCarrerasActionPerformed
         // TODO add your handling code here:
@@ -1444,7 +1363,7 @@ public class Ventana1 extends javax.swing.JFrame {
         this.jComboBox_anadirPiloto_EquiposCarreras.setVisible(false);
         this.jButton_anadirPiloto_EquipoCarreras.setVisible(false);
         jButton_cancelar_equipoCarreras.setVisible(false);
-        jTextField_idEquipo_equipoCarreras.setText("");
+        //jTextField_idEquipo_equipoCarreras.setText("");
         jTextField_nombre_equipoCarreras.setText("");
     }//GEN-LAST:event_jButton_cancelar_equipoCarrerasMouseClicked
 
@@ -2106,14 +2025,8 @@ public class Ventana1 extends javax.swing.JFrame {
         actualizarTablasVista();
     }//GEN-LAST:event_jButton_borrar_ingenieroMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        // TODO add your handling code here:
-        this.miControlador.mostrarTablaEquiposCarrerasTerminal();
-    }//GEN-LAST:event_jButton1MouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton_anadirCoche_Ingeniero;
     private javax.swing.JButton jButton_anadirCoche_piloto;
     private javax.swing.JButton jButton_anadirIngeniero_Coche;
@@ -2142,13 +2055,11 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JButton jButton_guardar_equipoCarreras;
     public javax.swing.JButton jButton_guardar_informe;
     private javax.swing.JButton jButton_guardar_ingeniero;
-    private javax.swing.JButton jButton_leer_xml;
     public javax.swing.JButton jButton_modificar_coche;
     private javax.swing.JButton jButton_modificar_equipoCarreras;
     private javax.swing.JButton jButton_modificar_informe;
     public javax.swing.JButton jButton_modificar_ingeniero;
     private javax.swing.JButton jButton_modificar_piloto;
-    private javax.swing.JButton jButton_reescribir_xml;
     private javax.swing.JComboBox<String> jComboBox_anadirCoche_Ingeniero;
     private javax.swing.JComboBox<String> jComboBox_anadirIngeniero_Coche;
     private javax.swing.JComboBox<String> jComboBox_anadirPiloto_EquiposCarreras;
@@ -2159,7 +2070,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_edad_piloto;
     private javax.swing.JLabel jLabel_fechaNac_ingeniero;
     private javax.swing.JLabel jLabel_idCoche_coche;
-    private javax.swing.JLabel jLabel_idEquipo_equipoCarreras;
     private javax.swing.JLabel jLabel_idInforme_informe;
     private javax.swing.JLabel jLabel_idIngeniero_ingeniero;
     private javax.swing.JLabel jLabel_idPiloto_piloto;
@@ -2190,7 +2100,6 @@ public class Ventana1 extends javax.swing.JFrame {
     public javax.swing.JTextField jTextField_edad_piloto;
     private javax.swing.JTextField jTextField_fechnac_ingeniero;
     private javax.swing.JTextField jTextField_idCoche_coche;
-    public javax.swing.JTextField jTextField_idEquipo_equipoCarreras;
     private javax.swing.JTextField jTextField_idInforme_informe;
     private javax.swing.JTextField jTextField_idIngeniero_ingeniero;
     public javax.swing.JTextField jTextField_idPiloto_piloto;

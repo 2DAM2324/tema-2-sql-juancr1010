@@ -224,6 +224,11 @@ public class Controlador {
         return existe;
     }
     
+    public void insertarEquipoCarreras(String nombre){
+        this.db.insertarEquipoCarreras(nombre);
+    }
+    
+    
     public void obtenerDatosBD(){
         this.db.traerInformes();
         this.db.traerCoches();

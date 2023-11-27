@@ -77,6 +77,28 @@ public class DatabaseConnection {
         }
     }
     
+    public void insertarEquipoCarreras(String nombre){
+        String consulta = "INSERT INTO EquipoCarreras (nombre) VALUES (?)";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, nombre);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
     public void consultarTablaEquiposCarreras(){
         String cons = "SELECT * FROM equipoCarreras";
         PreparedStatement consulta = null;
