@@ -112,6 +112,10 @@ public class Ventana1 extends javax.swing.JFrame {
         
         jButton_guardarModificacion_equipoCarreras.setVisible(false);
         
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
+        this.actualizarTablasVista();
+        
     }
     
     public void traerEquiposControladorVista(){

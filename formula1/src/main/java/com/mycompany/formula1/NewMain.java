@@ -4,6 +4,7 @@
  */
 package com.mycompany.formula1;
 
+import Modelo.DatabaseConnection;
 import Vista.Ventana1;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,6 +25,9 @@ public class NewMain {
         
         Ventana1 miVentana = new Ventana1();
         miVentana.setVisible(true);
+        Runtime.getRuntime().addShutdownHook(new Thread(()->{
+            DatabaseConnection.cerrarConexion();
+        }));
     }
     
 }

@@ -22,7 +22,7 @@ import java.sql.Statement;
  * @author johnm
  */
 public class DatabaseConnection {
-    Connection conn = null;
+    private static Connection conn;
     private ArrayList<EquipoCarreras> equiposBD;
     private ArrayList<Piloto> pilotosBD;
     private ArrayList<Informe> informesBD;
@@ -38,11 +38,11 @@ public class DatabaseConnection {
         }
     }
 
-    public void connect() {
+    public static void connect() {
         // Cadena de conexión para Oracle
         String url = "jdbc:sqlite:D:\\Program Files\\SqliteStudio\\basededatos\\formula1.db";
         try{
-             this.conn = DriverManager.getConnection(url);
+             conn = DriverManager.getConnection(url);
         }
         catch(SQLException e){
             System.out.println(e.getMessage());
@@ -51,7 +51,7 @@ public class DatabaseConnection {
     }
 
     public DatabaseConnection() {
-        
+        conn = null;
     }
     
     public void insertarDatosEnTabla(String query){
@@ -440,7 +440,7 @@ public class DatabaseConnection {
     public void traerEquiposCarreras(){
         this.equiposBD = new ArrayList<EquipoCarreras>();
         
-        String cons = "SELECT * FROM Piloto";
+        String cons = "SELECT * FROM EquipoCarreras";
         PreparedStatement consulta = null;
         ResultSet resultado = null;
         
@@ -470,7 +470,7 @@ public class DatabaseConnection {
         
     }
         
-    public void cerrarConexion(){
+    public static void cerrarConexion(){
         try{
             if(conn != null){
                 conn.close();
@@ -479,6 +479,54 @@ public class DatabaseConnection {
        catch(SQLException e){
             e.printStackTrace();
        }
+    }
+
+    public ArrayList<EquipoCarreras> getEquiposBD() {
+        return equiposBD;
+    }
+
+    public void setEquiposBD(ArrayList<EquipoCarreras> equiposBD) {
+        this.equiposBD = equiposBD;
+    }
+
+    public ArrayList<Piloto> getPilotosBD() {
+        return pilotosBD;
+    }
+
+    public void setPilotosBD(ArrayList<Piloto> pilotosBD) {
+        this.pilotosBD = pilotosBD;
+    }
+
+    public ArrayList<Informe> getInformesBD() {
+        return informesBD;
+    }
+
+    public void setInformesBD(ArrayList<Informe> informesBD) {
+        this.informesBD = informesBD;
+    }
+
+    public ArrayList<Genera> getGenerasBD() {
+        return generasBD;
+    }
+
+    public void setGenerasBD(ArrayList<Genera> generasBD) {
+        this.generasBD = generasBD;
+    }
+
+    public ArrayList<Coche> getCochesBD() {
+        return cochesBD;
+    }
+
+    public void setCochesBD(ArrayList<Coche> cochesBD) {
+        this.cochesBD = cochesBD;
+    }
+
+    public ArrayList<Ingeniero> getIngenierosBD() {
+        return ingenierosBD;
+    }
+
+    public void setIngenierosBD(ArrayList<Ingeniero> ingenierosBD) {
+        this.ingenierosBD = ingenierosBD;
     }
         
     

@@ -56,6 +56,7 @@ public class Controlador {
         this.coches = new ArrayList<Coche>();
         this.ingenieros = new ArrayList<Ingeniero>();
         this.db = new DatabaseConnection();
+        this.db.connect();
     }
 
    
@@ -158,6 +159,7 @@ public class Controlador {
     public void mostrarInformes(){
         for(Informe i : this.informes){
             System.out.println("ID: " + i.getIdInforme());
+            System.out.println("Descripcion: " + i.getDescripcion());
         }
     }
     
@@ -222,10 +224,33 @@ public class Controlador {
         return existe;
     }
     
+    public void obtenerDatosBD(){
+        this.db.traerInformes();
+        this.db.traerCoches();
+        this.db.traerIngenieros();
+        this.db.traerPilotos();
+        this.db.traerGenera();
+        this.db.traerEquiposCarreras();
+        this.db.relacionarCochesConIngenieros();
+        this.db.relacionarCochesConPilotos();
+        this.db.relacionarInformesConPilotos();
+        this.db.relacionarEquiposConPilotos();
+        this.informes = this.db.getInformesBD();
+        this.ingenieros = this.db.getIngenierosBD();
+        this.coches = this.db.getCochesBD();
+        this.pilotos = this.db.getPilotosBD();
+        this.equipos = this.db.getEquiposBD();
+        
+        mostrarEquiposCarreras();
+        mostrarPilotos();
+        mostrarInformes();
+    }
+    
+    
     public void mostrarTablaEquiposCarrerasTerminal(){
-        this.db.connect();
+        
         this.db.consultarTablaEquiposCarreras();
-        this.db.cerrarConexion();
+        
     }
     
     
