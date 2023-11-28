@@ -228,6 +228,13 @@ public class Controlador {
         this.db.insertarEquipoCarreras(nombre);
     }
     
+    public void modificarNombreEquipoCarreras(String idEquipo, String nombre){
+        this.db.modificarNombreEquipoCarreras(idEquipo, nombre);
+    }
+    
+    public void asignarPilotoAEquipoCarreras(String idPiloto, String idEquipo){
+        this.db.asignarEquipoAPiloto(idPiloto, idEquipo);
+    }
     
     public void obtenerDatosBD(){
         this.db.traerInformes();

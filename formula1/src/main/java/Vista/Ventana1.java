@@ -1252,33 +1252,23 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_equipoCarreras.getSelectedRow();
         
-        String idEquipo = "a";
-        String nombre = "";
-        //idEquipo = jTextField_idEquipo_equipoCarreras.getText();
-        nombre = jTextField_nombre_equipoCarreras.getText();
-        EquipoCarreras unEquipo = new EquipoCarreras(idEquipo, nombre);
+        if(fila != -1){
+            String nombre = "", idEquipo = this.misEquipos.get(fila).getIdEquipo();
+            //idEquipo = jTextField_idEquipo_equipoCarreras.getText();
+            nombre = jTextField_nombre_equipoCarreras.getText();
 
-        if(idEquipo.equals("") || nombre.equals("")){
-           JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco");
-        }else{
-            if((idEquipo.equals(this.misEquipos.get(fila).getIdEquipo()))){
-                this.misEquipos.get(fila).setIdEquipo(idEquipo);
-                this.misEquipos.get(fila).setIdEquipo(nombre);
-
-                this.miControlador.modificarEquipoCarreras(idEquipo, nombre, fila);
-            }else if(this.miControlador.comprobarSiEquipoExiste(unEquipo)){
-                JOptionPane.showMessageDialog(null, "El equipo ya existe en el sistema, introduzca otro ID");
+            if(nombre.equals("")){
+               JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco");
             }else{
-                this.misEquipos.get(fila).setIdEquipo(idEquipo);
-                this.misEquipos.get(fila).setIdEquipo(nombre);
-
-                this.miControlador.modificarEquipoCarreras(idEquipo, nombre, fila);
+                this.miControlador.modificarNombreEquipoCarreras(idEquipo, nombre);
             }
+
+            this.miControlador.obtenerDatosBD();
+            this.traerDatosControladorVista();
+            this.actualizarTablaEquipos();
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un equipo de carreras");
         }
-        
-        
-        this.actualizarTablaEquipos();
-        
         this.jButton_guardarModificacion_equipoCarreras.setVisible(false);
         this.jComboBox_anadirPiloto_EquiposCarreras.setVisible(false);
         this.jButton_anadirPiloto_EquipoCarreras.setVisible(false);
@@ -1340,9 +1330,12 @@ public class Ventana1 extends javax.swing.JFrame {
 
                 if(selectedValue != null){
                     if(p.getIdPiloto().equals(selectedValue)){
+                        System.out.println("Equipo: " + p.getEquipo_piloto());
                         if(p.getEquipo_piloto() == null){
-                            p.setEquipo_piloto(this.miControlador.getEquipos().get(fila));
-                            this.miControlador.getEquipos().get(fila).getPilotos().add(p);
+                            this.miControlador.asignarPilotoAEquipoCarreras(p.getIdPiloto(), this.misEquipos.get(fila).getIdEquipo());
+                            this.miControlador.obtenerDatosBD();
+                            this.traerDatosControladorVista();
+                            this.actualizarTablaEquipos();
                         }else{
                             pilotoConEquipo = true;
                         }

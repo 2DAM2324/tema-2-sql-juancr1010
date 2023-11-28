@@ -99,6 +99,52 @@ public class DatabaseConnection {
         }
     }
     
+    public void modificarNombreEquipoCarreras(String idEquipo, String nombre){
+        String consulta = "UPDATE EquipoCarreras SET nombre = ? " + "WHERE idEquipoCarreras = ?";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, nombre);
+            sentencia.setString(2, idEquipo);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    public void asignarEquipoAPiloto(String idPiloto, String idEquipo){
+        String consulta = "UPDATE Piloto SET idEquipoCarreras = ? " + "WHERE idPiloto = ?";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, idEquipo);
+            sentencia.setString(2, idPiloto);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
     public void consultarTablaEquiposCarreras(){
         String cons = "SELECT * FROM equipoCarreras";
         PreparedStatement consulta = null;
@@ -130,6 +176,10 @@ public class DatabaseConnection {
         }
     }
     
+    public void eliminarEquipoCarreras(String idEquipoCarreras){
+        
+    }
+    
     //TODO: Pasar los datos de la bd al controlador y posteriormente mostrar los datos en la vista
     
     public void relacionarEquiposConPilotos(){
@@ -143,12 +193,14 @@ public class DatabaseConnection {
             
             while(resultado.next()){
                 for(Piloto p: this.pilotosBD){
-                    if(p.getIdPiloto().equals(resultado.getString(1))){
-                        for(EquipoCarreras e: this.equiposBD){
-                            if(resultado.getString(4).equals(e.getIdEquipo())){
-                                p.setEquipo_piloto(e);
-                                e.getPilotos().add(p);
-                                p.setEquipo_piloto(e);
+                    if(resultado.getString(1) != null && resultado.getString(4) != null){
+                        if(p.getIdPiloto().equals(resultado.getString(1))){
+                            for(EquipoCarreras e: this.equiposBD){
+                                if(resultado.getString(4).equals(e.getIdEquipo())){
+                                    p.setEquipo_piloto(e);
+                                    e.getPilotos().add(p);
+                                    p.setEquipo_piloto(e);
+                                }
                             }
                         }
                     }
@@ -182,16 +234,24 @@ public class DatabaseConnection {
         try{
             consulta = conn.prepareStatement(cons);
             resultado = consulta.executeQuery();
-            
+            //System.out.println("resultado: " + resultado.getString(1));
+            //System.out.println("resultado2: " + resultado.getString(5));
             while(resultado.next()){
+                System.out.println("resultado: " + resultado.getString(1));
+                System.out.println("resultado2: " + resultado.getString(5));
+            
                 for(Piloto p: this.pilotosBD){
-                    if(p.getIdPiloto().equals(resultado.getString(1))){
-                        for(Coche c: this.cochesBD){
-                            if(resultado.getString(5).equals(c.getIdCoche())){
-                                p.setCoche_piloto(c);
-                                c.setPiloto(p);
-                                p.setCoche_piloto(c);
-                                c.setPiloto(p);
+                    if(resultado.getString(1) != null && resultado.getString(5) != null){
+                        //System.out.println("entro");
+                        if(p.getIdPiloto().equals(resultado.getString(1))){
+                            for(Coche c: this.cochesBD){
+                                
+                                    if(resultado.getString(5).equals(c.getIdCoche())){
+                                        p.setCoche_piloto(c);
+                                        c.setPiloto(p);
+                                        p.setCoche_piloto(c);
+                                        c.setPiloto(p);
+                                    }
                             }
                         }
                     }
