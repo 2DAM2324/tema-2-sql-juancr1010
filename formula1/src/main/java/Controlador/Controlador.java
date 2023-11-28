@@ -13,6 +13,7 @@ import Modelo.DatabaseConnection;
 import Vista.Ventana1;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -234,6 +235,10 @@ public class Controlador {
     
     public void asignarPilotoAEquipoCarreras(String idPiloto, String idEquipo){
         this.db.asignarEquipoAPiloto(idPiloto, idEquipo);
+    }
+    
+    public void eliminarEquipoCarreras(String idEquipoCarreras) throws SQLException{
+        this.db.eliminarEquipoCarreras(idEquipoCarreras);
     }
     
     public void obtenerDatosBD(){

@@ -53,6 +53,7 @@ import Modelo.EquipoCarreras;
 import Modelo.Genera;
 import Modelo.Informe;
 import Modelo.Ingeniero;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -1281,9 +1282,17 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_equipoCarreras.getSelectedRow();
         
-        this.miControlador.borrarEquipoCarreras(fila);
-        //this.misEquipos.remove(fila);
+        String idEquipo = this.misEquipos.get(fila).getIdEquipo();
         
+        try {
+            this.miControlador.eliminarEquipoCarreras(idEquipo);
+            //this.misEquipos.remove(fila);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
         this.actualizarTablaEquipos();
     }//GEN-LAST:event_jButton_borrar_equipoCarrerasMouseClicked
 
@@ -1319,6 +1328,7 @@ public class Ventana1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox_anadirPiloto_EquiposCarrerasActionPerformed
 
     private void jButton_anadirPiloto_EquipoCarrerasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_anadirPiloto_EquipoCarrerasMouseClicked
+
         // TODO add your handling code here:
         int fila = jTable_equipoCarreras.getSelectedRow();
         boolean pilotoConEquipo = false;

@@ -176,7 +176,60 @@ public class DatabaseConnection {
         }
     }
     
-    public void eliminarEquipoCarreras(String idEquipoCarreras){
+    public void eliminarEquipoCarreras(String idEquipoCarreras) throws SQLException{
+        String cons = "UPDATE Piloto SET idEquipoCarreras = NULL " + "WHERE idEquipoCarreras = ?";
+        String consultaDelete = "DELETE FROM EquipoCarreras WHERE idEquipoCarreras = ?";
+        PreparedStatement sentencia = null;
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(cons);
+            sentencia.setString(1, idEquipoCarreras);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(cons != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(consultaDelete);
+            sentencia.setString(1, idEquipoCarreras);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(cons != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
         
     }
     
