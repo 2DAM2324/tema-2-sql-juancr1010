@@ -145,6 +145,52 @@ public class DatabaseConnection {
         }
     }
     
+    public void modificarNombrePiloto(String idPiloto, String nombre){
+        String consulta = "UPDATE Piloto SET nombre = ? " + "WHERE idPiloto = ?";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, nombre);
+            sentencia.setString(2, idPiloto);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    public void modificarEdadPiloto(String idPiloto, int edad){
+        String consulta = "UPDATE Piloto SET edad = ? " + "WHERE idPiloto = ?";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setInt(1, edad);
+            sentencia.setString(2, idPiloto);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
     public void asignarEquipoAPiloto(String idPiloto, String idEquipo){
         String consulta = "UPDATE Piloto SET idEquipoCarreras = ? " + "WHERE idPiloto = ?";
         PreparedStatement sentencia = null;

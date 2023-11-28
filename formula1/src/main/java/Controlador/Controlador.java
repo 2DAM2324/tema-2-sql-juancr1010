@@ -237,6 +237,14 @@ public class Controlador {
         this.db.modificarNombreEquipoCarreras(idEquipo, nombre);
     }
     
+    public void modificarNombrePiloto(String idPiloto, String nombre){
+        this.db.modificarNombrePiloto(idPiloto, nombre);
+    }
+    
+    public void modificarEdadPiloto(String idPiloto, int edad){
+        this.db.modificarEdadPiloto(idPiloto, edad);
+    }
+    
     public void asignarPilotoAEquipoCarreras(String idPiloto, String idEquipo){
         this.db.asignarEquipoAPiloto(idPiloto, idEquipo);
     }

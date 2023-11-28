@@ -1405,34 +1405,23 @@ public class Ventana1 extends javax.swing.JFrame {
             abortarOperacion = true;
             JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
         }
-        idPiloto = "";
+        idPiloto = this.misPilotos.get(fila).getIdPiloto();
         nombre = jTextField_nombre_piloto.getText();
         //edad = Integer.parseInt(jTextField_edad_piloto.getText());
-        Piloto unPiloto = new Piloto(idPiloto, nombre, edad);
         
-        if(idPiloto.equals("") ||nombre.equals("")){
+        
+        if(nombre.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe introducir datos en blanco, abortando...");
         }else{
         
             if(!abortarOperacion){
-                if((idPiloto.equals(this.misPilotos.get(fila).getIdPiloto()))){
-                    this.misPilotos.get(fila).setIdPiloto(idPiloto);
-                    this.misPilotos.get(fila).setNombre(nombre);
-                    this.misPilotos.get(fila).setEdad(edad);
-
-                    this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
-                }else if(this.miControlador.comprobarSiPilotoExiste(unPiloto)){
-                    JOptionPane.showMessageDialog(null, "El piloto ya existe en el sistema, introduzca otro ID");
-                }else{
-                    this.misPilotos.get(fila).setIdPiloto(idPiloto);
-                    this.misPilotos.get(fila).setNombre(nombre);
-                    this.misPilotos.get(fila).setEdad(edad);
-
-                    this.miControlador.modificarPiloto(idPiloto, nombre, edad, fila);
-                }
+                this.miControlador.modificarNombrePiloto(idPiloto, nombre);
+                this.miControlador.modificarEdadPiloto(idPiloto, edad);
             }
         }
-        this.actualizarTablaPilotos();
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
+        this.actualizarTablasVista();
         
         this.jButton_guardarModificacion_pilotos.setVisible(false);
         this.jComboBox_coche_piloto.setVisible(false);
