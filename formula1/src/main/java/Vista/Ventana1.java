@@ -257,10 +257,8 @@ public class Ventana1 extends javax.swing.JFrame {
         jPanel_piloto = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable_piloto = new javax.swing.JTable();
-        jLabel_idPiloto_piloto = new javax.swing.JLabel();
         jLabel_nombre_piloto = new javax.swing.JLabel();
         jLabel_edad_piloto = new javax.swing.JLabel();
-        jTextField_idPiloto_piloto = new javax.swing.JTextField();
         jTextField_nombre_piloto = new javax.swing.JTextField();
         jTextField_edad_piloto = new javax.swing.JTextField();
         jButton_aniadir_piloto = new javax.swing.JButton();
@@ -519,8 +517,6 @@ public class Ventana1 extends javax.swing.JFrame {
         jTable_piloto.getColumnModel().getColumn(2).setResizable(false);
     }
 
-    jLabel_idPiloto_piloto.setText("idPiloto");
-
     jLabel_nombre_piloto.setText("Nombre");
 
     jLabel_edad_piloto.setText("Edad");
@@ -612,7 +608,6 @@ public class Ventana1 extends javax.swing.JFrame {
                 .addGroup(jPanel_pilotoLayout.createSequentialGroup()
                     .addGap(27, 27, 27)
                     .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel_idPiloto_piloto)
                         .addComponent(jLabel_nombre_piloto)
                         .addComponent(jLabel_edad_piloto)
                         .addComponent(jLabel_descripcionInforme_piloto)
@@ -620,8 +615,7 @@ public class Ventana1 extends javax.swing.JFrame {
                         .addComponent(jComboBox_coche_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(24, 24, 24)
                     .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField_descripcionInforme_piloto)
-                        .addComponent(jTextField_idPiloto_piloto, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                        .addComponent(jTextField_descripcionInforme_piloto, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                         .addComponent(jTextField_nombre_piloto)
                         .addComponent(jTextField_edad_piloto)
                         .addComponent(jTextField_IdInforme_piloto)
@@ -667,11 +661,7 @@ public class Ventana1 extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton_detalles_Piloto)))
-                    .addGap(15, 15, 15)
-                    .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_idPiloto_piloto)
-                        .addComponent(jTextField_idPiloto_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGap(49, 49, 49)
                     .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel_nombre_piloto)
                         .addComponent(jTextField_nombre_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -688,7 +678,7 @@ public class Ventana1 extends javax.swing.JFrame {
             .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jComboBox_coche_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton_anadirCoche_piloto))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
             .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jLabel_descripcionInforme_piloto1, javax.swing.GroupLayout.Alignment.TRAILING)
                 .addComponent(jTextField_IdInforme_piloto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1372,11 +1362,9 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void jButton_aniadir_pilotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_aniadir_pilotoMouseClicked
         // TODO add your handling code here:
-        String idPiloto = "";
         String nombre = "";
         int edad = 0;
         Boolean abortarOperacion = false;
-        idPiloto = jTextField_idPiloto_piloto.getText();
         nombre = jTextField_nombre_piloto.getText();
         try{
             edad = Integer.parseInt(jTextField_edad_piloto.getText());
@@ -1387,23 +1375,17 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
         }
         
-        if(idPiloto.equals("") || nombre.equals("")){
+        if(nombre.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
             if(!abortarOperacion){
-                Piloto unPiloto = new Piloto(idPiloto, nombre, edad);
-
-                if(this.miControlador.comprobarSiPilotoExiste(unPiloto) == false){
-                    this.miControlador.getPilotos().add(unPiloto);
-                }else{
-                    JOptionPane.showMessageDialog(null, "El piloto ya existe en el sistema, introduzca otro ID");
-                }
+                this.miControlador.insertarPiloto(nombre, edad);
             }
         }
-        this.miControlador.mostrarEquiposCarreras();
-        
-        this.actualizarTablaPilotos();
-        jTextField_idPiloto_piloto.setText("");
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
+        this.actualizarTablasVista();
+        //jTextField_idPiloto_piloto.setText("");
         jTextField_nombre_piloto.setText("");
         jTextField_edad_piloto.setText("");
     }//GEN-LAST:event_jButton_aniadir_pilotoMouseClicked
@@ -1423,7 +1405,7 @@ public class Ventana1 extends javax.swing.JFrame {
             abortarOperacion = true;
             JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
         }
-        idPiloto = jTextField_idPiloto_piloto.getText();
+        idPiloto = "";
         nombre = jTextField_nombre_piloto.getText();
         //edad = Integer.parseInt(jTextField_edad_piloto.getText());
         Piloto unPiloto = new Piloto(idPiloto, nombre, edad);
@@ -1456,7 +1438,7 @@ public class Ventana1 extends javax.swing.JFrame {
         this.jComboBox_coche_piloto.setVisible(false);
         this.jButton_anadirCoche_piloto.setVisible(false);
         this.jButton_cancelar_pilotos.setVisible(false);
-        jTextField_idPiloto_piloto.setText("");
+        //jTextField_idPiloto_piloto.setText("");
         jTextField_nombre_piloto.setText("");
         jTextField_edad_piloto.setText("");
     }//GEN-LAST:event_jButton_guardarModificacion_pilotosMouseClicked
@@ -1467,7 +1449,7 @@ public class Ventana1 extends javax.swing.JFrame {
         this.jComboBox_coche_piloto.setVisible(false);
         this.jButton_anadirCoche_piloto.setVisible(false);
         this.jButton_cancelar_pilotos.setVisible(false);
-        jTextField_idPiloto_piloto.setText("");
+        //jTextField_idPiloto_piloto.setText("");
         jTextField_nombre_piloto.setText("");
         jTextField_edad_piloto.setText("");
     }//GEN-LAST:event_jButton_cancelar_pilotosMouseClicked
@@ -1490,7 +1472,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jButton_anadirCoche_piloto.setVisible(true);
         jButton_cancelar_pilotos.setVisible(true);
        //System.out.println("FILA: " + fila);
-        jTextField_idPiloto_piloto.setText(miControlador.getPilotos().get(fila).getIdPiloto());
+        //jTextField_idPiloto_piloto.setText(miControlador.getPilotos().get(fila).getIdPiloto());
         jTextField_nombre_piloto.setText(miControlador.getPilotos().get(fila).getNombre());
         jTextField_edad_piloto.setText(Integer.toString(miControlador.getPilotos().get(fila).getEdad()));
      }else{
@@ -1706,7 +1688,7 @@ public class Ventana1 extends javax.swing.JFrame {
         //this.miControlador.mostrarEquiposCarreras();
         
         this.actualizarTablasVista();
-        jTextField_idPiloto_piloto.setText("");
+        //jTextField_idPiloto_piloto.setText("");
         jTextField_nombre_piloto.setText("");
         jTextField_edad_piloto.setText("");
     }//GEN-LAST:event_jButton_aniadir_cocheMouseClicked
@@ -2075,7 +2057,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_idCoche_coche;
     private javax.swing.JLabel jLabel_idInforme_informe;
     private javax.swing.JLabel jLabel_idIngeniero_ingeniero;
-    private javax.swing.JLabel jLabel_idPiloto_piloto;
     private javax.swing.JLabel jLabel_marca_coche;
     private javax.swing.JLabel jLabel_modelo_coche;
     private javax.swing.JLabel jLabel_nombre_equipoCarreras;
@@ -2105,7 +2086,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_idCoche_coche;
     private javax.swing.JTextField jTextField_idInforme_informe;
     private javax.swing.JTextField jTextField_idIngeniero_ingeniero;
-    public javax.swing.JTextField jTextField_idPiloto_piloto;
     private javax.swing.JTextField jTextField_marca_coche;
     private javax.swing.JTextField jTextField_modelo_coche;
     public javax.swing.JTextField jTextField_nombre_equipoCarreras;

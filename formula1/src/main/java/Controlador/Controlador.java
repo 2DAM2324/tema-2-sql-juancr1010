@@ -229,6 +229,10 @@ public class Controlador {
         this.db.insertarEquipoCarreras(nombre);
     }
     
+    public void insertarPiloto(String nombre, int edad){
+        this.db.insertarPiloto(nombre, edad);
+    }
+    
     public void modificarNombreEquipoCarreras(String idEquipo, String nombre){
         this.db.modificarNombreEquipoCarreras(idEquipo, nombre);
     }
@@ -240,6 +244,8 @@ public class Controlador {
     public void eliminarEquipoCarreras(String idEquipoCarreras) throws SQLException{
         this.db.eliminarEquipoCarreras(idEquipoCarreras);
     }
+    
+    
     
     public void obtenerDatosBD(){
         this.db.traerInformes();

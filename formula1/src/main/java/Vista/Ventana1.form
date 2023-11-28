@@ -289,7 +289,6 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel_idPiloto_piloto" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_nombre_piloto" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_edad_piloto" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_descripcionInforme_piloto" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -298,8 +297,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextField_descripcionInforme_piloto" max="32767" attributes="0"/>
-                                  <Component id="jTextField_idPiloto_piloto" alignment="0" pref="245" max="32767" attributes="0"/>
+                                  <Component id="jTextField_descripcionInforme_piloto" pref="245" max="32767" attributes="0"/>
                                   <Component id="jTextField_nombre_piloto" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField_edad_piloto" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField_IdInforme_piloto" alignment="0" max="32767" attributes="0"/>
@@ -361,12 +359,7 @@
                                       <Component id="jButton_detalles_Piloto" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel_idPiloto_piloto" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField_idPiloto_piloto" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel_nombre_piloto" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jTextField_nombre_piloto" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -389,7 +382,7 @@
                           <Component id="jComboBox_coche_piloto" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_anadirCoche_piloto" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel_descripcionInforme_piloto1" alignment="1" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField_IdInforme_piloto" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -448,11 +441,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel_idPiloto_piloto">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="idPiloto"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel_nombre_piloto">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nombre"/>
@@ -462,11 +450,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edad"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_idPiloto_piloto">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_nombre_piloto">
               <AuxValues>

@@ -98,6 +98,29 @@ public class DatabaseConnection {
             }
         }
     }
+
+    public void insertarPiloto(String nombre, int edad){
+        String consulta = "INSERT INTO Piloto (nombre, edad) VALUES (?, ?)";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, nombre);
+            sentencia.setInt(2, edad);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
     
     public void modificarNombreEquipoCarreras(String idEquipo, String nombre){
         String consulta = "UPDATE EquipoCarreras SET nombre = ? " + "WHERE idEquipoCarreras = ?";
