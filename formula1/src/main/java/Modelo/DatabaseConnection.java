@@ -214,6 +214,32 @@ public class DatabaseConnection {
         }
     }
     
+    public void asignarCocheAPiloto(String idCoche, String idPiloto){
+        PreparedStatement sentencia = null;
+        
+        String consultaPiloto = "UPDATE Piloto SET idCoche = ? " + "WHERE idPiloto = ?";
+        
+        try{
+            sentencia = conn.prepareStatement(consultaPiloto);
+            sentencia.setString(1, idCoche);
+            sentencia.setString(2, idPiloto);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+        
+    }
+    
     public void consultarTablaEquiposCarreras(){
         String cons = "SELECT * FROM equipoCarreras";
         PreparedStatement consulta = null;

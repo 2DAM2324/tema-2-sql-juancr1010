@@ -249,6 +249,10 @@ public class Controlador {
         this.db.asignarEquipoAPiloto(idPiloto, idEquipo);
     }
     
+    public void asignarCocheAPiloto(String idCoche, String idPiloto){
+        this.db.asignarCocheAPiloto(idCoche, idPiloto);
+    }
+    
     public void eliminarEquipoCarreras(String idEquipoCarreras) throws SQLException{
         this.db.eliminarEquipoCarreras(idEquipoCarreras);
     }

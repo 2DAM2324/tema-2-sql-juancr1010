@@ -1482,8 +1482,10 @@ public class Ventana1 extends javax.swing.JFrame {
                 if(selectedValue != null){
                     if(c.getIdCoche().equals(selectedValue)){
                         if(c.getPiloto() == null){
-                            c.setPiloto(this.miControlador.getPilotos().get(fila));
-                            this.miControlador.getPilotos().get(fila).setCoche_piloto(c);
+                           this.miControlador.asignarCocheAPiloto(c.getIdCoche(), this.misPilotos.get(fila).getIdPiloto());
+                           this.miControlador.obtenerDatosBD();
+                            this.traerDatosControladorVista();
+                            this.actualizarTablasVista();
                         }else{
                             CocheConPiloto = true;
                         }
