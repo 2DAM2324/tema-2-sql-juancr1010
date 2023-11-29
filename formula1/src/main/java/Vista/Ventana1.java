@@ -1503,25 +1503,16 @@ public class Ventana1 extends javax.swing.JFrame {
     private void jButton_borrar_pilotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_borrar_pilotoMouseClicked
         // TODO add your handling code here:
         int fila = jTable_piloto.getSelectedRow();
-        Informe aux = null;
-        for(EquipoCarreras e: this.miControlador.getEquipos()){
-            for(int i = 0; i < e.getPilotos().size(); i++){
-                if(e.getPilotos().get(i).getIdPiloto().equals(this.miControlador.getPilotos().get(fila).getIdPiloto())){
-                    e.getPilotos().remove(e.getPilotos().get(i));
-                }
-            }
-        }
-        for(Informe f: this.miControlador.getInformes()){
-            if(f.getIdInforme().equals(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera().getIdInforme())){
-                aux = f;
-            }
-        }
         
-        this.miControlador.getInformes().remove(aux);
-        this.miControlador.borrarPiloto(fila);
+        this.miControlador.eliminarPiloto(this.misPilotos.get(fila).getIdPiloto());
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
+        this.actualizarTablasVista();
+        
+        
         //this.misEquipos.remove(fila);
         
-        this.actualizarTablasVista();
+        
     }//GEN-LAST:event_jButton_borrar_pilotoMouseClicked
 
     private void jButton_generarInforme_PilotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_generarInforme_PilotoMouseClicked

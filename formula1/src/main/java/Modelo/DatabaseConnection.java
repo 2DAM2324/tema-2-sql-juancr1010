@@ -328,6 +328,130 @@ public class DatabaseConnection {
         
     }
     
+    public String obtenerInformePiloto(String idPiloto){
+        String consulta = "SELECT * FROM Genera WHERE idPiloto = " + idPiloto;
+        PreparedStatement sentencia = null;
+        ResultSet resultado = null;
+        String idInforme = "";
+        //System.out.println("AAAAAAAAAAAAAAAAAAAIDPILOTO: " + idPiloto);
+        
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            resultado = sentencia.executeQuery();
+            
+            while(resultado.next()){
+                System.out.println("AAAAAAAAAAAAAARESULTADO: " + resultado.getString(3));
+                if(resultado.getString(3) != null){ 
+                    idInforme = resultado.getString(3);
+                }
+            }
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                    resultado.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        System.out.println("IDINFORME: " + idInforme);
+        return idInforme;
+        
+    }
+    
+    public void eliminarPiloto(String idPiloto) throws SQLException{
+        
+        String idInforme = obtenerInformePiloto(idPiloto);
+        System.out.println("AAAAAAAAAAAAAAAidINFORME " + idInforme);
+        String consultaDeleteGenera = "DELETE FROM Genera WHERE idPiloto = ?";
+        String consultaDeleteInforme = "DELETE FROM Informe WHERE idInforme = ?";
+        String consultaDeletePiloto = "DELETE FROM Piloto WHERE idPiloto = ?";
+        PreparedStatement sentencia = null;
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(consultaDeleteGenera);
+            sentencia.setString(1, idPiloto);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        try{
+            if(!idInforme.equals("")){
+                conn.setAutoCommit(false);
+                sentencia = conn.prepareStatement(consultaDeleteInforme);
+                sentencia.setString(1, idInforme);
+                sentencia.executeUpdate();
+
+                conn.commit();
+                conn.setAutoCommit(true);
+            }
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        try{
+                conn.setAutoCommit(false);
+                sentencia = conn.prepareStatement(consultaDeletePiloto);
+                sentencia.setString(1, idPiloto);
+                sentencia.executeUpdate();
+
+                conn.commit();
+                conn.setAutoCommit(true);
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+       
+    }
+    
     //TODO: Pasar los datos de la bd al controlador y posteriormente mostrar los datos en la vista
     
     public void relacionarEquiposConPilotos(){

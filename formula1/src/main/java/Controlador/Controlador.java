@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 import javax.xml.parsers.DocumentBuilder;
@@ -255,6 +257,14 @@ public class Controlador {
     
     public void eliminarEquipoCarreras(String idEquipoCarreras) throws SQLException{
         this.db.eliminarEquipoCarreras(idEquipoCarreras);
+    }
+    
+    public void eliminarPiloto(String idPiloto){
+       try {
+           this.db.eliminarPiloto(idPiloto);
+       } catch (SQLException ex) {
+           ex.printStackTrace();
+       }
     }
     
     
