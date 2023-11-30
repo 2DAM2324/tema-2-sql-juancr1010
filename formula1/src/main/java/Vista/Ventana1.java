@@ -269,8 +269,6 @@ public class Ventana1 extends javax.swing.JFrame {
         jButton_generarInforme_Piloto = new javax.swing.JButton();
         jTextField_descripcionInforme_piloto = new javax.swing.JTextField();
         jLabel_descripcionInforme_piloto = new javax.swing.JLabel();
-        jLabel_descripcionInforme_piloto1 = new javax.swing.JLabel();
-        jTextField_IdInforme_piloto = new javax.swing.JTextField();
         jComboBox_coche_piloto = new javax.swing.JComboBox<>();
         jButton_detalles_Piloto = new javax.swing.JButton();
         jButton_anadirCoche_piloto = new javax.swing.JButton();
@@ -573,14 +571,6 @@ public class Ventana1 extends javax.swing.JFrame {
 
     jLabel_descripcionInforme_piloto.setText("Descripción Informe");
 
-    jLabel_descripcionInforme_piloto1.setText("IdInforme");
-
-    jTextField_IdInforme_piloto.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jTextField_IdInforme_pilotoActionPerformed(evt);
-        }
-    });
-
     jComboBox_coche_piloto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
     jComboBox_coche_piloto.setVisible(false);
 
@@ -611,14 +601,12 @@ public class Ventana1 extends javax.swing.JFrame {
                         .addComponent(jLabel_nombre_piloto)
                         .addComponent(jLabel_edad_piloto)
                         .addComponent(jLabel_descripcionInforme_piloto)
-                        .addComponent(jLabel_descripcionInforme_piloto1)
                         .addComponent(jComboBox_coche_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(24, 24, 24)
                     .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jTextField_descripcionInforme_piloto, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                         .addComponent(jTextField_nombre_piloto)
                         .addComponent(jTextField_edad_piloto)
-                        .addComponent(jTextField_IdInforme_piloto)
                         .addComponent(jButton_anadirCoche_piloto))
                     .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel_pilotoLayout.createSequentialGroup()
@@ -678,11 +666,7 @@ public class Ventana1 extends javax.swing.JFrame {
             .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jComboBox_coche_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton_anadirCoche_piloto))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-            .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jLabel_descripcionInforme_piloto1, javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(jTextField_IdInforme_piloto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
             .addGroup(jPanel_pilotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jTextField_descripcionInforme_piloto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel_descripcionInforme_piloto)
@@ -1447,10 +1431,6 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_descripcionInforme_pilotoActionPerformed
 
-    private void jTextField_IdInforme_pilotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_IdInforme_pilotoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_IdInforme_pilotoActionPerformed
-
     private void jButton_modificar_pilotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_modificar_pilotoMouseClicked
      // TODO add your handling code here:
      int fila = jTable_piloto.getSelectedRow();
@@ -1518,34 +1498,33 @@ public class Ventana1 extends javax.swing.JFrame {
     private void jButton_generarInforme_PilotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_generarInforme_PilotoMouseClicked
         // TODO add your handling code here:
         int fila = jTable_piloto.getSelectedRow();
-        String idInforme = jTextField_IdInforme_piloto.getText();
+       
         String descripcion = jTextField_descripcionInforme_piloto.getText();
         
-        if(idInforme == null || descripcion == null){
+        if(descripcion == null){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
             if(fila != -1){
                 if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto() == null){
 
-                    this.miControlador.getPilotos().get(fila).generarInformePiloto(idInforme, descripcion);
-                    this.miControlador.getInformes().add(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera());
+                   this.miControlador.generarInformePiloto(this.miControlador.getPilotos().get(fila).getIdPiloto(), descripcion);
+                    
                 }else{
                     if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera() == null){
-                        Informe aux = new Informe(idInforme, descripcion);
-                        aux.setGenera_en_informe(this.miControlador.getPilotos().get(fila).getGenera_en_piloto());
-                        this.miControlador.getPilotos().get(fila).getGenera_en_piloto().setInforme_genera(aux);
-                        this.miControlador.getInformes().add(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera());
+                        this.miControlador.generarInformePiloto(this.miControlador.getPilotos().get(fila).getIdPiloto(), descripcion);
                     }else{
                         JOptionPane.showMessageDialog(null, "ERROR: no es posible generar más de un informe en un piloto");
                     }
                 }
 
+                this.miControlador.obtenerDatosBD();
+                this.traerDatosControladorVista();
                 this.actualizarTablasVista();
             }else{
                 JOptionPane.showMessageDialog(null, "ERROR: debe seleccionar un piloto al que generar un informe");
             }
         }
-        this.actualizarTablasVista();
+        jTextField_descripcionInforme_piloto.setText("");
     }//GEN-LAST:event_jButton_generarInforme_PilotoMouseClicked
 
     private void jButton_modificar_informeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_modificar_informeMouseClicked
@@ -2032,7 +2011,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox_anadirPiloto_EquiposCarreras;
     private javax.swing.JComboBox<String> jComboBox_coche_piloto;
     private javax.swing.JLabel jLabel_descripcionInforme_piloto;
-    private javax.swing.JLabel jLabel_descripcionInforme_piloto1;
     private javax.swing.JLabel jLabel_descripcion_informe;
     private javax.swing.JLabel jLabel_edad_piloto;
     private javax.swing.JLabel jLabel_fechaNac_ingeniero;
@@ -2060,7 +2038,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JTable jTable_informe;
     public javax.swing.JTable jTable_ingeniero;
     private javax.swing.JTable jTable_piloto;
-    public javax.swing.JTextField jTextField_IdInforme_piloto;
     public javax.swing.JTextField jTextField_descripcionInforme_piloto;
     private javax.swing.JTextField jTextField_descripcion_informe;
     public javax.swing.JTextField jTextField_edad_piloto;

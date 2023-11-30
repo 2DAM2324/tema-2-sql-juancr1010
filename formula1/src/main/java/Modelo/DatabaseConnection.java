@@ -609,6 +609,56 @@ public class DatabaseConnection {
         }
     }
     
+    public void generarInformePiloto(String idPiloto, String descripcion){
+    
+        String consulta = "INSERT INTO Informe (descripcion) VALUES (?)";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, descripcion);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+           if(sentencia != null){
+                try{
+                   sentencia.close();
+               }catch(SQLException sqlexcptn){
+                   sqlexcptn.printStackTrace();
+               }
+           }
+        }
+        
+        this.traerInformes();
+        
+        String idInforme = this.informesBD.get(this.informesBD.size()-1).getIdInforme();
+        
+        String consultaGenera = "INSERT INTO Genera (idPiloto, idInforme) VALUES (?, ?)";
+        
+        try{
+            sentencia = conn.prepareStatement(consultaGenera);
+            sentencia.setString(1, idPiloto);
+            sentencia.setString(2, idInforme);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+           if(sentencia != null){
+                try{
+                   sentencia.close();
+               }catch(SQLException sqlexcptn){
+                   sqlexcptn.printStackTrace();
+               }
+           }
+        }
+        
+        
+    }
+    
     
     public void traerIngenieros(){
         this.ingenierosBD = new ArrayList<Ingeniero>();

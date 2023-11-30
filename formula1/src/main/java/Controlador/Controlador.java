@@ -235,6 +235,10 @@ public class Controlador {
         this.db.insertarPiloto(nombre, edad);
     }
     
+    public void generarInformePiloto(String idPiloto, String descripcion){
+        this.db.generarInformePiloto(idPiloto, descripcion);
+    }
+    
     public void modificarNombreEquipoCarreras(String idEquipo, String nombre){
         this.db.modificarNombreEquipoCarreras(idEquipo, nombre);
     }
