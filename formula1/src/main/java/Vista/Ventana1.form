@@ -583,15 +583,9 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel_idInforme_informe" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel_descripcion_informe" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel_descripcion_informe" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jTextField_idInforme_informe" alignment="0" pref="245" max="32767" attributes="0"/>
-                                  <Component id="jTextField_descripcion_informe" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jTextField_descripcion_informe" min="-2" pref="245" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jButton_guardar_informe" alignment="0" max="32767" attributes="0"/>
@@ -620,16 +614,9 @@
                       </Group>
                       <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel_idInforme_informe" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField_idInforme_informe" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel_descripcion_informe" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField_descripcion_informe" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel_descripcion_informe" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextField_descripcion_informe" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jButton_guardar_informe" min="-2" max="-2" attributes="0"/>
@@ -679,25 +666,12 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel_idInforme_informe">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="idInforme"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel_idInforme_informe.setVisible(false);"/>
-              </AuxValues>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel_descripcion_informe">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Descripci&#xf3;n"/>
               </Properties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jLabel_descripcion_informe.setVisible(false);"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_idInforme_informe">
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextField_idInforme_informe.setVisible(false);"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_descripcion_informe">

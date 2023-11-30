@@ -251,6 +251,10 @@ public class Controlador {
         this.db.modificarEdadPiloto(idPiloto, edad);
     }
     
+    public void modificarDescripcionInforme(String descripcion, String idInforme){
+        this.db.modificarDescripcionInforme(idInforme, descripcion);
+    }
+    
     public void asignarPilotoAEquipoCarreras(String idPiloto, String idEquipo){
         this.db.asignarEquipoAPiloto(idPiloto, idEquipo);
     }
@@ -268,6 +272,14 @@ public class Controlador {
            this.db.eliminarPiloto(idPiloto);
        } catch (SQLException ex) {
            ex.printStackTrace();
+       }
+    }
+    
+    public void eliminarInforme(String idInforme){
+       try {
+           this.db.eliminarInforme(idInforme);
+       } catch (SQLException ex) {
+           Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
        }
     }
     

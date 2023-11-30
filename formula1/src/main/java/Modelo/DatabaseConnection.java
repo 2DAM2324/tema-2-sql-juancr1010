@@ -145,6 +145,29 @@ public class DatabaseConnection {
         }
     }
     
+    public void modificarDescripcionInforme(String idInforme, String descripcion){
+        String consulta = "UPDATE Informe SET descripcion = ? " + "WHERE idInforme = ?";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, descripcion);
+            sentencia.setString(2, idInforme);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
     public void modificarNombrePiloto(String idPiloto, String nombre){
         String consulta = "UPDATE Piloto SET nombre = ? " + "WHERE idPiloto = ?";
         PreparedStatement sentencia = null;
@@ -369,7 +392,7 @@ public class DatabaseConnection {
     public void eliminarPiloto(String idPiloto) throws SQLException{
         
         String idInforme = obtenerInformePiloto(idPiloto);
-        System.out.println("AAAAAAAAAAAAAAAidINFORME " + idInforme);
+        //System.out.println("AAAAAAAAAAAAAAAidINFORME " + idInforme);
         String consultaDeleteGenera = "DELETE FROM Genera WHERE idPiloto = ?";
         String consultaDeleteInforme = "DELETE FROM Informe WHERE idInforme = ?";
         String consultaDeletePiloto = "DELETE FROM Piloto WHERE idPiloto = ?";
@@ -657,6 +680,66 @@ public class DatabaseConnection {
         }
         
         
+    }
+    
+    public void eliminarInforme(String idInforme) throws SQLException{
+        
+        //System.out.println("AAAAAAAAAAAAAAAidINFORME " + idInforme);
+        String consultaDeleteGenera = "DELETE FROM Genera WHERE idInforme = ?";
+        String consultaDeleteInforme = "DELETE FROM Informe WHERE idInforme = ?";
+        //String consultaDeletePiloto = "DELETE FROM Piloto WHERE idPiloto = ?";
+        PreparedStatement sentencia = null;
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(consultaDeleteGenera);
+            sentencia.setString(1, idInforme);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        try{
+            if(!idInforme.equals("")){
+                conn.setAutoCommit(false);
+                sentencia = conn.prepareStatement(consultaDeleteInforme);
+                sentencia.setString(1, idInforme);
+                sentencia.executeUpdate();
+
+                conn.commit();
+                conn.setAutoCommit(true);
+            }
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
     }
     
     

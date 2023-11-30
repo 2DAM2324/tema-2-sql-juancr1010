@@ -275,9 +275,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jPanel_informe = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable_informe = new javax.swing.JTable();
-        jLabel_idInforme_informe = new javax.swing.JLabel();
         jLabel_descripcion_informe = new javax.swing.JLabel();
-        jTextField_idInforme_informe = new javax.swing.JTextField();
         jTextField_descripcion_informe = new javax.swing.JTextField();
         jButton_guardar_informe = new javax.swing.JButton();
         jButton_cancelar_informe = new javax.swing.JButton();
@@ -698,13 +696,8 @@ public class Ventana1 extends javax.swing.JFrame {
         jTable_informe.getColumnModel().getColumn(1).setResizable(false);
     }
 
-    jLabel_idInforme_informe.setText("idInforme");
-    jLabel_idInforme_informe.setVisible(false);
-
     jLabel_descripcion_informe.setText("Descripción");
     jLabel_descripcion_informe.setVisible(false);
-
-    jTextField_idInforme_informe.setVisible(false);
 
     jTextField_descripcion_informe.setVisible(false);
 
@@ -753,13 +746,9 @@ public class Ventana1 extends javax.swing.JFrame {
                         .addComponent(jButton_borrar_informe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel_informeLayout.createSequentialGroup()
                     .addGap(27, 27, 27)
-                    .addGroup(jPanel_informeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel_idInforme_informe)
-                        .addComponent(jLabel_descripcion_informe))
+                    .addComponent(jLabel_descripcion_informe)
                     .addGap(24, 24, 24)
-                    .addGroup(jPanel_informeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTextField_idInforme_informe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                        .addComponent(jTextField_descripcion_informe, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jTextField_descripcion_informe, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(38, 38, 38)
                     .addGroup(jPanel_informeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jButton_guardar_informe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -780,14 +769,9 @@ public class Ventana1 extends javax.swing.JFrame {
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGap(49, 49, 49)
             .addGroup(jPanel_informeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addGroup(jPanel_informeLayout.createSequentialGroup()
-                    .addGroup(jPanel_informeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_idInforme_informe)
-                        .addComponent(jTextField_idInforme_informe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel_informeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel_descripcion_informe)
-                        .addComponent(jTextField_descripcion_informe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel_informeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_descripcion_informe)
+                    .addComponent(jTextField_descripcion_informe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel_informeLayout.createSequentialGroup()
                     .addComponent(jButton_guardar_informe)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1531,13 +1515,13 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_informe.getSelectedRow();
         if(fila != -1){
-            jLabel_idInforme_informe.setVisible(true);
-            jTextField_idInforme_informe.setVisible(true);
+            //jLabel_idInforme_informe.setVisible(true);
+            //jTextField_idInforme_informe.setVisible(true);
             jLabel_descripcion_informe.setVisible(true);
             jTextField_descripcion_informe.setVisible(true);
             jButton_cancelar_informe.setVisible(true);
             jButton_guardar_informe.setVisible(true);
-            jTextField_idInforme_informe.setText(this.miControlador.getInformes().get(fila).getIdInforme());
+            //jTextField_idInforme_informe.setText(this.miControlador.getInformes().get(fila).getIdInforme());
             jTextField_descripcion_informe.setText(this.miControlador.getInformes().get(fila).getDescripcion());
         }else{
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un informe");
@@ -1572,48 +1556,44 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_informe.getSelectedRow();
         
-        String idInforme = jTextField_idInforme_informe.getText();
+        //String idInforme = jTextField_idInforme_informe.getText();
         String descripcion = jTextField_descripcion_informe.getText();
         
         
         
-        Informe unInforme = new Informe(idInforme, descripcion);
+        //Informe unInforme = new Informe(idInforme, descripcion);
         
-        if(idInforme.equals("") || descripcion.equals("")){
+        if(descripcion.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
-            if((idInforme.equals(this.misInformes.get(fila).getIdInforme()))){
-                this.miControlador.getInformes().get(fila).setIdInforme(idInforme);
-                this.miControlador.getInformes().get(fila).setDescripcion(descripcion);
-
-            }else if(this.miControlador.comprobarSiInformeExiste(unInforme)){
-                JOptionPane.showMessageDialog(null, "El informe ya existe en el sistema, introduzca otro ID");
+            if(fila != -1){
+                this.miControlador.modificarDescripcionInforme(descripcion, this.misInformes.get(fila).getIdInforme());
             }else{
-                this.miControlador.getInformes().get(fila).setIdInforme(idInforme);
-                this.miControlador.getInformes().get(fila).setDescripcion(descripcion);
-
+                JOptionPane.showMessageDialog(null, "ERROR: Debe seleccionar un informe");
             }
         }
         
-        jLabel_idInforme_informe.setVisible(false);
-        jTextField_idInforme_informe.setVisible(false);
+        
+        
         jLabel_descripcion_informe.setVisible(false);
         jTextField_descripcion_informe.setVisible(false);
         jButton_cancelar_informe.setVisible(false);
         jButton_guardar_informe.setVisible(false);
         
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_guardar_informeMouseClicked
 
     private void jButton_cancelar_informeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_cancelar_informeMouseClicked
         // TODO add your handling code here:
-        jLabel_idInforme_informe.setVisible(false);
-        jTextField_idInforme_informe.setVisible(false);
+        //jLabel_idInforme_informe.setVisible(false);
+        //jTextField_idInforme_informe.setVisible(false);
         jLabel_descripcion_informe.setVisible(false);
         jTextField_descripcion_informe.setVisible(false);
         jButton_cancelar_informe.setVisible(false);
         jButton_guardar_informe.setVisible(false);
-        jTextField_idInforme_informe.setText("");
+        //jTextField_idInforme_informe.setText("");
         jTextField_descripcion_informe.setText("");
     }//GEN-LAST:event_jButton_cancelar_informeMouseClicked
 
@@ -1622,8 +1602,11 @@ public class Ventana1 extends javax.swing.JFrame {
         int fila = jTable_informe.getSelectedRow();
         this.misInformes.get(fila).getGenera_en_informe().setInforme_genera(null);
         
-        this.miControlador.mostrarInformes();
-        this.miControlador.borrarInforme(fila);
+        if(fila != -1){
+            this.miControlador.eliminarInforme(this.misInformes.get(fila).getIdInforme());
+        }
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_borrar_informeMouseClicked
 
@@ -2015,7 +1998,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_edad_piloto;
     private javax.swing.JLabel jLabel_fechaNac_ingeniero;
     private javax.swing.JLabel jLabel_idCoche_coche;
-    private javax.swing.JLabel jLabel_idInforme_informe;
     private javax.swing.JLabel jLabel_idIngeniero_ingeniero;
     private javax.swing.JLabel jLabel_marca_coche;
     private javax.swing.JLabel jLabel_modelo_coche;
@@ -2043,7 +2025,6 @@ public class Ventana1 extends javax.swing.JFrame {
     public javax.swing.JTextField jTextField_edad_piloto;
     private javax.swing.JTextField jTextField_fechnac_ingeniero;
     private javax.swing.JTextField jTextField_idCoche_coche;
-    private javax.swing.JTextField jTextField_idInforme_informe;
     private javax.swing.JTextField jTextField_idIngeniero_ingeniero;
     private javax.swing.JTextField jTextField_marca_coche;
     private javax.swing.JTextField jTextField_modelo_coche;
