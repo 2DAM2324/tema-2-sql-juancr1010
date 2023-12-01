@@ -275,6 +275,10 @@ public class Controlador {
         this.db.asignarCocheAPiloto(idCoche, idPiloto);
     }
     
+    public void crearTaller(String idCoche, String idIngeniero){
+        this.db.crearTaller(idCoche, idIngeniero);
+    }
+    
     public void eliminarEquipoCarreras(String idEquipoCarreras) throws SQLException{
         this.db.eliminarEquipoCarreras(idEquipoCarreras);
     }
@@ -287,6 +291,14 @@ public class Controlador {
        }
     }
     
+    public void eliminarCoche(String idCoche){
+       try {
+           this.db.eliminarCoche(idCoche);
+       } catch (SQLException ex) {
+           ex.printStackTrace();
+       }
+    }
+        
     public void eliminarInforme(String idInforme){
        try {
            this.db.eliminarInforme(idInforme);
@@ -295,6 +307,21 @@ public class Controlador {
        }
     }
     
+    public boolean comprobarSiIngenieroEstaACargoDeCoche(String idIngeniero, String idCoche){
+        boolean existe = false;
+        for(Coche c: this.coches){
+            if(c.getIdCoche().equals(idCoche)){
+                for(Ingeniero i: c.getIngenieros_coche()){
+                    if(i.getIdIngeniero().equals(idIngeniero)){
+                        existe = true;
+                    }
+                }
+            }
+        }
+        
+        return existe;
+        
+    }
     
     
     public void obtenerDatosBD(){

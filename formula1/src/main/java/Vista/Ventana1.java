@@ -1373,8 +1373,13 @@ public class Ventana1 extends javax.swing.JFrame {
         }else{
         
             if(!abortarOperacion){
-                this.miControlador.modificarNombrePiloto(idPiloto, nombre);
-                this.miControlador.modificarEdadPiloto(idPiloto, edad);
+                
+                if(fila != -1){
+                    this.miControlador.modificarNombrePiloto(idPiloto, nombre);
+                    this.miControlador.modificarEdadPiloto(idPiloto, edad);
+                }else{
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un Piloto..");
+                }
             }
         }
         this.miControlador.obtenerDatosBD();
@@ -1669,6 +1674,8 @@ public class Ventana1 extends javax.swing.JFrame {
         jTextField_modelo_coche.setText("");
         jTextField_marca_coche.setText("");
         
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_guardar_cocheMouseClicked
 
@@ -1687,23 +1694,13 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_coche.getSelectedRow();
         
-        for(Piloto p: this.miControlador.getPilotos()){
-            if(p.getCoche_piloto().getIdCoche().equals(this.miControlador.getCoches().get(fila).getIdCoche())){
-                p.setCoche_piloto(null);
-            }
+        if(fila != -1){
+            this.miControlador.eliminarCoche(this.misCoches.get(fila).getIdCoche());
         }
         
-        for(Ingeniero i: this.miControlador.getIngenieros()){
-            for(int j = 0; j < i.getCoche_ingeniero().size(); j++){
-                if(i.getCoche_ingeniero().get(j).getIdCoche().equals(this.miControlador.getCoches().get(fila).getIdCoche())){
-                    i.getCoche_ingeniero().remove(i.getCoche_ingeniero().get(j));
-                }
-            }
-        }
-        
-        this.miControlador.borrarCoche(fila);
-        
-        actualizarTablasVista();
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
+        this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_borrar_cocheMouseClicked
 
     private void jComboBox_anadirIngeniero_CocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_anadirIngeniero_CocheActionPerformed
@@ -1720,8 +1717,11 @@ public class Ventana1 extends javax.swing.JFrame {
 
                 if(selectedValue != null){
                     if(i.getIdIngeniero().equals(selectedValue)){
-                        i.getCoche_ingeniero().add(this.miControlador.getCoches().get(fila));
-                        this.miControlador.getCoches().get(fila).getIngenieros_coche().add(i);
+                       if(!this.miControlador.comprobarSiIngenieroEstaACargoDeCoche(i.getIdIngeniero(), this.misCoches.get(fila).getIdCoche())){
+                            this.miControlador.crearTaller(this.misCoches.get(fila).getIdCoche(), i.getIdIngeniero());
+                       }else{
+                           JOptionPane.showMessageDialog(null, "ERROR: No puede asignar un ingeniero que ya está asignado...");
+                       }
                     }
 
 
@@ -1730,7 +1730,9 @@ public class Ventana1 extends javax.swing.JFrame {
         }else{
                 JOptionPane.showMessageDialog(null, "Seleccione el coche al que añadirle el ingeniero");
         }
-        
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
+        this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_anadirIngeniero_CocheMouseClicked
 
     private void jButton_detalles_CocheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_detalles_CocheMouseClicked

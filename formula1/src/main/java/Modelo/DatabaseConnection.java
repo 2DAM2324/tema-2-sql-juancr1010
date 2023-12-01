@@ -309,6 +309,30 @@ public class DatabaseConnection {
         }
     }
     
+    public void crearTaller(String idCoche, String idIngeniero){
+        String consulta = "INSERT INTO Taller (idCoche, idIngeniero) VALUES (?, ?)";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, idCoche);
+            sentencia.setString(2, idIngeniero);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+        
+    }
+    
     public void asignarCocheAPiloto(String idCoche, String idPiloto){
         PreparedStatement sentencia = null;
         
@@ -422,6 +446,91 @@ public class DatabaseConnection {
         }
         
     }
+    
+    public void eliminarCoche(String idCoche) throws SQLException{
+        
+        String cons = "DELETE FROM Taller WHERE idCoche = ?";
+        String consultaPiloto = "UPDATE Piloto SET idCoche = NULL " + "WHERE idCoche = ?";
+        String consultaDelete = "DELETE FROM Coche WHERE idCoche = ?";
+        PreparedStatement sentencia = null;
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(cons);
+            sentencia.setString(1, idCoche);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(cons != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(consultaPiloto);
+            sentencia.setString(1, idCoche);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(cons != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(consultaDelete);
+            sentencia.setString(1, idCoche);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(cons != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+    }
+    
     
     public String obtenerInformePiloto(String idPiloto){
         String consulta = "SELECT * FROM Genera WHERE idPiloto = " + idPiloto;
