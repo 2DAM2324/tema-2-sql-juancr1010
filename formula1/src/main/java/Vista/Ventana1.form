@@ -750,14 +750,12 @@
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel_idCoche_coche" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel_modelo_coche" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel_marca_coche" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jTextField_idCoche_coche" alignment="0" pref="245" max="32767" attributes="0"/>
-                                          <Component id="jTextField_modelo_coche" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextField_modelo_coche" alignment="0" pref="245" max="32767" attributes="0"/>
                                           <Component id="jTextField_marca_coche" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -801,12 +799,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButton_detalles_Coche" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_idCoche_coche" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_idCoche_coche" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_modelo_coche" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField_modelo_coche" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -823,7 +816,7 @@
                           <Component id="jComboBox_anadirIngeniero_Coche" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_anadirIngeniero_Coche" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="107" max="32767" attributes="0"/>
+                      <EmptySpace pref="113" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -874,11 +867,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel_idCoche_coche">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="idCoche"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel_modelo_coche">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modelo"/>
@@ -890,8 +878,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_marca_coche">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_idCoche_coche">
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_modelo_coche">
             </Component>

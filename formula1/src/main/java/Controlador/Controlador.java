@@ -231,6 +231,10 @@ public class Controlador {
         this.db.insertarEquipoCarreras(nombre);
     }
     
+    public void insertarCoche(String marca, String modelo){
+        this.db.insertarCoche(marca, modelo);
+    }
+    
     public void insertarPiloto(String nombre, int edad){
         this.db.insertarPiloto(nombre, edad);
     }
@@ -253,6 +257,14 @@ public class Controlador {
     
     public void modificarDescripcionInforme(String descripcion, String idInforme){
         this.db.modificarDescripcionInforme(idInforme, descripcion);
+    }
+    
+    public void modificarMarcaCoche(String idCoche, String marca){
+        this.db.modificarMarcaCoche(idCoche, marca);
+    }
+    
+    public void modificarModeloCoche(String idCoche, String modelo){
+        this.db.modificarModeloCoche(idCoche, modelo);
     }
     
     public void asignarPilotoAEquipoCarreras(String idPiloto, String idEquipo){

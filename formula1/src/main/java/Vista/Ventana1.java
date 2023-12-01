@@ -284,11 +284,9 @@ public class Ventana1 extends javax.swing.JFrame {
         jPanel_coche = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable_coche = new javax.swing.JTable();
-        jLabel_idCoche_coche = new javax.swing.JLabel();
         jLabel_modelo_coche = new javax.swing.JLabel();
         jLabel_marca_coche = new javax.swing.JLabel();
         jTextField_marca_coche = new javax.swing.JTextField();
-        jTextField_idCoche_coche = new javax.swing.JTextField();
         jTextField_modelo_coche = new javax.swing.JTextField();
         jButton_guardar_coche = new javax.swing.JButton();
         jButton_cancelar_coche = new javax.swing.JButton();
@@ -804,8 +802,6 @@ public class Ventana1 extends javax.swing.JFrame {
         jTable_coche.getColumnModel().getColumn(2).setResizable(false);
     }
 
-    jLabel_idCoche_coche.setText("idCoche");
-
     jLabel_modelo_coche.setText("Modelo");
 
     jLabel_marca_coche.setText("Marca");
@@ -901,13 +897,11 @@ public class Ventana1 extends javax.swing.JFrame {
                     .addGroup(jPanel_cocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel_cocheLayout.createSequentialGroup()
                             .addGroup(jPanel_cocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel_idCoche_coche)
                                 .addComponent(jLabel_modelo_coche)
                                 .addComponent(jLabel_marca_coche))
-                            .addGap(24, 24, 24)
+                            .addGap(30, 30, 30)
                             .addGroup(jPanel_cocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTextField_idCoche_coche, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                                .addComponent(jTextField_modelo_coche)
+                                .addComponent(jTextField_modelo_coche, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                                 .addComponent(jTextField_marca_coche)))
                         .addGroup(jPanel_cocheLayout.createSequentialGroup()
                             .addComponent(jComboBox_anadirIngeniero_Coche, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -938,11 +932,7 @@ public class Ventana1 extends javax.swing.JFrame {
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(jButton_detalles_Coche)
-            .addGap(9, 9, 9)
-            .addGroup(jPanel_cocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel_idCoche_coche)
-                .addComponent(jTextField_idCoche_coche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGap(43, 43, 43)
             .addGroup(jPanel_cocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel_modelo_coche)
                 .addComponent(jTextField_modelo_coche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -956,7 +946,7 @@ public class Ventana1 extends javax.swing.JFrame {
             .addGroup(jPanel_cocheLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jComboBox_anadirIngeniero_Coche, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton_anadirIngeniero_Coche))
-            .addContainerGap(107, Short.MAX_VALUE))
+            .addContainerGap(113, Short.MAX_VALUE))
     );
 
     jTabbedPane.addTab("Coche", jPanel_coche);
@@ -1612,29 +1602,26 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void jButton_aniadir_cocheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_aniadir_cocheMouseClicked
         // TODO add your handling code here:
-        String idCoche = "";
         String modelo = "";
         String marca = "";
-        idCoche = jTextField_idCoche_coche.getText();
+        
         modelo = jTextField_modelo_coche.getText();
         marca = jTextField_marca_coche.getText();
-        Coche unCoche = new Coche(idCoche, modelo, marca);
-        if(idCoche.equals("") || modelo.equals("") || marca.equals("")){
+        
+        if(modelo.equals("") || marca.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar campos en blanco, abortando...");
         }else{
-            if(this.miControlador.comprobarSiCocheExiste(unCoche) == false){
-                this.miControlador.getCoches().add(unCoche);
-            }else{
-                JOptionPane.showMessageDialog(null, "El coche ya existe en el sistema, introduzca otro ID");
-            }
+            this.miControlador.insertarCoche(marca, modelo);
         }
         
         //this.miControlador.mostrarEquiposCarreras();
         
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
         this.actualizarTablasVista();
         //jTextField_idPiloto_piloto.setText("");
-        jTextField_nombre_piloto.setText("");
-        jTextField_edad_piloto.setText("");
+        jTextField_marca_coche.setText("");
+        jTextField_modelo_coche.setText("");
     }//GEN-LAST:event_jButton_aniadir_cocheMouseClicked
 
     private void jButton_guardar_cocheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_guardar_cocheActionPerformed
@@ -1650,7 +1637,7 @@ public class Ventana1 extends javax.swing.JFrame {
             jButton_guardar_coche.setVisible(true);
             jComboBox_anadirIngeniero_Coche.setVisible(true);
             jButton_anadirIngeniero_Coche.setVisible(true);
-            jTextField_idCoche_coche.setText(this.miControlador.getCoches().get(fila).getIdCoche());
+            //jTextField_idCoche_coche.setText(this.miControlador.getCoches().get(fila).getIdCoche());
             jTextField_marca_coche.setText(this.miControlador.getCoches().get(fila).getMarca());
             jTextField_modelo_coche.setText(this.miControlador.getCoches().get(fila).getModelo());
         }else{
@@ -1662,22 +1649,23 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_coche.getSelectedRow();
         
-        String idCoche = jTextField_idCoche_coche.getText();
+        //String idCoche = jTextField_idCoche_coche.getText();
         String marca = jTextField_marca_coche.getText();
         String modelo = jTextField_modelo_coche.getText();
 
-        if(idCoche.equals("") || marca.equals("") || modelo.equals("")){
+        if(marca.equals("") || modelo.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar campos en blanco, abortando...");
         }else{
-            this.miControlador.getCoches().get(fila).setIdCoche(idCoche);
-            this.miControlador.getCoches().get(fila).setMarca(marca);
-            this.miControlador.getCoches().get(fila).setModelo(modelo);
+            if(fila != -1){
+                this.miControlador.modificarMarcaCoche(this.misCoches.get(fila).getIdCoche(), marca);
+                this.miControlador.modificarModeloCoche(this.misCoches.get(fila).getIdCoche(), marca);
+            }
         }
         jButton_cancelar_coche.setVisible(false);
         jButton_guardar_coche.setVisible(false);
         jComboBox_anadirIngeniero_Coche.setVisible(false);
         jButton_anadirIngeniero_Coche.setVisible(false);
-        jTextField_idCoche_coche.setText("");
+        //jTextField_idCoche_coche.setText("");
         jTextField_modelo_coche.setText("");
         jTextField_marca_coche.setText("");
         
@@ -1686,7 +1674,7 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void jButton_cancelar_cocheMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_cancelar_cocheMouseClicked
         // TODO add your handling code here:
-        jTextField_idCoche_coche.setText("");
+        //jTextField_idCoche_coche.setText("");
         jTextField_modelo_coche.setText("");
         jTextField_marca_coche.setText("");
         jButton_cancelar_coche.setVisible(false);
@@ -1997,7 +1985,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_descripcion_informe;
     private javax.swing.JLabel jLabel_edad_piloto;
     private javax.swing.JLabel jLabel_fechaNac_ingeniero;
-    private javax.swing.JLabel jLabel_idCoche_coche;
     private javax.swing.JLabel jLabel_idIngeniero_ingeniero;
     private javax.swing.JLabel jLabel_marca_coche;
     private javax.swing.JLabel jLabel_modelo_coche;
@@ -2024,7 +2011,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_descripcion_informe;
     public javax.swing.JTextField jTextField_edad_piloto;
     private javax.swing.JTextField jTextField_fechnac_ingeniero;
-    private javax.swing.JTextField jTextField_idCoche_coche;
     private javax.swing.JTextField jTextField_idIngeniero_ingeniero;
     private javax.swing.JTextField jTextField_marca_coche;
     private javax.swing.JTextField jTextField_modelo_coche;
