@@ -1006,14 +1006,12 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel_idIngeniero_ingeniero" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_fechaNac_ingeniero" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel_sueldo_ingeniero" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextField_idIngeniero_ingeniero" alignment="0" pref="245" max="32767" attributes="0"/>
-                                  <Component id="jTextField_fechnac_ingeniero" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField_fechnac_ingeniero" alignment="0" pref="245" max="32767" attributes="0"/>
                                   <Component id="jTextField_sueldo_ingeniero" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
@@ -1051,12 +1049,7 @@
                               <Component id="jButton_detalles_Ingeniero" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel_idIngeniero_ingeniero" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField_idIngeniero_ingeniero" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel_fechaNac_ingeniero" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTextField_fechnac_ingeniero" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -1073,7 +1066,7 @@
                           <Component id="jComboBox_anadirCoche_Ingeniero" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_anadirCoche_Ingeniero" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="112" max="32767" attributes="0"/>
+                      <EmptySpace pref="118" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1124,11 +1117,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="jLabel_idIngeniero_ingeniero">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="idIngeniero"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel_fechaNac_ingeniero">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Fecha Nacimiento"/>
@@ -1140,8 +1128,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_sueldo_ingeniero">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField_idIngeniero_ingeniero">
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField_fechnac_ingeniero">
             </Component>

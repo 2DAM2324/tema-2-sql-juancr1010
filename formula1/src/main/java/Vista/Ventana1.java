@@ -299,11 +299,9 @@ public class Ventana1 extends javax.swing.JFrame {
         jPanel_ingeniero = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable_ingeniero = new javax.swing.JTable();
-        jLabel_idIngeniero_ingeniero = new javax.swing.JLabel();
         jLabel_fechaNac_ingeniero = new javax.swing.JLabel();
         jLabel_sueldo_ingeniero = new javax.swing.JLabel();
         jTextField_sueldo_ingeniero = new javax.swing.JTextField();
-        jTextField_idIngeniero_ingeniero = new javax.swing.JTextField();
         jTextField_fechnac_ingeniero = new javax.swing.JTextField();
         jButton_guardar_ingeniero = new javax.swing.JButton();
         jButton_cancelar_ingeniero = new javax.swing.JButton();
@@ -974,8 +972,6 @@ public class Ventana1 extends javax.swing.JFrame {
         jTable_ingeniero.getColumnModel().getColumn(2).setResizable(false);
     }
 
-    jLabel_idIngeniero_ingeniero.setText("idIngeniero");
-
     jLabel_fechaNac_ingeniero.setText("Fecha Nacimiento");
 
     jLabel_sueldo_ingeniero.setText("Sueldo");
@@ -1070,13 +1066,11 @@ public class Ventana1 extends javax.swing.JFrame {
                         .addComponent(jButton_borrar_ingeniero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel_ingenieroLayout.createSequentialGroup()
                     .addGroup(jPanel_ingenieroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel_idIngeniero_ingeniero)
                         .addComponent(jLabel_fechaNac_ingeniero)
                         .addComponent(jLabel_sueldo_ingeniero))
                     .addGap(24, 24, 24)
                     .addGroup(jPanel_ingenieroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField_idIngeniero_ingeniero, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                        .addComponent(jTextField_fechnac_ingeniero)
+                        .addComponent(jTextField_fechnac_ingeniero, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                         .addComponent(jTextField_sueldo_ingeniero))
                     .addGap(38, 38, 38)
                     .addGroup(jPanel_ingenieroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1104,11 +1098,7 @@ public class Ventana1 extends javax.swing.JFrame {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addComponent(jButton_detalles_Ingeniero)))
-            .addGap(15, 15, 15)
-            .addGroup(jPanel_ingenieroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel_idIngeniero_ingeniero)
-                .addComponent(jTextField_idIngeniero_ingeniero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGap(49, 49, 49)
             .addGroup(jPanel_ingenieroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jLabel_fechaNac_ingeniero)
                 .addComponent(jTextField_fechnac_ingeniero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1122,7 +1112,7 @@ public class Ventana1 extends javax.swing.JFrame {
             .addGroup(jPanel_ingenieroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(jComboBox_anadirCoche_Ingeniero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jButton_anadirCoche_Ingeniero))
-            .addContainerGap(112, Short.MAX_VALUE))
+            .addContainerGap(118, Short.MAX_VALUE))
     );
 
     jTabbedPane.addTab("Ingeniero", jPanel_ingeniero);
@@ -1753,11 +1743,11 @@ public class Ventana1 extends javax.swing.JFrame {
 
     private void jButton_aniadir_ingenieroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_aniadir_ingenieroMouseClicked
         // TODO add your handling code here:
-        String idIngeniero = "";
+//        String idIngeniero = "";
         String fechaNac = "";
         double sueldo = 0.0;
         Boolean abortarOperacion = false;
-        idIngeniero = jTextField_idIngeniero_ingeniero.getText();
+        //idIngeniero = jTextField_idIngeniero_ingeniero.getText();
         fechaNac = jTextField_fechnac_ingeniero.getText();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         formatoFecha.setLenient(false);
@@ -1778,17 +1768,17 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR: debes introducir un sueldo que sea un número real");
             abortarOperacion = true;
         }
-        if(idIngeniero.equals("")){
-            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar en blanco los campos, abortando...");
+        if(sueldo < 0.0){
+            JOptionPane.showMessageDialog(null, "ERROR: no debe introducir un sueldo negativo...");
         }else{
             if(!abortarOperacion){
-                Ingeniero unIngeniero = new Ingeniero(idIngeniero, fechaNac, sueldo);
-                this.miControlador.getIngenieros().add(unIngeniero);
-                //this.miControlador.mostrarEquiposCarreras();
+                this.miControlador.insertarIngeniero(fechaNac, sueldo);
             }
         }
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
         this.actualizarTablasVista();
-        jTextField_idIngeniero_ingeniero.setText("");
+        //jTextField_idIngeniero_ingeniero.setText("");
         jTextField_fechnac_ingeniero.setText("");
         jTextField_sueldo_ingeniero.setText("");
         
@@ -1803,7 +1793,7 @@ public class Ventana1 extends javax.swing.JFrame {
             jButton_guardar_ingeniero.setVisible(true);
             jComboBox_anadirCoche_Ingeniero.setVisible(true);
             jButton_anadirCoche_Ingeniero.setVisible(true);
-            jTextField_idIngeniero_ingeniero.setText(this.miControlador.getIngenieros().get(fila).getIdIngeniero());
+            //jTextField_idIngeniero_ingeniero.setText(this.miControlador.getIngenieros().get(fila).getIdIngeniero());
             jTextField_fechnac_ingeniero.setText(this.miControlador.getIngenieros().get(fila).getFechaNacimiento());
             jTextField_sueldo_ingeniero.setText(Double.toString(this.miControlador.getIngenieros().get(fila).getSueldo()));
         }else{
@@ -1844,7 +1834,7 @@ public class Ventana1 extends javax.swing.JFrame {
         int fila = jTable_ingeniero.getSelectedRow();
         Boolean abortarOperacion = false;
         
-        String idIngeniero = jTextField_idIngeniero_ingeniero.getText();
+        //String idIngeniero = jTextField_idIngeniero_ingeniero.getText();
         String fecha = jTextField_fechnac_ingeniero.getText();
         String sueldoCadena = jTextField_sueldo_ingeniero.getText();
         double sueldo = 0.0;
@@ -1868,25 +1858,14 @@ public class Ventana1 extends javax.swing.JFrame {
             abortarOperacion = true;
         }
         
-        if(idIngeniero.equals("")){
-            JOptionPane.showMessageDialog(null, "ERROR: no debe dejar campos en blanco, abortando...");
-        }else{
-        
-            if(!abortarOperacion){
-                Ingeniero unIngeniero = new Ingeniero(idIngeniero, fecha, sueldo);
+        if(fila != -1){
+            if(sueldo < 0.0){
+                JOptionPane.showMessageDialog(null, "ERROR: no debe introducir sueldos negativos, abortando...");
+            }else{
 
-                if((idIngeniero.equals(this.misIngenieros.get(fila).getIdIngeniero()))){
-                    this.miControlador.getIngenieros().get(fila).setIdIngeniero(idIngeniero);
-                    this.miControlador.getIngenieros().get(fila).setFechaNacimiento(fecha);
-                    this.miControlador.getIngenieros().get(fila).setSueldo(sueldo);
-
-                }else if(this.miControlador.comprobarSiIngenieroExiste(unIngeniero)){
-                    JOptionPane.showMessageDialog(null, "El ingeniero ya existe en el sistema, introduzca otro ID");
-                }else{
-                    this.miControlador.getIngenieros().get(fila).setIdIngeniero(idIngeniero);
-                    this.miControlador.getIngenieros().get(fila).setFechaNacimiento(fecha);
-                    this.miControlador.getIngenieros().get(fila).setSueldo(sueldo);
-
+                if(!abortarOperacion){
+                    this.miControlador.modificarFechaIngeniero(this.misIngenieros.get(fila).getIdIngeniero(), fecha);
+                    this.miControlador.modificarSueldoIngeniero(this.misIngenieros.get(fila).getIdIngeniero(), sueldo);
                 }
             }
         }
@@ -1894,10 +1873,12 @@ public class Ventana1 extends javax.swing.JFrame {
         jButton_guardar_ingeniero.setVisible(false);
         jComboBox_anadirCoche_Ingeniero.setVisible(false);
         jButton_anadirCoche_Ingeniero.setVisible(false);
-        jTextField_idIngeniero_ingeniero.setText("");
+       // jTextField_idIngeniero_ingeniero.setText("");
         jTextField_fechnac_ingeniero.setText("");
         jTextField_sueldo_ingeniero.setText("");
         
+        this.miControlador.obtenerDatosBD();
+        this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_guardar_ingenieroMouseClicked
 
@@ -1907,7 +1888,7 @@ public class Ventana1 extends javax.swing.JFrame {
         jButton_guardar_ingeniero.setVisible(false);
         jComboBox_anadirCoche_Ingeniero.setVisible(false);
         jButton_anadirCoche_Ingeniero.setVisible(false);
-        jTextField_idIngeniero_ingeniero.setText("");
+        //jTextField_idIngeniero_ingeniero.setText("");
         jTextField_fechnac_ingeniero.setText("");
         jTextField_sueldo_ingeniero.setText("");
     }//GEN-LAST:event_jButton_cancelar_ingenieroMouseClicked
@@ -1987,7 +1968,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_descripcion_informe;
     private javax.swing.JLabel jLabel_edad_piloto;
     private javax.swing.JLabel jLabel_fechaNac_ingeniero;
-    private javax.swing.JLabel jLabel_idIngeniero_ingeniero;
     private javax.swing.JLabel jLabel_marca_coche;
     private javax.swing.JLabel jLabel_modelo_coche;
     private javax.swing.JLabel jLabel_nombre_equipoCarreras;
@@ -2013,7 +1993,6 @@ public class Ventana1 extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_descripcion_informe;
     public javax.swing.JTextField jTextField_edad_piloto;
     private javax.swing.JTextField jTextField_fechnac_ingeniero;
-    private javax.swing.JTextField jTextField_idIngeniero_ingeniero;
     private javax.swing.JTextField jTextField_marca_coche;
     private javax.swing.JTextField jTextField_modelo_coche;
     public javax.swing.JTextField jTextField_nombre_equipoCarreras;

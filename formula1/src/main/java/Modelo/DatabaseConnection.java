@@ -16,6 +16,7 @@ import Modelo.Genera;
 import Modelo.Informe;
 import Modelo.Coche;
 import Modelo.Ingeniero;
+import java.sql.Date;
 import java.sql.Statement;
 /**
  *
@@ -148,6 +149,30 @@ public class DatabaseConnection {
         }
     }
     
+    public void insertarIngeniero(String fecha, double sueldo){
+        //Date fechaFinal = fec
+        String consulta = "INSERT INTO Ingeniero (FechaNacimiento, Sueldo) VALUES (?, ?)";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, fecha);
+            sentencia.setDouble(2, sueldo);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
     public void modificarNombreEquipoCarreras(String idEquipo, String nombre){
         String consulta = "UPDATE EquipoCarreras SET nombre = ? " + "WHERE idEquipoCarreras = ?";
         PreparedStatement sentencia = null;
@@ -170,6 +195,53 @@ public class DatabaseConnection {
             }
         }
     }
+    
+    public void modificarFechaIngeniero(String idIngeniero, String fecha){
+        String consulta = "UPDATE Ingeniero SET FechaNacimiento = ? " + "WHERE idIngeniero = ?";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setString(1, fecha);
+            sentencia.setString(2, idIngeniero);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    public void modificarSueldoIngeniero(String idIngeniero, double sueldo){
+        String consulta = "UPDATE Ingeniero SET Sueldo = ? " + "WHERE idIngeniero = ?";
+        PreparedStatement sentencia = null;
+        try{
+            sentencia = conn.prepareStatement(consulta);
+            sentencia.setDouble(1, sueldo);
+            sentencia.setString(2, idIngeniero);
+            sentencia.executeUpdate();
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+        }
+        finally{
+            if(sentencia != null){
+                try{
+                    sentencia.close();
+                }catch(SQLException sqlexcptn){
+                    sqlexcptn.printStackTrace();
+                }
+            }
+        }
+    }
+    
     
     public void modificarMarcaCoche(String idCoche, String marca){
         String consulta = "UPDATE Coche SET marca = ? " + "WHERE idCoche = ?";
@@ -424,6 +496,63 @@ public class DatabaseConnection {
             conn.setAutoCommit(false);
             sentencia = conn.prepareStatement(consultaDelete);
             sentencia.setString(1, idEquipoCarreras);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(cons != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+    }
+    
+    public void eliminarIngeniero(String idIngeniero) throws SQLException{
+        String cons = "DELETE FROM Taller WHERE idIngeniero = ?";
+        String consultaDelete = "DELETE FROM Ingeniero WHERE idIngeniero = ?";
+        PreparedStatement sentencia = null;
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(cons);
+            sentencia.setString(1, idIngeniero);
+            sentencia.executeUpdate();
+            
+            conn.commit();
+            conn.setAutoCommit(true);
+            
+        }
+        catch(SQLException sqle){
+            sqle.printStackTrace();
+            conn.rollback();
+        }
+        finally{
+            if(cons != null){
+                try{
+                    sentencia.close();
+                }
+                catch(SQLException e){
+                    e.printStackTrace();
+                }
+            }
+        }
+        
+        try{
+            conn.setAutoCommit(false);
+            sentencia = conn.prepareStatement(consultaDelete);
+            sentencia.setString(1, idIngeniero);
             sentencia.executeUpdate();
             
             conn.commit();
@@ -934,7 +1063,7 @@ public class DatabaseConnection {
         try{
             consulta = conn.prepareStatement(cons);
             resultado = consulta.executeQuery();
-            
+           
             while(resultado.next()){
                 this.ingenierosBD.add(new Ingeniero(resultado.getString(1), resultado.getString(2), Double.parseDouble(resultado.getString(3))));
             }

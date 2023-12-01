@@ -13,6 +13,7 @@ import Modelo.DatabaseConnection;
 import Vista.Ventana1;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -239,6 +240,10 @@ public class Controlador {
         this.db.insertarPiloto(nombre, edad);
     }
     
+    public void insertarIngeniero(String fecha, double sueldo){
+        this.db.insertarIngeniero(fecha, sueldo);
+    }
+    
     public void generarInformePiloto(String idPiloto, String descripcion){
         this.db.generarInformePiloto(idPiloto, descripcion);
     }
@@ -265,6 +270,14 @@ public class Controlador {
     
     public void modificarModeloCoche(String idCoche, String modelo){
         this.db.modificarModeloCoche(idCoche, modelo);
+    }
+    
+    public void modificarFechaIngeniero(String idIngeniero, String fecha){
+        this.db.modificarFechaIngeniero(idIngeniero, fecha);
+    }
+    
+    public void modificarSueldoIngeniero(String idIngeniero, double sueldo){
+        this.db.modificarSueldoIngeniero(idIngeniero, sueldo);
     }
     
     public void asignarPilotoAEquipoCarreras(String idPiloto, String idEquipo){
