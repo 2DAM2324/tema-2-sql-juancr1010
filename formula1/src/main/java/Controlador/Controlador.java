@@ -311,6 +311,14 @@ public class Controlador {
            ex.printStackTrace();
        }
     }
+    
+    public void eliminarIngeniero(String idIngeniero){
+       try {
+           this.db.eliminarIngeniero(idIngeniero);
+       } catch (SQLException ex) {
+           ex.printStackTrace();
+       }
+    }
         
     public void eliminarInforme(String idInforme){
        try {
