@@ -228,6 +228,7 @@ public class Controlador {
         return existe;
     }
     
+    // A PARTIR DE AQUI ESTÁN LOS MÉTODOS DE LA BD
     public void insertarEquipoCarreras(String nombre) throws SQLException{
         this.db.insertarEquipoCarreras(nombre);
     }
@@ -344,7 +345,10 @@ public class Controlador {
         
     }
     
-    
+    /**
+     *@brief Trae los datos de la BD y los mete en el controlador
+     *@author Juan Cabello Rodríguez
+     */
     public void obtenerDatosBD() throws SQLException{
         this.db.traerInformes();
         this.db.traerCoches();
@@ -374,7 +378,7 @@ public class Controlador {
         
     }
     
-    
+    // ESTOS SON LOS MÉTODOS DE LA PRÁCTICA DE XML
     public void leerXML(){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         Document documento = null;
