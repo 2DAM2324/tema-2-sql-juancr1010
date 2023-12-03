@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: Controlador.ControladorTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.812 s <<< FAILURE! - in Controlador.ControladorTest
+modificarEquipoCarreras  Time elapsed: 0.02 s  <<< ERROR!
+java.lang.IndexOutOfBoundsException: Index 9 out of bounds for length 9
+	at Controlador.ControladorTest.modificarEquipoCarreras(ControladorTest.java:88)
+

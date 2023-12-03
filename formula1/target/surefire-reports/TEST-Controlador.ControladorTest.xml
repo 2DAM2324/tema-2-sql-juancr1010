@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Controlador.ControladorTest" time="2.812" tests="7" errors="1" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="C:\Users\johnm\OneDrive\Documentos\NetBeansProjects\formula1\target\test-classes;C:\Users\johnm\OneDrive\Documentos\NetBeansProjects\formula1\target\classes;C:\Users\johnm\.m2\repository\org\xerial\sqlite-jdbc\3.36.0.1\sqlite-jdbc-3.36.0.1.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-nop\2.0.9\slf4j-nop-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-jdk14\2.0.9\slf4j-jdk14-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\johnm\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\johnm\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\johnm\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Europe/Madrid"/>
+    <property name="os.name" value="Windows 10"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="user.country" value="ES"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17.0.1\bin"/>
+    <property name="sun.java.command" value="C:\Users\johnm\AppData\Local\Temp\surefire876574192273072304\surefirebooter13994176182914109417.jar C:\Users\johnm\AppData\Local\Temp\surefire876574192273072304 2023-12-03T10-53-38_433-jvmRun1 surefire9799498317485973875tmp surefire_05539559792115334183tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\johnm\OneDrive\Documentos\NetBeansProjects\formula1\target\test-classes;C:\Users\johnm\OneDrive\Documentos\NetBeansProjects\formula1\target\classes;C:\Users\johnm\.m2\repository\org\xerial\sqlite-jdbc\3.36.0.1\sqlite-jdbc-3.36.0.1.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-nop\2.0.9\slf4j-nop-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-jdk14\2.0.9\slf4j-jdk14-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\johnm\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\johnm\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\johnm\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\johnm"/>
+    <property name="user.language" value="es"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2021-10-19"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-17.0.1"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\johnm\OneDrive\Documentos\NetBeansProjects\formula1"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\johnm\AppData\Local\Temp\surefire876574192273072304\surefirebooter13994176182914109417.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.1+12-LTS-39"/>
+    <property name="user.name" value="johnm"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\NetBeans-12.5\netbeans\java\maven-nblib\netbeans-eventspy.jar;C:\Program Files\NetBeans-12.5\netbeans\java\maven-nblib\netbeans-eventspy.jar"/>
+    <property name="localRepository" value="C:\Users\johnm\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="C:\Users\johnm\AppData\Local\Temp\"/>
+    <property name="java.version" value="17.0.1"/>
+    <property name="user.dir" value="C:\Users\johnm\OneDrive\Documentos\NetBeansProjects\formula1"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-17.0.1\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Python312\Scripts\;C:\Python312\;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\app\johnm\product\21c\dbhomeXE\bin;C:\MinGW\bin;C:\MinGW\libexec\gcc\x86_64-w64-mingw32\11.1.0;C:\Program Files\AdoptOpenJDK\jdk-8.0.282.8-hotspot\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Wolfram Research\WolframScript\;C:\TDM-GCC-64\bin;C:\cygwin64\bin;C:\cygwin64\lib;C;C:\Program Files\doxygen\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Program Files\dotnet\;C:\Program Files\Java\jdk-17.0.1\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\node_modules\npm;C:\Program Files\nodejs\;C:\Users\johnm\AppData\Local\Microsoft\WindowsApps;C:\MinGW\bin;C:\Users\johnm\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\johnm\.dotnet\tools;C:\Users\johnm\AppData\Local\GitHubDesktop\bin;C:\Program Files\sf\bin;C:\Users\johnm\AppData\Roaming\npm;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="17.0.1+12-LTS-39"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="insertarPiloto" classname="Controlador.ControladorTest" time="2.153"/>
+  <testcase name="obtenerDatosBD" classname="Controlador.ControladorTest" time="0.017"/>
+  <testcase name="modificarEquipoCarreras" classname="Controlador.ControladorTest" time="0.02">
+    <error message="Index 9 out of bounds for length 9" type="java.lang.IndexOutOfBoundsException">java.lang.IndexOutOfBoundsException: Index 9 out of bounds for length 9
+	at Controlador.ControladorTest.modificarEquipoCarreras(ControladorTest.java:88)
+</error>
+    <system-out><![CDATA[resultado: 5
+resultado2: 5
+resultado: 6
+resultado2: 6
+resultado: 7
+resultado2: 7
+resultado: 8
+resultado2: 8
+resultado: 9
+resultado2: 9
+resultado: 10
+resultado2: 10
+resultado: 11
+resultado2: null
+resultado: 12
+resultado2: null
+resultado: 13
+resultado2: 11
+resultado: 15
+resultado2: null
+resultado: 16
+resultado2: null
+resultado: 17
+resultado2: null
+resultado: 18
+resultado2: null
+Nombre: Alemania
+ID Equipo: 2
+Nombre: Portugal
+ID Equipo: 3
+Nombre: Polonia
+ID Equipo: 4
+Nombre: Turquía
+ID Equipo: 5
+Nombre: NuevoEquipo
+ID Equipo: 6
+Nombre: España
+ID Equipo: 7
+Nombre: TestNuevoNombreEquipoCarreras
+ID Equipo: 8
+Nombre: TestNuevoNombreEquipoCarreras
+ID Equipo: 9
+Nombre: TestInsertarEquipoCarreras
+ID Equipo: 10
+Nombre: Piloto 5
+ID Piloto: 5
+Edad: 28
+Nombre: Piloto 6
+ID Piloto: 6
+Edad: 24
+Nombre: Piloto 7
+ID Piloto: 7
+Edad: 29
+Nombre: Piloto 8
+ID Piloto: 8
+Edad: 53
+Nombre: Piloto 9
+ID Piloto: 9
+Edad: 27
+Nombre: Piloto 10
+ID Piloto: 10
+Edad: 23
+Nombre: Piloto 11
+ID Piloto: 11
+Edad: 23
+Nombre: Piloto 12
+ID Piloto: 12
+Edad: 23
+Nombre: UnPiloto
+ID Piloto: 13
+Edad: 22
+Nombre: Roberto
+ID Piloto: 15
+Edad: 21
+Nombre: TestPiloto
+ID Piloto: 16
+Edad: 23
+Nombre: TestPiloto
+ID Piloto: 17
+Edad: 23
+Nombre: TestPiloto
+ID Piloto: 18
+Edad: 23
+ID: 5
+Descripcion: informe unPiloto cuyo id es 13 
+ID: 7
+Descripcion: TestGenerarInforme
+ID: 8
+Descripcion: TestGenerarInforme
+]]></system-out>
+  </testcase>
+  <testcase name="generarInforme" classname="Controlador.ControladorTest" time="0.281"/>
+  <testcase name="insertarEquipoCarreras" classname="Controlador.ControladorTest" time="0.11"/>
+  <testcase name="insertarIngeniero" classname="Controlador.ControladorTest" time="0.093"/>
+  <testcase name="insertarCoche" classname="Controlador.ControladorTest" time="0.125"/>
+</testsuite>
