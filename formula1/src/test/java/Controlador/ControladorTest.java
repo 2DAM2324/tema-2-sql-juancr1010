@@ -9,7 +9,10 @@ import Modelo.EquipoCarreras;
 import Modelo.Informe;
 import Modelo.Ingeniero;
 import Modelo.Piloto;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -143,5 +146,73 @@ public class ControladorTest {
         contr.modificarFechaIngeniero(idIngeniero, "2000-03-15");
         contr.modificarSueldoIngeniero(idIngeniero, 20000);
     }
+    
+    @Test
+    public void borrarEquipoCarreras(){
+        Controlador contr = new Controlador();
+        
+        contr.insertarEquipoCarreras("TestEliminarEquipoCarreras");
+        contr.obtenerDatosBD();
+        String idEquipoCarreras = contr.getEquipos().get(contr.getEquipos().size()-1).getIdEquipo();
+        
+        
+        try {
+            contr.eliminarEquipoCarreras(idEquipoCarreras);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @Test
+    public void borrarPiloto(){
+        Controlador contr = new Controlador();
+        
+       contr.insertarPiloto("TestEliminarPiloto", 23);
+        contr.obtenerDatosBD();
+        String idPiloto = contr.getPilotos().get(contr.getPilotos().size()-1).getIdPiloto();
+        
+        
+        contr.eliminarPiloto(idPiloto);
+    }
+    
+    @Test
+    public void borrarInforme(){
+        Controlador contr = new Controlador();
+        
+       contr.insertarPiloto("TestEliminarInforme", 23);
+       contr.obtenerDatosBD();
+       
+       String idPiloto = contr.getPilotos().get(contr.getPilotos().size()-1).getIdPiloto();
+        
+       contr.generarInformePiloto(idPiloto, "TestEliminarInforme"); 
+       String idInforme = contr.getInformes().get(contr.getInformes().size()-1).getIdInforme();
+       contr.eliminarInforme(idInforme);
+    }
+    
+    @Test
+    public void borrarCoche(){
+        Controlador contr = new Controlador();
+        
+       contr.insertarCoche("TestEliminarMarcaCoche", "TestEliminarModeloCoche");
+       contr.obtenerDatosBD();
+       
+       String idCoche = contr.getCoches().get(contr.getCoches().size()-1).getIdCoche();
+       
+       contr.eliminarCoche(idCoche);
+    }
+    
+    @Test
+    public void borrarIngeniero(){
+        Controlador contr = new Controlador();
+        
+       contr.insertarIngeniero("2000-10-12", 25000);
+       contr.obtenerDatosBD();
+       
+       String idIngeniero = contr.getIngenieros().get(contr.getIngenieros().size()-1).getIdIngeniero();
+       
+       contr.eliminarIngeniero(idIngeniero);
+    }
+    
+    
 
 }
