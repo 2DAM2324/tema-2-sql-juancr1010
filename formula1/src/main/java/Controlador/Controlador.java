@@ -296,35 +296,35 @@ public class Controlador {
         this.db.eliminarEquipoCarreras(idEquipoCarreras);
     }
     
-    public void eliminarPiloto(String idPiloto){
+    public void eliminarPiloto(String idPiloto) throws SQLException{
        try {
            this.db.eliminarPiloto(idPiloto);
        } catch (SQLException ex) {
-           ex.printStackTrace();
+           throw ex;
        }
     }
     
-    public void eliminarCoche(String idCoche){
+    public void eliminarCoche(String idCoche) throws SQLException{
        try {
            this.db.eliminarCoche(idCoche);
        } catch (SQLException ex) {
-           ex.printStackTrace();
+           throw ex;
        }
     }
     
-    public void eliminarIngeniero(String idIngeniero){
+    public void eliminarIngeniero(String idIngeniero) throws SQLException{
        try {
            this.db.eliminarIngeniero(idIngeniero);
        } catch (SQLException ex) {
-           ex.printStackTrace();
+           throw ex;
        }
     }
         
-    public void eliminarInforme(String idInforme){
+    public void eliminarInforme(String idInforme) throws SQLException{
        try {
            this.db.eliminarInforme(idInforme);
        } catch (SQLException ex) {
-           Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+           throw ex;
        }
     }
     

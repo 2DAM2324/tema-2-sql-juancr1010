@@ -213,6 +213,63 @@ public class ControladorTest {
        contr.eliminarIngeniero(idIngeniero);
     }
     
+    @Test
+    public void relacionEquipoPiloto(){
+       Controlador contr = new Controlador();
+        
+       contr.insertarEquipoCarreras("TestRelacionEquipoPiloto");
+       contr.insertarPiloto("TestRelacionEquipoPiloto", 32);
+       contr.obtenerDatosBD();
+       String idPiloto = contr.getPilotos().get(contr.getPilotos().size()-1).getIdPiloto();
+       String idEquipo = contr.getEquipos().get(contr.getEquipos().size()-1).getIdEquipo();
+       
+       contr.asignarPilotoAEquipoCarreras(idPiloto, idEquipo);
+       
+       contr.eliminarPiloto(idPiloto);
+        try {
+            contr.eliminarEquipoCarreras(idEquipo);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+       
+    }
+    
+    @Test
+    public void relacionCochePiloto(){
+       Controlador contr = new Controlador();
+        
+       contr.insertarPiloto("TestRelacionEquipoPiloto", 32);
+       contr.insertarCoche("TestMarcaRelacion", "TestModeloRelacion");
+       contr.obtenerDatosBD();
+       String idPiloto = contr.getPilotos().get(contr.getPilotos().size()-1).getIdPiloto();
+       String idCoche = contr.getCoches().get(contr.getCoches().size()-1).getIdCoche();
+       
+       contr.asignarPilotoAEquipoCarreras(idPiloto, idCoche);
+       
+       contr.eliminarPiloto(idPiloto);
+       contr.eliminarCoche(idCoche);
+       
+    }
+
+    @Test
+    public void relacionCocheIngeniero(){
+       Controlador contr = new Controlador();
+        
+       contr.insertarCoche("TestMarca", "TestModelo");
+       contr.insertarIngeniero("2000-02-14", 65);
+       contr.obtenerDatosBD();
+       String idCoche = contr.getCoches().get(contr.getCoches().size()-1).getIdCoche();
+       String idIngeniero = contr.getIngenieros().get(contr.getIngenieros().size()-1).getIdIngeniero();
+       
+       contr.crearTaller(idCoche, idIngeniero);
+       
+       contr.eliminarCoche(idCoche);
+       contr.eliminarIngeniero(idIngeniero);
+    }
+    
+    
+    
+    
     
 
 }

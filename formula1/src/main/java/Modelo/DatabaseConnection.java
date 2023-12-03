@@ -39,14 +39,14 @@ public class DatabaseConnection {
         }
     }
 
-    public static void connect() {
+    public static void connect() throws SQLException {
         // Cadena de conexión para Oracle
         String url = "jdbc:sqlite:D:\\Program Files\\SqliteStudio\\basededatos\\formula1.db";
         try{
              conn = DriverManager.getConnection(url);
         }
         catch(SQLException e){
-            System.out.println(e.getMessage());
+            throw e;
         }
         
     }
@@ -55,7 +55,7 @@ public class DatabaseConnection {
         conn = null;
     }
     
-    public void insertarDatosEnTabla(String query){
+    public void insertarDatosEnTabla(String query) throws SQLException{
         PreparedStatement sentencia = null;
         try{
             sentencia = this.conn.prepareStatement(query);
@@ -64,7 +64,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException e){
-            e.printStackTrace();
+            throw e;
         }
         finally{
             try{
@@ -73,12 +73,12 @@ public class DatabaseConnection {
                 }
             }
             catch(SQLException excptn){
-                excptn.printStackTrace();
+                throw excptn;
             }
         }
     }
     
-    public void insertarEquipoCarreras(String nombre){
+    public void insertarEquipoCarreras(String nombre) throws SQLException{
         String consulta = "INSERT INTO EquipoCarreras (nombre) VALUES (?)";
         PreparedStatement sentencia = null;
         try{
@@ -87,20 +87,20 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
 
-    public void insertarCoche(String marca, String modelo){
+    public void insertarCoche(String marca, String modelo) throws SQLException{
         String consulta = "INSERT INTO Coche (marca, modelo) VALUES (?, ?)";
         PreparedStatement sentencia = null;
         try{
@@ -110,7 +110,7 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
@@ -126,7 +126,7 @@ public class DatabaseConnection {
 
     
     
-    public void insertarPiloto(String nombre, int edad){
+    public void insertarPiloto(String nombre, int edad) throws SQLException{
         String consulta = "INSERT INTO Piloto (nombre, edad) VALUES (?, ?)";
         PreparedStatement sentencia = null;
         try{
@@ -136,7 +136,7 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
@@ -149,7 +149,7 @@ public class DatabaseConnection {
         }
     }
     
-    public void insertarIngeniero(String fecha, double sueldo){
+    public void insertarIngeniero(String fecha, double sueldo) throws SQLException{
         //Date fechaFinal = fec
         String consulta = "INSERT INTO Ingeniero (FechaNacimiento, Sueldo) VALUES (?, ?)";
         PreparedStatement sentencia = null;
@@ -160,20 +160,20 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
     
-    public void modificarNombreEquipoCarreras(String idEquipo, String nombre){
+    public void modificarNombreEquipoCarreras(String idEquipo, String nombre) throws SQLException{
         String consulta = "UPDATE EquipoCarreras SET nombre = ? " + "WHERE idEquipoCarreras = ?";
         PreparedStatement sentencia = null;
         try{
@@ -183,20 +183,20 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
     
-    public void modificarFechaIngeniero(String idIngeniero, String fecha){
+    public void modificarFechaIngeniero(String idIngeniero, String fecha) throws SQLException{
         String consulta = "UPDATE Ingeniero SET FechaNacimiento = ? " + "WHERE idIngeniero = ?";
         PreparedStatement sentencia = null;
         try{
@@ -206,20 +206,20 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
     
-    public void modificarSueldoIngeniero(String idIngeniero, double sueldo){
+    public void modificarSueldoIngeniero(String idIngeniero, double sueldo) throws SQLException{
         String consulta = "UPDATE Ingeniero SET Sueldo = ? " + "WHERE idIngeniero = ?";
         PreparedStatement sentencia = null;
         try{
@@ -229,21 +229,21 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
     
     
-    public void modificarMarcaCoche(String idCoche, String marca){
+    public void modificarMarcaCoche(String idCoche, String marca) throws SQLException{
         String consulta = "UPDATE Coche SET marca = ? " + "WHERE idCoche = ?";
         PreparedStatement sentencia = null;
         try{
@@ -253,20 +253,20 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
 
-    public void modificarModeloCoche(String idCoche, String modelo){
+    public void modificarModeloCoche(String idCoche, String modelo) throws SQLException{
         String consulta = "UPDATE Coche SET modelo = ? " + "WHERE idCoche = ?";
         PreparedStatement sentencia = null;
         try{
@@ -276,20 +276,20 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
     
-    public void modificarDescripcionInforme(String idInforme, String descripcion){
+    public void modificarDescripcionInforme(String idInforme, String descripcion) throws SQLException{
         String consulta = "UPDATE Informe SET descripcion = ? " + "WHERE idInforme = ?";
         PreparedStatement sentencia = null;
         try{
@@ -299,20 +299,20 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
     
-    public void modificarNombrePiloto(String idPiloto, String nombre){
+    public void modificarNombrePiloto(String idPiloto, String nombre) throws SQLException{
         String consulta = "UPDATE Piloto SET nombre = ? " + "WHERE idPiloto = ?";
         PreparedStatement sentencia = null;
         try{
@@ -322,20 +322,20 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
     
-    public void modificarEdadPiloto(String idPiloto, int edad){
+    public void modificarEdadPiloto(String idPiloto, int edad) throws SQLException{
         String consulta = "UPDATE Piloto SET edad = ? " + "WHERE idPiloto = ?";
         PreparedStatement sentencia = null;
         try{
@@ -345,14 +345,14 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }

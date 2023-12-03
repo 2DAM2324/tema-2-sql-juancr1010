@@ -1226,7 +1226,7 @@ public class Ventana1 extends javax.swing.JFrame {
             this.miControlador.eliminarEquipoCarreras(idEquipo);
             //this.misEquipos.remove(fila);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "ERROR: Ha sucedido un error inesperado...");
         }
         
         this.miControlador.obtenerDatosBD();
@@ -1318,7 +1318,7 @@ public class Ventana1 extends javax.swing.JFrame {
             edad = Integer.parseInt(jTextField_edad_piloto.getText());
         }
         catch(NumberFormatException nfe){
-            nfe.printStackTrace();
+            //nfe.printStackTrace();
             abortarOperacion = true;
             JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
         }
@@ -1349,7 +1349,7 @@ public class Ventana1 extends javax.swing.JFrame {
             edad = Integer.parseInt(jTextField_edad_piloto.getText());
         }
         catch(NumberFormatException nfe){
-            nfe.printStackTrace();
+            //nfe.printStackTrace();
             abortarOperacion = true;
             JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
         }
@@ -1453,7 +1453,11 @@ public class Ventana1 extends javax.swing.JFrame {
         // TODO add your handling code here:
         int fila = jTable_piloto.getSelectedRow();
         
-        this.miControlador.eliminarPiloto(this.misPilotos.get(fila).getIdPiloto());
+        try {
+            this.miControlador.eliminarPiloto(this.misPilotos.get(fila).getIdPiloto());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.miControlador.obtenerDatosBD();
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
@@ -1588,7 +1592,11 @@ public class Ventana1 extends javax.swing.JFrame {
         this.misInformes.get(fila).getGenera_en_informe().setInforme_genera(null);
         
         if(fila != -1){
-            this.miControlador.eliminarInforme(this.misInformes.get(fila).getIdInforme());
+            try {
+                this.miControlador.eliminarInforme(this.misInformes.get(fila).getIdInforme());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "ERROR: Ha sucedido un error inesperado...");
+            }
         }
         this.miControlador.obtenerDatosBD();
         this.traerDatosControladorVista();
@@ -1685,7 +1693,11 @@ public class Ventana1 extends javax.swing.JFrame {
         int fila = jTable_coche.getSelectedRow();
         
         if(fila != -1){
-            this.miControlador.eliminarCoche(this.misCoches.get(fila).getIdCoche());
+            try {
+                this.miControlador.eliminarCoche(this.misCoches.get(fila).getIdCoche());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "ERROR: Ha sucedido un error inesperado...");
+            }
         }
         
         this.miControlador.obtenerDatosBD();
@@ -1858,7 +1870,7 @@ public class Ventana1 extends javax.swing.JFrame {
             sueldo = Double.parseDouble(sueldoCadena);
         }
         catch(NumberFormatException nfe){
-            nfe.printStackTrace();
+           // nfe.printStackTrace();
             JOptionPane.showMessageDialog(null, "ERROR: debes introducir un número real como sueldo");
             abortarOperacion = true;
         }
@@ -1918,7 +1930,11 @@ public class Ventana1 extends javax.swing.JFrame {
         int fila = jTable_ingeniero.getSelectedRow();
         
         if(fila != -1){
-            this.miControlador.eliminarIngeniero(this.misIngenieros.get(fila).getIdIngeniero());
+            try {
+                this.miControlador.eliminarIngeniero(this.misIngenieros.get(fila).getIdIngeniero());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "ERROR: Ha sucedido un error inesperado...");
+            }
         }
         
        
