@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Controlador.ControladorTest" time="8.713" tests="19" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="Controlador.ControladorTest" time="8.438" tests="19" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="ES"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-17.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\johnm\AppData\Local\Temp\surefire17965952821378395382\surefirebooter17268000200123901825.jar C:\Users\johnm\AppData\Local\Temp\surefire17965952821378395382 2023-12-03T17-50-03_056-jvmRun1 surefire4342006582397559509tmp surefire_04313746963577883681tmp"/>
+    <property name="sun.java.command" value="C:\Users\johnm\AppData\Local\Temp\surefire3072566989598228275\surefirebooter15528466997341751512.jar C:\Users\johnm\AppData\Local\Temp\surefire3072566989598228275 2023-12-03T18-38-00_198-jvmRun1 surefire10815470314366343258tmp surefire_02130958415257591477tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\johnm\OneDrive\Documentos\NetBeansProjects\formula1\target\test-classes;C:\Users\johnm\OneDrive\Documentos\NetBeansProjects\formula1\target\classes;C:\Users\johnm\.m2\repository\org\xerial\sqlite-jdbc\3.36.0.1\sqlite-jdbc-3.36.0.1.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-api\2.0.9\slf4j-api-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-nop\2.0.9\slf4j-nop-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-jdk14\2.0.9\slf4j-jdk14-2.0.9.jar;C:\Users\johnm\.m2\repository\org\slf4j\slf4j-simple\2.0.9\slf4j-simple-2.0.9.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.6.0\junit-jupiter-api-5.6.0.jar;C:\Users\johnm\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\johnm\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\johnm\.m2\repository\org\junit\platform\junit-platform-commons\1.6.0\junit-platform-commons-1.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.6.0\junit-jupiter-params-5.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.6.0\junit-jupiter-engine-5.6.0.jar;C:\Users\johnm\.m2\repository\org\junit\platform\junit-platform-engine\1.6.0\junit-platform-engine-1.6.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\johnm\AppData\Local\Temp\surefire17965952821378395382\surefirebooter17268000200123901825.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\johnm\AppData\Local\Temp\surefire3072566989598228275\surefirebooter15528466997341751512.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.1+12-LTS-39"/>
@@ -57,23 +57,23 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="modificarIngeniero" classname="Controlador.ControladorTest" time="2.5"/>
-  <testcase name="relacionCochePiloto" classname="Controlador.ControladorTest" time="0.585"/>
-  <testcase name="borrarEquipoCarreras" classname="Controlador.ControladorTest" time="0.198"/>
-  <testcase name="insertarPiloto" classname="Controlador.ControladorTest" time="0.124"/>
-  <testcase name="borrarPiloto" classname="Controlador.ControladorTest" time="0.287"/>
-  <testcase name="modificarCoche" classname="Controlador.ControladorTest" time="0.39"/>
-  <testcase name="modificarPiloto" classname="Controlador.ControladorTest" time="0.421"/>
-  <testcase name="obtenerDatosBD" classname="Controlador.ControladorTest" time="0.003"/>
-  <testcase name="modificarInforme" classname="Controlador.ControladorTest" time="0.635"/>
-  <testcase name="borrarInforme" classname="Controlador.ControladorTest" time="0.639"/>
+  <testcase name="modificarIngeniero" classname="Controlador.ControladorTest" time="2.461"/>
+  <testcase name="relacionCochePiloto" classname="Controlador.ControladorTest" time="0.559"/>
+  <testcase name="borrarEquipoCarreras" classname="Controlador.ControladorTest" time="0.21"/>
+  <testcase name="insertarPiloto" classname="Controlador.ControladorTest" time="0.111"/>
+  <testcase name="borrarPiloto" classname="Controlador.ControladorTest" time="0.244"/>
+  <testcase name="modificarCoche" classname="Controlador.ControladorTest" time="0.399"/>
+  <testcase name="modificarPiloto" classname="Controlador.ControladorTest" time="0.368"/>
+  <testcase name="obtenerDatosBD" classname="Controlador.ControladorTest" time="0.006"/>
+  <testcase name="modificarInforme" classname="Controlador.ControladorTest" time="0.637"/>
+  <testcase name="borrarInforme" classname="Controlador.ControladorTest" time="0.611"/>
   <testcase name="modificarEquipoCarreras" classname="Controlador.ControladorTest" time="0.244"/>
-  <testcase name="borrarCoche" classname="Controlador.ControladorTest" time="0.277"/>
-  <testcase name="borrarIngeniero" classname="Controlador.ControladorTest" time="0.246"/>
-  <testcase name="generarInforme" classname="Controlador.ControladorTest" time="0.384"/>
-  <testcase name="insertarEquipoCarreras" classname="Controlador.ControladorTest" time="0.141"/>
-  <testcase name="insertarIngeniero" classname="Controlador.ControladorTest" time="0.14"/>
-  <testcase name="relacionCocheIngeniero" classname="Controlador.ControladorTest" time="0.766"/>
-  <testcase name="insertarCoche" classname="Controlador.ControladorTest" time="0.109"/>
-  <testcase name="relacionEquipoPiloto" classname="Controlador.ControladorTest" time="0.605"/>
+  <testcase name="borrarCoche" classname="Controlador.ControladorTest" time="0.266"/>
+  <testcase name="borrarIngeniero" classname="Controlador.ControladorTest" time="0.266"/>
+  <testcase name="generarInforme" classname="Controlador.ControladorTest" time="0.366"/>
+  <testcase name="insertarEquipoCarreras" classname="Controlador.ControladorTest" time="0.132"/>
+  <testcase name="insertarIngeniero" classname="Controlador.ControladorTest" time="0.133"/>
+  <testcase name="relacionCocheIngeniero" classname="Controlador.ControladorTest" time="0.744"/>
+  <testcase name="insertarCoche" classname="Controlador.ControladorTest" time="0.122"/>
+  <testcase name="relacionEquipoPiloto" classname="Controlador.ControladorTest" time="0.533"/>
 </testsuite>

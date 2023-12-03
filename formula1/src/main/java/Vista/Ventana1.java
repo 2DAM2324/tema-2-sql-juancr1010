@@ -87,7 +87,11 @@ public class Ventana1 extends javax.swing.JFrame {
      */
     public Ventana1() throws IOException, FileNotFoundException, ClassNotFoundException, NotSerializableException, SAXException {
         initComponents();
-        this.miControlador = new Controlador();
+        try {
+            this.miControlador = new Controlador();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.misEquipos = new ArrayList<EquipoCarreras>();
         this.misPilotos = new ArrayList<Piloto>();
         this.misCoches = new ArrayList<Coche>();
@@ -113,7 +117,11 @@ public class Ventana1 extends javax.swing.JFrame {
         
         jButton_guardarModificacion_equipoCarreras.setVisible(false);
         
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
         
@@ -1155,10 +1163,18 @@ public class Ventana1 extends javax.swing.JFrame {
         if(nombre.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
-            this.miControlador.insertarEquipoCarreras(nombre);
+            try {
+                this.miControlador.insertarEquipoCarreras(nombre);
+            } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+            }
         }
-        //this.miControlador.mostrarEquiposCarreras();
-        this.miControlador.obtenerDatosBD();
+        try {
+            //this.miControlador.mostrarEquiposCarreras();
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablaEquipos();
         //jTextField_idEquipo_equipoCarreras.setText("");
@@ -1199,10 +1215,18 @@ public class Ventana1 extends javax.swing.JFrame {
             if(nombre.equals("")){
                JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco");
             }else{
-                this.miControlador.modificarNombreEquipoCarreras(idEquipo, nombre);
+                try {
+                    this.miControlador.modificarNombreEquipoCarreras(idEquipo, nombre);
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                }
             }
 
-            this.miControlador.obtenerDatosBD();
+            try {
+                this.miControlador.obtenerDatosBD();
+            } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+            }
             this.traerDatosControladorVista();
             this.actualizarTablaEquipos();
         }else{
@@ -1229,7 +1253,11 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR: Ha sucedido un error inesperado...");
         }
         
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablaEquipos();
     }//GEN-LAST:event_jButton_borrar_equipoCarrerasMouseClicked
@@ -1280,8 +1308,16 @@ public class Ventana1 extends javax.swing.JFrame {
                     if(p.getIdPiloto().equals(selectedValue)){
                         System.out.println("Equipo: " + p.getEquipo_piloto());
                         if(p.getEquipo_piloto() == null){
-                            this.miControlador.asignarPilotoAEquipoCarreras(p.getIdPiloto(), this.misEquipos.get(fila).getIdEquipo());
-                            this.miControlador.obtenerDatosBD();
+                            try {
+                                this.miControlador.asignarPilotoAEquipoCarreras(p.getIdPiloto(), this.misEquipos.get(fila).getIdEquipo());
+                            } catch (SQLException ex) {
+                                JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                            }
+                            try {
+                                this.miControlador.obtenerDatosBD();
+                            } catch (SQLException ex) {
+                                JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                            }
                             this.traerDatosControladorVista();
                             this.actualizarTablaEquipos();
                         }else{
@@ -1323,14 +1359,27 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
         }
         
+        if(edad < 0){
+            abortarOperacion = true;
+            JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
+        }
+        
         if(nombre.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
             if(!abortarOperacion){
-                this.miControlador.insertarPiloto(nombre, edad);
+                try {
+                    this.miControlador.insertarPiloto(nombre, edad);
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                }
             }
         }
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
         //jTextField_idPiloto_piloto.setText("");
@@ -1353,6 +1402,10 @@ public class Ventana1 extends javax.swing.JFrame {
             abortarOperacion = true;
             JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
         }
+        if(edad < 0){
+            abortarOperacion = true;
+            JOptionPane.showMessageDialog(null, "ERROR: Ha introducido una edad no válida");
+        }
         idPiloto = this.misPilotos.get(fila).getIdPiloto();
         nombre = jTextField_nombre_piloto.getText();
         //edad = Integer.parseInt(jTextField_edad_piloto.getText());
@@ -1365,14 +1418,26 @@ public class Ventana1 extends javax.swing.JFrame {
             if(!abortarOperacion){
                 
                 if(fila != -1){
-                    this.miControlador.modificarNombrePiloto(idPiloto, nombre);
-                    this.miControlador.modificarEdadPiloto(idPiloto, edad);
+                    try {
+                        this.miControlador.modificarNombrePiloto(idPiloto, nombre);
+                    } catch (SQLException ex) {
+                        JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                    }
+                    try {
+                        this.miControlador.modificarEdadPiloto(idPiloto, edad);
+                    } catch (SQLException ex) {
+                        JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                    }
                 }else{
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un Piloto..");
                 }
             }
         }
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
         
@@ -1431,8 +1496,16 @@ public class Ventana1 extends javax.swing.JFrame {
                 if(selectedValue != null){
                     if(c.getIdCoche().equals(selectedValue)){
                         if(c.getPiloto() == null){
-                           this.miControlador.asignarCocheAPiloto(c.getIdCoche(), this.misPilotos.get(fila).getIdPiloto());
-                           this.miControlador.obtenerDatosBD();
+                            try {
+                                this.miControlador.asignarCocheAPiloto(c.getIdCoche(), this.misPilotos.get(fila).getIdPiloto());
+                            } catch (SQLException ex) {
+                                JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                            }
+                            try {
+                                this.miControlador.obtenerDatosBD();
+                            } catch (SQLException ex) {
+                                JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                            }
                             this.traerDatosControladorVista();
                             this.actualizarTablasVista();
                         }else{
@@ -1458,7 +1531,11 @@ public class Ventana1 extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "ERROR: Ha sucedido un error inesperado...");
         }
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
         
@@ -1474,23 +1551,35 @@ public class Ventana1 extends javax.swing.JFrame {
        
         String descripcion = jTextField_descripcionInforme_piloto.getText();
         
-        if(descripcion == null){
+        if(descripcion.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
             if(fila != -1){
                 if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto() == null){
 
-                   this.miControlador.generarInformePiloto(this.miControlador.getPilotos().get(fila).getIdPiloto(), descripcion);
+                    try {
+                        this.miControlador.generarInformePiloto(this.miControlador.getPilotos().get(fila).getIdPiloto(), descripcion);
+                    } catch (SQLException ex) {
+                        JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                    }
                     
                 }else{
                     if(this.miControlador.getPilotos().get(fila).getGenera_en_piloto().getInforme_genera() == null){
-                        this.miControlador.generarInformePiloto(this.miControlador.getPilotos().get(fila).getIdPiloto(), descripcion);
+                        try {
+                            this.miControlador.generarInformePiloto(this.miControlador.getPilotos().get(fila).getIdPiloto(), descripcion);
+                        } catch (SQLException ex) {
+                            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                        }
                     }else{
                         JOptionPane.showMessageDialog(null, "ERROR: no es posible generar más de un informe en un piloto");
                     }
                 }
 
-                this.miControlador.obtenerDatosBD();
+                try {
+                    this.miControlador.obtenerDatosBD();
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                }
                 this.traerDatosControladorVista();
                 this.actualizarTablasVista();
             }else{
@@ -1556,7 +1645,11 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar los campos en blanco, abortando...");
         }else{
             if(fila != -1){
-                this.miControlador.modificarDescripcionInforme(descripcion, this.misInformes.get(fila).getIdInforme());
+                try {
+                    this.miControlador.modificarDescripcionInforme(descripcion, this.misInformes.get(fila).getIdInforme());
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                }
             }else{
                 JOptionPane.showMessageDialog(null, "ERROR: Debe seleccionar un informe");
             }
@@ -1569,7 +1662,11 @@ public class Ventana1 extends javax.swing.JFrame {
         jButton_cancelar_informe.setVisible(false);
         jButton_guardar_informe.setVisible(false);
         
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_guardar_informeMouseClicked
@@ -1598,7 +1695,11 @@ public class Ventana1 extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "ERROR: Ha sucedido un error inesperado...");
             }
         }
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_borrar_informeMouseClicked
@@ -1614,12 +1715,20 @@ public class Ventana1 extends javax.swing.JFrame {
         if(modelo.equals("") || marca.equals("")){
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar campos en blanco, abortando...");
         }else{
-            this.miControlador.insertarCoche(marca, modelo);
+            try {
+                this.miControlador.insertarCoche(marca, modelo);
+            } catch (SQLException ex) {
+                JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+            }
         }
         
-        //this.miControlador.mostrarEquiposCarreras();
-        
-        this.miControlador.obtenerDatosBD();
+        try {
+            //this.miControlador.mostrarEquiposCarreras();
+
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
         //jTextField_idPiloto_piloto.setText("");
@@ -1660,8 +1769,16 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR: no debe dejar campos en blanco, abortando...");
         }else{
             if(fila != -1){
-                this.miControlador.modificarMarcaCoche(this.misCoches.get(fila).getIdCoche(), marca);
-                this.miControlador.modificarModeloCoche(this.misCoches.get(fila).getIdCoche(), marca);
+                try {
+                    this.miControlador.modificarMarcaCoche(this.misCoches.get(fila).getIdCoche(), marca);
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                }
+                try {
+                    this.miControlador.modificarModeloCoche(this.misCoches.get(fila).getIdCoche(), marca);
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                }
             }
         }
         jButton_cancelar_coche.setVisible(false);
@@ -1672,7 +1789,11 @@ public class Ventana1 extends javax.swing.JFrame {
         jTextField_modelo_coche.setText("");
         jTextField_marca_coche.setText("");
         
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_guardar_cocheMouseClicked
@@ -1700,7 +1821,11 @@ public class Ventana1 extends javax.swing.JFrame {
             }
         }
         
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_borrar_cocheMouseClicked
@@ -1720,7 +1845,11 @@ public class Ventana1 extends javax.swing.JFrame {
                 if(selectedValue != null){
                     if(i.getIdIngeniero().equals(selectedValue)){
                        if(!this.miControlador.comprobarSiIngenieroEstaACargoDeCoche(i.getIdIngeniero(), this.misCoches.get(fila).getIdCoche())){
-                            this.miControlador.crearTaller(this.misCoches.get(fila).getIdCoche(), i.getIdIngeniero());
+                           try {
+                               this.miControlador.crearTaller(this.misCoches.get(fila).getIdCoche(), i.getIdIngeniero());
+                           } catch (SQLException ex) {
+                              JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                           }
                        }else{
                            JOptionPane.showMessageDialog(null, "ERROR: No puede asignar un ingeniero que ya está asignado...");
                        }
@@ -1732,7 +1861,11 @@ public class Ventana1 extends javax.swing.JFrame {
         }else{
                 JOptionPane.showMessageDialog(null, "Seleccione el coche al que añadirle el ingeniero");
         }
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_anadirIngeniero_CocheMouseClicked
@@ -1784,10 +1917,18 @@ public class Ventana1 extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ERROR: no debe introducir un sueldo negativo...");
         }else{
             if(!abortarOperacion){
-                this.miControlador.insertarIngeniero(fechaNac, sueldo);
+                try {
+                    this.miControlador.insertarIngeniero(fechaNac, sueldo);
+                } catch (SQLException ex) {
+                    JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                }
             }
         }
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
         //jTextField_idIngeniero_ingeniero.setText("");
@@ -1829,7 +1970,11 @@ public class Ventana1 extends javax.swing.JFrame {
                 if(selectedValue != null){
                     if(c.getIdCoche().equals(selectedValue)){
                        if(!this.miControlador.comprobarSiIngenieroEstaACargoDeCoche(this.misIngenieros.get(fila).getIdIngeniero(), c.getIdCoche())){
-                            this.miControlador.crearTaller(c.getIdCoche(), this.misIngenieros.get(fila).getIdIngeniero());
+                           try {
+                               this.miControlador.crearTaller(c.getIdCoche(), this.misIngenieros.get(fila).getIdIngeniero());
+                           } catch (SQLException ex) {
+                               JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                           }
                        }else{
                            JOptionPane.showMessageDialog(null, "ERROR: No puede asignar un ingeniero que ya está asignado...");
                        }
@@ -1841,7 +1986,11 @@ public class Ventana1 extends javax.swing.JFrame {
         }else{
                 JOptionPane.showMessageDialog(null, "Seleccione el coche al que añadirle el ingeniero");
         }
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_anadirCoche_IngenieroMouseClicked
@@ -1881,8 +2030,16 @@ public class Ventana1 extends javax.swing.JFrame {
             }else{
 
                 if(!abortarOperacion){
-                    this.miControlador.modificarFechaIngeniero(this.misIngenieros.get(fila).getIdIngeniero(), fecha);
-                    this.miControlador.modificarSueldoIngeniero(this.misIngenieros.get(fila).getIdIngeniero(), sueldo);
+                    try {
+                        this.miControlador.modificarFechaIngeniero(this.misIngenieros.get(fila).getIdIngeniero(), fecha);
+                    } catch (SQLException ex) {
+                        JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                    }
+                    try {
+                        this.miControlador.modificarSueldoIngeniero(this.misIngenieros.get(fila).getIdIngeniero(), sueldo);
+                    } catch (SQLException ex) {
+                        JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+                    }
                 }
             }
         }
@@ -1894,7 +2051,11 @@ public class Ventana1 extends javax.swing.JFrame {
         jTextField_fechnac_ingeniero.setText("");
         jTextField_sueldo_ingeniero.setText("");
         
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_guardar_ingenieroMouseClicked
@@ -1938,7 +2099,11 @@ public class Ventana1 extends javax.swing.JFrame {
         }
         
        
-        this.miControlador.obtenerDatosBD();
+        try {
+            this.miControlador.obtenerDatosBD();
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "ERROR: Ha sucedido un error inesperado...");
+        }
         this.traerDatosControladorVista();
         this.actualizarTablasVista();
     }//GEN-LAST:event_jButton_borrar_ingenieroMouseClicked

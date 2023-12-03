@@ -55,6 +55,10 @@ public class DatabaseConnection {
         conn = null;
     }
     
+    /**
+     * @brief Este método fue una prueba que nunca salió adelante, se encuentra en desarrollo
+     * @author Juan Cabello Rodríguez
+     */
     public void insertarDatosEnTabla(String query) throws SQLException{
         PreparedStatement sentencia = null;
         try{
@@ -77,7 +81,11 @@ public class DatabaseConnection {
             }
         }
     }
-    
+
+    /**
+     * @brief Inserta un Equipo de Carreras en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void insertarEquipoCarreras(String nombre) throws SQLException{
         String consulta = "INSERT INTO EquipoCarreras (nombre) VALUES (?)";
         PreparedStatement sentencia = null;
@@ -100,6 +108,10 @@ public class DatabaseConnection {
         }
     }
 
+    /**
+     * @brief Inserta un Coche en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void insertarCoche(String marca, String modelo) throws SQLException{
         String consulta = "INSERT INTO Coche (marca, modelo) VALUES (?, ?)";
         PreparedStatement sentencia = null;
@@ -125,7 +137,10 @@ public class DatabaseConnection {
     
 
     
-    
+    /**
+     * @brief Inserta un Piloto en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void insertarPiloto(String nombre, int edad) throws SQLException{
         String consulta = "INSERT INTO Piloto (nombre, edad) VALUES (?, ?)";
         PreparedStatement sentencia = null;
@@ -149,6 +164,10 @@ public class DatabaseConnection {
         }
     }
     
+    /**
+     * @brief Inserta un Ingeniero en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void insertarIngeniero(String fecha, double sueldo) throws SQLException{
         //Date fechaFinal = fec
         String consulta = "INSERT INTO Ingeniero (FechaNacimiento, Sueldo) VALUES (?, ?)";
@@ -173,6 +192,10 @@ public class DatabaseConnection {
         }
     }
     
+    /**
+     * @brief Modifica el nombre de un Equipo de Carreras en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void modificarNombreEquipoCarreras(String idEquipo, String nombre) throws SQLException{
         String consulta = "UPDATE EquipoCarreras SET nombre = ? " + "WHERE idEquipoCarreras = ?";
         PreparedStatement sentencia = null;
@@ -196,6 +219,10 @@ public class DatabaseConnection {
         }
     }
     
+    /**
+     * @brief Modifica la fecha de nacimiento de un Ingeniero en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void modificarFechaIngeniero(String idIngeniero, String fecha) throws SQLException{
         String consulta = "UPDATE Ingeniero SET FechaNacimiento = ? " + "WHERE idIngeniero = ?";
         PreparedStatement sentencia = null;
@@ -219,6 +246,10 @@ public class DatabaseConnection {
         }
     }
     
+    /**
+     * @brief Modifica el sueldo de un Ingeniero en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void modificarSueldoIngeniero(String idIngeniero, double sueldo) throws SQLException{
         String consulta = "UPDATE Ingeniero SET Sueldo = ? " + "WHERE idIngeniero = ?";
         PreparedStatement sentencia = null;
@@ -242,7 +273,10 @@ public class DatabaseConnection {
         }
     }
     
-    
+    /**
+     * @brief Modifica la marca de un coche en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void modificarMarcaCoche(String idCoche, String marca) throws SQLException{
         String consulta = "UPDATE Coche SET marca = ? " + "WHERE idCoche = ?";
         PreparedStatement sentencia = null;
@@ -265,7 +299,11 @@ public class DatabaseConnection {
             }
         }
     }
-
+    
+    /**
+     * @brief Modifica el modelo de un coche en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void modificarModeloCoche(String idCoche, String modelo) throws SQLException{
         String consulta = "UPDATE Coche SET modelo = ? " + "WHERE idCoche = ?";
         PreparedStatement sentencia = null;
@@ -289,6 +327,10 @@ public class DatabaseConnection {
         }
     }
     
+    /**
+     * @brief Modifica la descripción de un informe en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void modificarDescripcionInforme(String idInforme, String descripcion) throws SQLException{
         String consulta = "UPDATE Informe SET descripcion = ? " + "WHERE idInforme = ?";
         PreparedStatement sentencia = null;
@@ -312,6 +354,10 @@ public class DatabaseConnection {
         }
     }
     
+    /**
+     * @brief Modifica el nombre de un piloto en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void modificarNombrePiloto(String idPiloto, String nombre) throws SQLException{
         String consulta = "UPDATE Piloto SET nombre = ? " + "WHERE idPiloto = ?";
         PreparedStatement sentencia = null;
@@ -334,7 +380,10 @@ public class DatabaseConnection {
             }
         }
     }
-    
+    /**
+     * @brief Modifica la edad de un piloto en la base de datos
+     * @author Juan Cabello Rodríguez
+     */
     public void modificarEdadPiloto(String idPiloto, int edad) throws SQLException{
         String consulta = "UPDATE Piloto SET edad = ? " + "WHERE idPiloto = ?";
         PreparedStatement sentencia = null;
@@ -358,7 +407,11 @@ public class DatabaseConnection {
         }
     }
     
-    public void asignarEquipoAPiloto(String idPiloto, String idEquipo){
+    /**
+     * @brief Asigna un equipo a un piloto en la BD.
+     * @author Juan Cabello Rodríguez
+     */
+    public void asignarEquipoAPiloto(String idPiloto, String idEquipo) throws SQLException{
         String consulta = "UPDATE Piloto SET idEquipoCarreras = ? " + "WHERE idPiloto = ?";
         PreparedStatement sentencia = null;
         try{
@@ -368,20 +421,24 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
     }
     
-    public void crearTaller(String idCoche, String idIngeniero){
+    /**
+     * @brief Crea un taller en la BD, es decir la relación entre un coche y un ingeniero
+     * @author Juan Cabello Rodríguez
+     */
+    public void crearTaller(String idCoche, String idIngeniero) throws SQLException{
         String consulta = "INSERT INTO Taller (idCoche, idIngeniero) VALUES (?, ?)";
         PreparedStatement sentencia = null;
         try{
@@ -391,21 +448,25 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
         
     }
     
-    public void asignarCocheAPiloto(String idCoche, String idPiloto){
+    /**
+     * @brief Asigna un coche a un piloto en la BD.
+     * @author Juan Cabello Rodríguez
+     */
+    public void asignarCocheAPiloto(String idCoche, String idPiloto) throws SQLException{
         PreparedStatement sentencia = null;
         
         String consultaPiloto = "UPDATE Piloto SET idCoche = ? " + "WHERE idPiloto = ?";
@@ -417,21 +478,25 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
                 try{
                     sentencia.close();
                 }catch(SQLException sqlexcptn){
-                    sqlexcptn.printStackTrace();
+                    throw sqlexcptn;
                 }
             }
         }
         
     }
     
-    public void consultarTablaEquiposCarreras(){
+    /**
+     * @brief Consulta los equipos de carreras y los muestra por pantalla
+     * @author Juan Cabello Rodríguez
+     */
+    public void consultarTablaEquiposCarreras() throws SQLException{
         String cons = "SELECT * FROM equipoCarreras";
         PreparedStatement consulta = null;
         ResultSet resultado = null;
@@ -447,7 +512,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -456,12 +521,17 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
     }
     
+    /**
+     * @brief Elimina un equipo de carreras de la BD
+     * @post Debe deshacer la asignación con el Piloto
+     * @author Juan Cabello Rodríguez
+     */
     public void eliminarEquipoCarreras(String idEquipoCarreras) throws SQLException{
         String cons = "UPDATE Piloto SET idEquipoCarreras = NULL " + "WHERE idEquipoCarreras = ?";
         String consultaDelete = "DELETE FROM EquipoCarreras WHERE idEquipoCarreras = ?";
@@ -478,8 +548,9 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(cons != null){
@@ -487,7 +558,7 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
@@ -503,8 +574,9 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(cons != null){
@@ -512,13 +584,18 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
         
     }
     
+    /**
+     * @brief Elimina un equipo de carreras de la BD
+     * @post Debe deshacer la relación con el Coche
+     * @author Juan Cabello Rodríguez
+     */
     public void eliminarIngeniero(String idIngeniero) throws SQLException{
         String cons = "DELETE FROM Taller WHERE idIngeniero = ?";
         String consultaDelete = "DELETE FROM Ingeniero WHERE idIngeniero = ?";
@@ -535,8 +612,9 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(cons != null){
@@ -544,7 +622,7 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
@@ -560,8 +638,8 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(cons != null){
@@ -569,13 +647,17 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
         
     }
-    
+    /**
+     * @brief Elimina un coche de la base de datos
+     * @post Deben quedar resueltas las relaciones tanto con el piloto como con los ingenieros
+     * @author Juan Cabello Rodríguez
+     */
     public void eliminarCoche(String idCoche) throws SQLException{
         
         String cons = "DELETE FROM Taller WHERE idCoche = ?";
@@ -594,8 +676,8 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(cons != null){
@@ -603,7 +685,7 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
@@ -619,8 +701,8 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(cons != null){
@@ -628,7 +710,7 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
@@ -644,8 +726,8 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(cons != null){
@@ -653,15 +735,18 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
         
     }
     
-    
-    public String obtenerInformePiloto(String idPiloto){
+    /**
+     * @brief Obtiene un informe de un piloto
+     * @author Juan Cabello Rodríguez
+     */
+    public String obtenerInformePiloto(String idPiloto) throws SQLException{
         String consulta = "SELECT * FROM Genera WHERE idPiloto = " + idPiloto;
         PreparedStatement sentencia = null;
         ResultSet resultado = null;
@@ -681,7 +766,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
@@ -690,7 +775,7 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
@@ -698,7 +783,12 @@ public class DatabaseConnection {
         return idInforme;
         
     }
-    
+   
+    /**
+    * @brief Elimina un piloto de la BD
+    * @post Elimina el informe generado por el piloto y deshace la relación con el coche asignado
+    * @author Juan Cabello Rodríguez
+    */
     public void eliminarPiloto(String idPiloto) throws SQLException{
         
         String idInforme = obtenerInformePiloto(idPiloto);
@@ -719,8 +809,9 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
@@ -728,7 +819,7 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
@@ -745,8 +836,8 @@ public class DatabaseConnection {
             }
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
@@ -754,7 +845,7 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
@@ -769,8 +860,8 @@ public class DatabaseConnection {
                 conn.setAutoCommit(true);
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
@@ -778,16 +869,19 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
        
     }
     
-    //TODO: Pasar los datos de la bd al controlador y posteriormente mostrar los datos en la vista
-    
-    public void relacionarEquiposConPilotos(){
+    /**
+    * @brief Relaciona los equipos con los pilotos
+    * @post Pilotos con sus respectivos equipos
+    * @author Juan Cabello Rodríguez
+    */
+    public void relacionarEquiposConPilotos() throws SQLException{
         String cons = "SELECT * FROM Piloto";
         PreparedStatement consulta = null;
         ResultSet resultado = null;
@@ -815,7 +909,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -824,13 +918,18 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
     }
     
-    public void relacionarCochesConPilotos(){
+    /**
+    * @brief Relaciona los coches con los pilotos
+    * @post Pilotos con su respectivo coche
+    * @author Juan Cabello Rodríguez
+    */
+    public void relacionarCochesConPilotos() throws SQLException{
     
         String cons = "SELECT * FROM Piloto";
         PreparedStatement consulta = null;
@@ -866,7 +965,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -875,14 +974,19 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
     
     }
     
-    public void relacionarCochesConIngenieros(){
+    /**
+    * @brief Relaciona los coches con los ingenieros
+    * @post Coches con sus respectivos ingenieros
+    * @author Juan Cabello Rodríguez
+    */
+    public void relacionarCochesConIngenieros() throws SQLException{
         String cons = "SELECT * FROM Taller";
         String idCoche = "", idIngeniero = "";
         
@@ -911,7 +1015,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -920,13 +1024,18 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
     
     }
     
+    /**
+    * @brief Relaciona los informes con los pilotos
+    * @post Pilotos con sus respectivos informes
+    * @author Juan Cabello Rodríguez
+    */
     public void relacionarInformesConPilotos(){
         for(Genera g: this.generasBD){
             for(Piloto p: this.pilotosBD){
@@ -942,7 +1051,12 @@ public class DatabaseConnection {
         }
     }
     
-    public void generarInformePiloto(String idPiloto, String descripcion){
+    /**
+    * @brief Genera un informe del piloto
+    * @post Queda la relación establecida entre ese informe y ese piloto
+    * @author Juan Cabello Rodríguez
+    */
+    public void generarInformePiloto(String idPiloto, String descripcion) throws SQLException{
     
         String consulta = "INSERT INTO Informe (descripcion) VALUES (?)";
         PreparedStatement sentencia = null;
@@ -952,14 +1066,14 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
            if(sentencia != null){
                 try{
                    sentencia.close();
                }catch(SQLException sqlexcptn){
-                   sqlexcptn.printStackTrace();
+                   throw sqlexcptn;
                }
            }
         }
@@ -977,14 +1091,14 @@ public class DatabaseConnection {
             sentencia.executeUpdate();
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
            if(sentencia != null){
                 try{
                    sentencia.close();
                }catch(SQLException sqlexcptn){
-                   sqlexcptn.printStackTrace();
+                   throw sqlexcptn;
                }
            }
         }
@@ -992,6 +1106,11 @@ public class DatabaseConnection {
         
     }
     
+    /**
+    * @brief Elimina un informe
+    * @post Deshace la relación del piloto con ese informe
+    * @author Juan Cabello Rodríguez
+    */
     public void eliminarInforme(String idInforme) throws SQLException{
         
         //System.out.println("AAAAAAAAAAAAAAAidINFORME " + idInforme);
@@ -1011,8 +1130,9 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
@@ -1020,7 +1140,7 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
@@ -1037,8 +1157,9 @@ public class DatabaseConnection {
             }
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            
             conn.rollback();
+            throw sqle;
         }
         finally{
             if(sentencia != null){
@@ -1046,14 +1167,18 @@ public class DatabaseConnection {
                     sentencia.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
     }
     
-    
-    public void traerIngenieros(){
+    /**
+    * @brief Trae los ingenieros de la BD
+    * @post No están establecidas las relaciones
+    * @author Juan Cabello Rodríguez
+    */
+    public void traerIngenieros() throws SQLException{
         this.ingenierosBD = new ArrayList<Ingeniero>();
         
         String cons = "SELECT * FROM Ingeniero";
@@ -1070,7 +1195,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -1079,14 +1204,19 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
         
     }
     
-    public void traerCoches(){
+    /**
+    * @brief Trae los coches de la BD
+    * @post No están establecidas las relaciones
+    * @author Juan Cabello Rodríguez
+    */
+    public void traerCoches() throws SQLException{
         this.cochesBD = new ArrayList<Coche>();
         
         String cons = "SELECT * FROM Coche";
@@ -1103,7 +1233,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -1112,15 +1242,19 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
         
     }
     
-    //TODO: Debes cohesionar los informes con los pilotos, recuerda que genera guarda el informe y el piloto, no los IDs.
-    public void traerGenera(){
+    /**
+    * @brief Trae los genera de la BD
+    * @post Se encarga de relacionar los informes y los pilotos
+    * @author Juan Cabello Rodríguez
+    */
+    public void traerGenera() throws SQLException{
         this.generasBD = new ArrayList<Genera>();
         
         String cons = "SELECT * FROM Genera";
@@ -1153,7 +1287,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -1162,14 +1296,19 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
         
     }
     
-    public void traerInformes(){
+    /**
+    * @brief Trae los informes de la BD
+    * @post No están establecidas las relaciones
+    * @author Juan Cabello Rodríguez
+    */
+    public void traerInformes() throws SQLException{
         this.informesBD = new ArrayList<Informe>();
         
         String cons = "SELECT * FROM Informe";
@@ -1186,7 +1325,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -1195,13 +1334,18 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
     }
     
-    public void traerPilotos(){
+    /**
+    * @brief Trae los pilotos de la BD
+    * @post No están establecidas las relaciones
+    * @author Juan Cabello Rodríguez
+    */
+    public void traerPilotos() throws SQLException{
         this.pilotosBD = new ArrayList<Piloto>();
         
         String cons = "SELECT * FROM Piloto";
@@ -1218,7 +1362,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -1227,14 +1371,19 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
         
     }
     
-    public void traerEquiposCarreras(){
+    /**
+    * @brief Trae los equipos de carreras de la BD
+    * @post No están establecidas las relaciones
+    * @author Juan Cabello Rodríguez
+    */
+    public void traerEquiposCarreras() throws SQLException{
         this.equiposBD = new ArrayList<EquipoCarreras>();
         
         String cons = "SELECT * FROM EquipoCarreras";
@@ -1251,7 +1400,7 @@ public class DatabaseConnection {
             
         }
         catch(SQLException sqle){
-            sqle.printStackTrace();
+            throw sqle;
         }
         finally{
             if(consulta != null){
@@ -1260,21 +1409,21 @@ public class DatabaseConnection {
                     resultado.close();
                 }
                 catch(SQLException e){
-                    e.printStackTrace();
+                    throw e;
                 }
             }
         }
         
     }
         
-    public static void cerrarConexion(){
+    public static void cerrarConexion() throws SQLException{
         try{
             if(conn != null){
                 conn.close();
             }
        }
        catch(SQLException e){
-            e.printStackTrace();
+            throw e;
        }
     }
 

@@ -46,37 +46,37 @@ public class ControladorTest {
     }
 
     @Test
-    public void obtenerDatosBD(){
+    public void obtenerDatosBD() throws SQLException{
         Controlador contr = new Controlador();
         contr.obtenerDatosBD();
     }
     
     @Test
-    public void insertarEquipoCarreras(){
+    public void insertarEquipoCarreras() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarEquipoCarreras("TestInsertarEquipoCarreras");
     }
     
     @Test
-    public void insertarPiloto(){
+    public void insertarPiloto() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarPiloto("TestPiloto", 23);
     }
     
     @Test
-    public void insertarCoche(){
+    public void insertarCoche() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarCoche("TestMarcaCoche", "TestModeloCoche");
     }
     
     @Test
-    public void insertarIngeniero(){
+    public void insertarIngeniero() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarIngeniero("2000-10-12", 25000);
     }
     
     @Test
-    public void generarInforme(){
+    public void generarInforme() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarPiloto("TestGenerarInforme", 26);
         contr.obtenerDatosBD();
@@ -86,7 +86,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void modificarEquipoCarreras(){
+    public void modificarEquipoCarreras() throws SQLException{
         Controlador contr = new Controlador();
         
         contr.insertarEquipoCarreras("TestNuevoEquipoCarrerasModificable");
@@ -98,7 +98,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void modificarPiloto(){
+    public void modificarPiloto() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarPiloto("TestModificarPiloto", 23);
         contr.obtenerDatosBD();
@@ -110,7 +110,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void modificarInforme(){
+    public void modificarInforme() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarPiloto("TestModificarInforme", 23);
         contr.obtenerDatosBD();
@@ -124,7 +124,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void modificarCoche(){
+    public void modificarCoche() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarCoche("TestModificarMarcaCoche", "TestModificarModeloCoche");
         contr.obtenerDatosBD();
@@ -136,7 +136,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void modificarIngeniero(){
+    public void modificarIngeniero() throws SQLException{
         Controlador contr = new Controlador();
         contr.insertarIngeniero("2000-10-12", 25000);
         contr.obtenerDatosBD();
@@ -148,7 +148,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void borrarEquipoCarreras(){
+    public void borrarEquipoCarreras() throws SQLException{
         Controlador contr = new Controlador();
         
         contr.insertarEquipoCarreras("TestEliminarEquipoCarreras");
@@ -164,7 +164,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void borrarPiloto(){
+    public void borrarPiloto() throws SQLException{
         Controlador contr = new Controlador();
         
        contr.insertarPiloto("TestEliminarPiloto", 23);
@@ -176,7 +176,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void borrarInforme(){
+    public void borrarInforme() throws SQLException{
         Controlador contr = new Controlador();
         
        contr.insertarPiloto("TestEliminarInforme", 23);
@@ -185,12 +185,13 @@ public class ControladorTest {
        String idPiloto = contr.getPilotos().get(contr.getPilotos().size()-1).getIdPiloto();
         
        contr.generarInformePiloto(idPiloto, "TestEliminarInforme"); 
+       contr.obtenerDatosBD();
        String idInforme = contr.getInformes().get(contr.getInformes().size()-1).getIdInforme();
        contr.eliminarInforme(idInforme);
     }
     
     @Test
-    public void borrarCoche(){
+    public void borrarCoche() throws SQLException{
         Controlador contr = new Controlador();
         
        contr.insertarCoche("TestEliminarMarcaCoche", "TestEliminarModeloCoche");
@@ -202,7 +203,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void borrarIngeniero(){
+    public void borrarIngeniero() throws SQLException{
         Controlador contr = new Controlador();
         
        contr.insertarIngeniero("2000-10-12", 25000);
@@ -214,7 +215,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void relacionEquipoPiloto(){
+    public void relacionEquipoPiloto() throws SQLException{
        Controlador contr = new Controlador();
         
        contr.insertarEquipoCarreras("TestRelacionEquipoPiloto");
@@ -235,7 +236,7 @@ public class ControladorTest {
     }
     
     @Test
-    public void relacionCochePiloto(){
+    public void relacionCochePiloto() throws SQLException{
        Controlador contr = new Controlador();
         
        contr.insertarPiloto("TestRelacionEquipoPiloto", 32);
@@ -252,7 +253,7 @@ public class ControladorTest {
     }
 
     @Test
-    public void relacionCocheIngeniero(){
+    public void relacionCocheIngeniero() throws SQLException{
        Controlador contr = new Controlador();
         
        contr.insertarCoche("TestMarca", "TestModelo");

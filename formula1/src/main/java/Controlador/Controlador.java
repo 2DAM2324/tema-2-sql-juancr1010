@@ -53,7 +53,7 @@ public class Controlador {
    private ArrayList<Ingeniero> ingenieros;
    private DatabaseConnection db;
 
-    public Controlador() {
+    public Controlador() throws SQLException {
         this.equipos = new ArrayList<EquipoCarreras>();
         this.pilotos = new ArrayList<Piloto>();
         this.informes = new ArrayList<Informe>();
@@ -228,67 +228,67 @@ public class Controlador {
         return existe;
     }
     
-    public void insertarEquipoCarreras(String nombre){
+    public void insertarEquipoCarreras(String nombre) throws SQLException{
         this.db.insertarEquipoCarreras(nombre);
     }
     
-    public void insertarCoche(String marca, String modelo){
+    public void insertarCoche(String marca, String modelo) throws SQLException{
         this.db.insertarCoche(marca, modelo);
     }
     
-    public void insertarPiloto(String nombre, int edad){
+    public void insertarPiloto(String nombre, int edad) throws SQLException{
         this.db.insertarPiloto(nombre, edad);
     }
     
-    public void insertarIngeniero(String fecha, double sueldo){
+    public void insertarIngeniero(String fecha, double sueldo) throws SQLException{
         this.db.insertarIngeniero(fecha, sueldo);
     }
     
-    public void generarInformePiloto(String idPiloto, String descripcion){
+    public void generarInformePiloto(String idPiloto, String descripcion) throws SQLException{
         this.db.generarInformePiloto(idPiloto, descripcion);
     }
     
-    public void modificarNombreEquipoCarreras(String idEquipo, String nombre){
+    public void modificarNombreEquipoCarreras(String idEquipo, String nombre) throws SQLException{
         this.db.modificarNombreEquipoCarreras(idEquipo, nombre);
     }
     
-    public void modificarNombrePiloto(String idPiloto, String nombre){
+    public void modificarNombrePiloto(String idPiloto, String nombre) throws SQLException{
         this.db.modificarNombrePiloto(idPiloto, nombre);
     }
     
-    public void modificarEdadPiloto(String idPiloto, int edad){
+    public void modificarEdadPiloto(String idPiloto, int edad) throws SQLException{
         this.db.modificarEdadPiloto(idPiloto, edad);
     }
     
-    public void modificarDescripcionInforme(String descripcion, String idInforme){
+    public void modificarDescripcionInforme(String descripcion, String idInforme) throws SQLException{
         this.db.modificarDescripcionInforme(idInforme, descripcion);
     }
     
-    public void modificarMarcaCoche(String idCoche, String marca){
+    public void modificarMarcaCoche(String idCoche, String marca) throws SQLException{
         this.db.modificarMarcaCoche(idCoche, marca);
     }
     
-    public void modificarModeloCoche(String idCoche, String modelo){
+    public void modificarModeloCoche(String idCoche, String modelo) throws SQLException{
         this.db.modificarModeloCoche(idCoche, modelo);
     }
     
-    public void modificarFechaIngeniero(String idIngeniero, String fecha){
+    public void modificarFechaIngeniero(String idIngeniero, String fecha) throws SQLException{
         this.db.modificarFechaIngeniero(idIngeniero, fecha);
     }
     
-    public void modificarSueldoIngeniero(String idIngeniero, double sueldo){
+    public void modificarSueldoIngeniero(String idIngeniero, double sueldo) throws SQLException{
         this.db.modificarSueldoIngeniero(idIngeniero, sueldo);
     }
     
-    public void asignarPilotoAEquipoCarreras(String idPiloto, String idEquipo){
+    public void asignarPilotoAEquipoCarreras(String idPiloto, String idEquipo) throws SQLException{
         this.db.asignarEquipoAPiloto(idPiloto, idEquipo);
     }
     
-    public void asignarCocheAPiloto(String idCoche, String idPiloto){
+    public void asignarCocheAPiloto(String idCoche, String idPiloto) throws SQLException{
         this.db.asignarCocheAPiloto(idCoche, idPiloto);
     }
     
-    public void crearTaller(String idCoche, String idIngeniero){
+    public void crearTaller(String idCoche, String idIngeniero) throws SQLException{
         this.db.crearTaller(idCoche, idIngeniero);
     }
     
@@ -345,7 +345,7 @@ public class Controlador {
     }
     
     
-    public void obtenerDatosBD(){
+    public void obtenerDatosBD() throws SQLException{
         this.db.traerInformes();
         this.db.traerCoches();
         this.db.traerIngenieros();
@@ -368,7 +368,7 @@ public class Controlador {
     }
     
     
-    public void mostrarTablaEquiposCarrerasTerminal(){
+    public void mostrarTablaEquiposCarrerasTerminal() throws SQLException{
         
         this.db.consultarTablaEquiposCarreras();
         
